@@ -1,0 +1,12 @@
+language: java
+
+install: true
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+env:
+  - CODECOV_TOKEN="8382dae4-931c-43e2-8448-b02351f3f4bc"
+
+cache:
+  directories:
+    - ./.m2
