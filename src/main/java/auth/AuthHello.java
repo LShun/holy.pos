@@ -1,8 +1,12 @@
 package auth;
 
-public class AuthHello {
-    public static void authHello(){
-        System.out.print("Hello");
 
-    }
+import java.awt.*;
+
+public class AuthHello {
+
+    public static void honey()
+    {
+        System.out.println("Hello");
+   }
 }
