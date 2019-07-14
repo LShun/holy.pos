@@ -49,6 +49,9 @@ public class Order {
 
                 while (!code.equalsIgnoreCase("q")) {
                     for (Product x : menu) {
+                        System.out.println("=======");
+                        System.out.println(code);
+                        System.out.println(x.getId());
                         if (x.getId().equals(code))
                             p = new Product(code, x.getTitle(), x.getDesc(), x.getPrice(), x.getTax());
                     }
@@ -65,8 +68,10 @@ public class Order {
                     } else {
                         System.out.println("The code does not exists.");
                     }
-                    System.out.print("Enter the product code > ");
 
+                    p = null;
+
+                    System.out.print("Enter the product code > ");
                     code = in.nextLine();
                 }
             } else if (action == 2) {
@@ -109,14 +114,12 @@ public class Order {
         double amountReceived = in.nextDouble();
         while(amountReceived < total) {
             System.out.println("Not enough!");
+            System.out.print("Amount Received is RM");
             amountReceived = in.nextDouble();
         }
         double change = total - amountReceived;
+        System.out.print("Change Amount is RM" + change);
+
+        Receipt r = new Receipt(c, total);
     }
 }
-
-
-
-//class Receipt{
-//
-//}
