@@ -2,6 +2,7 @@ package food_menu;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FoodMenu {
@@ -9,18 +10,18 @@ public class FoodMenu {
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
 
-    private static ArrayList<Product> products = new ArrayList<Product>();
+    private static ArrayList<Product> products = new ArrayList<Product>(Arrays.asList
+            (new Product("BBEEF", "Beefburger",	"Beefburger", 5.99, 0.16),
+                    new Product("BC", "Cheeseburger", "Cheeseburger", 5.99, 0.16),
+                    new Product("BDC", "Double cheeseburger", "Double cheeseburger", 7.99, 0.16),
+                    new Product("BCH", "Chicken Burger", "Chicken Burger", 5.99, 0.16),
+                    new Product("BRSD", "Sausage Deluxe Breakfast", "Sausage burger x 1 + Hashbrown + 1 x coffee (S)", 8.99, 0.16),
+                    new Product("LUBS", "Burger Set Lunch", "Double chicken burger + French fries (L) x Chicken nuggets (S) + Coca Cola Drink (L)", 8.99, 0.16)
+    ));
 
     public static void foodMenu() {
         Scanner in = new Scanner(System.in);
         int choice;
-
-        products.add(new Product("BBEEF", "Beefburger",	"Beefburger", 5.99, 0.16));
-        products.add(new Product("BC", "Cheeseburger", "Cheeseburger", 5.99, 0.16));
-        products.add(new Product("BDC", "Double cheeseburger", "Double cheeseburger", 7.99, 0.16));
-        products.add(new Product("BCH", "Chicken Burger", "Chicken Burger", 5.99, 0.16));
-        products.add(new Product("BRSD", "Sausage Deluxe Breakfast", "Sausage burger x 1 + Hashbrown + 1 x coffee (S)", 8.99, 0.16));
-        products.add(new Product("LUBS", "Burger Set Lunch", "Double chicken burger + French fries (L) x Chicken nuggets (S) + Coca Cola Drink (L)", 8.99, 0.16));
 
         while (true) {
             System.out.println("1.  New Product");
