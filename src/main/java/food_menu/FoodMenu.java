@@ -436,6 +436,10 @@ public class FoodMenu {
         System.out.println("=END=");
     }
 
+    public static void showProducts() {
+        showProducts(products);
+    }
+
     // get products from the menu (allow other functions to get a copy of the array)
     public static ArrayList<Product> getProducts() {
         return products;
