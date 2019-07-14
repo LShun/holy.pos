@@ -3,9 +3,9 @@ package food_menu;
 public class Product {
     private String id, title, desc;
     private double price;
-    private int tax;
+    private double tax;
 
-    public Product(String id, String title, String desc, double price, int tax) {
+    public Product(String id, String title, String desc, double price, double tax) {
         this.id = id;
         this.title = title;
         this.desc = desc;
@@ -29,11 +29,11 @@ public class Product {
         return id;
     }
 
-    public int getTax() {
+    public double getTax() {
         return tax;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -49,7 +49,16 @@ public class Product {
         this.desc = desc;
     }
 
-    public void setTax(int tax) {
+    public void setTax(double tax) {
         this.tax = tax;
+    }
+
+    public void showProduct() {
+        System.out.println(
+                "ID: " + this.id + "\n" +
+                "TITLE: " + this.title + "\n" +
+                "DESC: " + this.desc + "\n" +
+                "PRICE: " + this.price + "\n" +
+                "TAX: " + this.tax + "\n");
     }
 }
