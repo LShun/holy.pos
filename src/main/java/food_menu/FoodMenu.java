@@ -434,4 +434,9 @@ public class FoodMenu {
         // TODO: Print footer
         System.out.println("=END=");
     }
+
+    // get products from the menu (allow other functions to get a copy of the array)
+    public static ArrayList<Product> getProducts() {
+        return products;
+    }
 }
