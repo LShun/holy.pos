@@ -460,6 +460,8 @@ public class FoodMenu {
 
     // String -> Product
     // get a single product from the FoodMenu by ID
+    // IF no such product is found, then return an "empty" product
+    // with all String fields set to "" and all numeric fields set to 0 (or 0.0)
     public static Product getProductByID(String term) {
         for (Product p : products) {
             if (p.getId().equals(term)) {
