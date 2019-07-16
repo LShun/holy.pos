@@ -5,6 +5,14 @@ public class Product {
     private double price;
     private double tax;
 
+    public Product() {
+        this.id = "";
+        this.title = "";
+        this.desc = "";
+        this.price = 0.0;
+        this.tax = 0.0;
+    }
+
     public Product(String id, String title, String desc, double price, double tax) {
         this.id = id;
         this.title = title;

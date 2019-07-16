@@ -10,6 +10,7 @@ public class FoodMenu {
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
 
+    // array storing all the food being sold in fast food restaurant
     private static ArrayList<Product> products = new ArrayList<Product>(Arrays.asList
             (new Product("BBEEF", "Beefburger",	"Beefburger", 5.99, 0.16),
                     new Product("BC", "Cheeseburger", "Cheeseburger", 5.99, 0.16),
@@ -19,6 +20,11 @@ public class FoodMenu {
                     new Product("LUBS", "Burger Set Lunch", "Double chicken burger + French fries (L) x Chicken nuggets (S) + Coca Cola Drink (L)", 8.99, 0.16)
     ));
 
+    // =======================
+    // FOODMENU USE ONLY
+    // =======================
+
+    // menu for manipulating the food menu
     public static void foodMenu() {
         Scanner in = new Scanner(System.in);
         int choice;
@@ -53,6 +59,7 @@ public class FoodMenu {
         }
     }
 
+    // add a new product to the array
     private static void add() {
         String id, title, description;
         double price;
@@ -226,6 +233,7 @@ public class FoodMenu {
         products.get(index).showProduct();
     }
 
+    // helper function
     private static Product modifyProd(Product temp) {
         int choice;
         Scanner in = new Scanner (System.in);
@@ -422,7 +430,11 @@ public class FoodMenu {
         return found;
     }
 
-    // show all the products inside the array in a consistent format
+    // =======================
+    // EXTERNAL & INTERNAL USE
+    // =======================
+
+    // show the products inside the array in a consistent format
     private static void showProducts(ArrayList<Product> products) {
         // TODO: Print header
         System.out.printf("%40s", "PRODUCTS\n");
@@ -435,13 +447,27 @@ public class FoodMenu {
         // TODO: Print footer
         System.out.println("=END=");
     }
-
+    // overloading: show all products
     public static void showProducts() {
         showProducts(products);
     }
 
-    // get products from the menu (allow other functions to get a copy of the array)
+    // void -> ArrayList<Product>
+    // get all products from the menu (allow other functions to get a copy of the array)
     public static ArrayList<Product> getProducts() {
         return products;
     }
+
+    // String -> Product
+    // get a single product from the FoodMenu by ID
+    public static Product getProductByID(String term) {
+        for (Product p : products) {
+            if (p.getId().equals(term)) {
+                return p;
+            }
+        }
+        return new Product();
+    }
+
+
 }
