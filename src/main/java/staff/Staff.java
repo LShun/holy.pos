@@ -71,10 +71,6 @@ public class Staff {
         return scan.nextInt();
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d90617ff7a2c793a793625c567f1189f00680bd3
     public static void staff(){
         //Variables declaration
         int choice;
@@ -89,13 +85,6 @@ public class Staff {
             switch(choice)
             {
                 case 1:
-<<<<<<< HEAD
-                    System.out.println("1. Add Staff Record");
-                    break;
-
-                case 2:
-                    System.out.println("2. Display Staff Record");
-=======
                     System.out.println("Add Staff Record");
                     {
                         String staffID, password, sName, designation;
@@ -138,7 +127,6 @@ public class Staff {
                                 temp.getGender(), temp.getWorkingExperience(),
                                 temp.getDateOfEmployed().toString());
                     }
->>>>>>> d90617ff7a2c793a793625c567f1189f00680bd3
                     break;
 
                 case 3:
