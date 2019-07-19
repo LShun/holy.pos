@@ -19,7 +19,6 @@ public class Order {
         * */
 
         Cart c = new Cart();
-        Product p = null;
         String code;
         int action;
         int qty;
@@ -40,23 +39,24 @@ public class Order {
 
         while(action>=1 && action <=5) {
             if (action == 1) {
+                //Declaration
+                Product p = null;
 
                 //Show Menu
                 FoodMenu.showProducts();
 
+                //Prompt input message
                 System.out.print("Enter the product code > ");
                 code = in.nextLine();
 
+                //When the input is not 'q'
                 while (!code.equalsIgnoreCase("q")) {
-                    for (Product x : menu) {
-                        System.out.println("=======");
-                        System.out.println(code);
-                        System.out.println(x.getId());
-                        if (x.getId().equals(code))
-                            p = new Product(code, x.getTitle(), x.getDesc(), x.getPrice(), x.getTax());
-                    }
+                    p = FoodMenu.getProductByID(code);
+                    p = new Product(code, p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
 
-                    if (p != null) {
+                    //When the product exists in the menu
+                    if (p.getId() != "") {
+                        //And already exists in the cart
                         if (c.getItems().containsKey(p)) {
                             System.out.println("The items has already existed in the cart");
                         }
@@ -71,16 +71,17 @@ public class Order {
 
                     p = null;
 
-                    System.out.print("Enter the product code > ");
+                    System.out.print("Enter the product code or q to quit > ");
                     code = in.nextLine();
                 }
             } else if (action == 2) {
+                //Declaration
+                Product p;
+
                 System.out.print("Enter the product code > ");
                 code = in.nextLine();
-                for (Product x : menu) {
-                    if (x.getId().equals(code))
-                        p = new Product(code, x.getTitle(), x.getDesc(), x.getPrice(), x.getTax());
-                }
+                p = FoodMenu.getProductByID(code);
+                p = new Product(code, p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
                 if (c.getItems().containsKey(p)) {
                     c.del(p);
                 }
