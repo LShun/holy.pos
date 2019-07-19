@@ -2,7 +2,8 @@ package staff;
 
 import java.awt.*;
 import java.util.Scanner;
-import java.util.Date;
+//import java.util.Date;
+import java.time.LocalDate;
 
 public class Staff {
 
@@ -14,19 +15,31 @@ public class Staff {
     private int year;
     private String designation;
     private int workingExperience;
-
-    Date dateOfEmployed = new Date();
+    private LocalDate dateOfEmployed;
+    //Date dateOfEmployed = new Date();
         //public Staff(){
 
    // }
 
-    public Staff(){
+    public Staff(String staffID, String sName, char gender,String designation, int workingExperience,
+                int year,int month, int dayOfMonth){
 
         this.staffID=staffID;
         this.sName=sName;
         this.gender=gender;
         this.designation=designation;
         this.workingExperience=workingExperience;
+        this.dateOfEmployed.of(year, month, dayOfMonth);
+    }
+    
+    public Staff(String staffID, String sName, char gender,String designation, int workingExperience){
+
+        this.staffID=staffID;
+        this.sName=sName;
+        this.gender=gender;
+        this.designation=designation;
+        this.workingExperience=workingExperience;
+        this.dateOfEmployed.of(0,0,0);
     }
 
     public static void clearScreen() {
