@@ -29,10 +29,12 @@ public class Staff {
         this.workingExperience=workingExperience;
     }
 
+
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
 
     public static int mainMenu() //To allow the user to perform any of the transaction
     {
@@ -58,6 +60,8 @@ public class Staff {
 
         return scan.nextInt();
     }
+
+
     public static void staff(){
         //Variables declaration
         int choice;
@@ -72,19 +76,19 @@ public class Staff {
             switch(choice)
             {
                 case 1:
-                    System.out.println("Add Staff Record");
+                    System.out.println("1. Add Staff Record");
                     break;
 
                 case 2:
-                    System.out.println("Display Staff Record");
+                    System.out.println("2. Display Staff Record");
                     break;
 
                 case 3:
-                    System.out.println("Modify Staff Record");
+                    System.out.println("3. Modify Staff Record");
                     break;
 
                 case 4:
-                    System.out.println("Search Staff Record");
+                    System.out.println("4. Search Staff Record");
                     break;
 
                 case 5:
@@ -100,6 +104,16 @@ public class Staff {
 
             choice = mainMenu();
         } while (choice != 7);
+
+
+
+
+    }
+
+    public void addStaff(){
+
+
+
 
 
 
