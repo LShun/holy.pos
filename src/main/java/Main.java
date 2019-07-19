@@ -35,9 +35,11 @@ public class Main {
                 case 2:
                     // put auth classes under here
                     Auth.auth();
+                    break;
                 case 3:
                     // put food_menu classes under here
                     FoodMenu.foodMenu();
+                    break;
                 case 4:
                     // put order classes under here
                     Order.order();
@@ -52,8 +54,6 @@ public class Main {
                 default:
                     return;
             }
-
-
         }
     }
 }
