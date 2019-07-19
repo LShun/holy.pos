@@ -2,19 +2,21 @@ package staff;
 
 import java.awt.*;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Staff {
 
     private String staffID;
     private String sName;
     private char gender;
-    private int day;
+    private static int day;
     private int month;
     private int year;
     private String designation;
     private int workingExperience;
 
-    //public Staff(){
+    Date dateOfEmployed = new Date();
+        //public Staff(){
 
    // }
 
@@ -30,13 +32,6 @@ public class Staff {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
-    }
-
-    public static int getInt() {
-        Scanner in = new Scanner(System.in);
-
-        System.out.println("Enter an integer: ");
-        return in.nextInt();
     }
 
     public static int mainMenu() //To allow the user to perform any of the transaction
@@ -68,70 +63,43 @@ public class Staff {
         int choice;
 
         //Function call-mainMenu()
-        choice = getInt();
+        choice = mainMenu();
 
         do
         {
             clearScreen();
 
-            if (choice == 1)
+            switch(choice)
             {
-                //displayExistingRecord();
-                System.out.println("Hello");
+                case 1:
+                    System.out.println("Add Staff Record");
+                    break;
 
+                case 2:
+                    System.out.println("Display Staff Record");
+                    break;
 
-            }
+                case 3:
+                    System.out.println("Modify Staff Record");
+                    break;
 
-            else if (choice == 2)
-            {
-                //addRecord();
-                System.out.println("Hello1");
+                case 4:
+                    System.out.println("Search Staff Record");
+                    break;
 
+                case 5:
+                  return;
 
-            }
-
-            else if (choice == 3)
-            {
-                //searchRecord();
-                System.out.println("Hello2");
-
-
-            }
-
-            else if (choice == 4)
-            {
-                //modifyRecord();
-                System.out.println("Hello3");
-
-
-            }
-
-            else if (choice == 5)
-            {
-                //removeRecord();
-                System.out.println("Hello4");
-
-
-
-            }
-
-            else if (choice == 6)
-            {
-               // displayRemoveRecord();
-                System.out.println("Hello5");
-
-            }
-
-            else if (choice != 7)
-            {
-                System.out.println("Error! Please enter again\n");
+                default:
+                    System.out.println("Please enter a valid number");
 
 
             }
 
             System.out.println("\n");
 
-        } while (getInt() != 7);
+            choice = mainMenu();
+        } while (choice != 7);
 
 
 
