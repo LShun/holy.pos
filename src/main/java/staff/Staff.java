@@ -150,20 +150,6 @@ public class Staff {
         } while (choice != 7);
     }
 
-<<<<<<< HEAD
-    public void addStaff(){
-
-
-
-
-
-
-
-    }
-
-
-
-=======
     public String getStaffID() { return staffID; }
     public void setStaffID(String staffID) { this.staffID = staffID; }
     public String getsName() { return sName; }
@@ -178,7 +164,7 @@ public class Staff {
     public void setDateOfEmployed(LocalDate dateOfEmployed) { this.dateOfEmployed = dateOfEmployed; }
     public String getPassword(){ return password; }
     public void setPassword(String password){ this.password = password; }
->>>>>>> d90617ff7a2c793a793625c567f1189f00680bd3
+
 }
 
 
