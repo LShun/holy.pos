@@ -1,5 +1,7 @@
 package food_menu;
 
+import java.util.Objects;
+
 public class Product {
     private String id, title, desc;
     private double price;
@@ -68,5 +70,26 @@ public class Product {
                 "DESC: " + this.desc + "\n" +
                 "PRICE: " + this.price + "\n" +
                 "TAX: " + this.tax + "\n");
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.title);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        else if (o == null) return false;
+        else if (this.getClass() != o.getClass()) return false;
+        Product p = (Product) o;
+
+        int hash = hashCode();
+
+        if (hash == p.hashCode())
+            return true;
+        else
+            return false;
+
     }
 }
