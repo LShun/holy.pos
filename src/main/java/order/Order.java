@@ -118,9 +118,14 @@ public class Order {
             System.out.print("Amount Received is RM");
             amountReceived = in.nextDouble();
         }
-        double change = total - amountReceived;
-        System.out.print("Change Amount is RM" + change);
+        double change = amountReceived - total;
+        System.out.println("Change Amount is RM" + change);
 
         Receipt r = new Receipt(c, total);
+        System.out.printf("%-8s%-25s%4s%8s%8s\n","ID","Name","Qty","RM","RM");
+        System.out.println("---------------------------------------------+-------");
+        r.display();
+        System.out.println("---------------------------------------------+-------");
+        System.out.printf("%45s%8.2f\n","Total", r.getTotal());
     }
 }

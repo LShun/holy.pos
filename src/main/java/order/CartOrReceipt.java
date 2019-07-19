@@ -22,7 +22,8 @@ public abstract class CartOrReceipt {
 
     public void display() {
         for (Map.Entry<Product, Integer> e : items.entrySet()) {
-            System.out.printf("%-8s%-15s%3d\n",e.getKey().getId(), e.getKey().getTitle(), e.getValue());
+            System.out.printf("%-8s%-25s%4d%8.2f|%7.2f\n",e.getKey().getId(), e.getKey().getTitle(), e.getValue(),
+                    e.getKey().getPrice(), e.getKey().getPrice() * e.getValue() );
         }
     }
 }
