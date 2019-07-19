@@ -39,10 +39,12 @@ public class Staff {
         this(staffID, password, sName, gender, designation, workingExperience, 0, 0, 0);
     }
 
+
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
 
     public static int mainMenu() //To allow the user to perform any of the transaction
     {
@@ -69,6 +71,10 @@ public class Staff {
         return scan.nextInt();
     }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> d90617ff7a2c793a793625c567f1189f00680bd3
     public static void staff(){
         //Variables declaration
         int choice;
@@ -83,6 +89,13 @@ public class Staff {
             switch(choice)
             {
                 case 1:
+<<<<<<< HEAD
+                    System.out.println("1. Add Staff Record");
+                    break;
+
+                case 2:
+                    System.out.println("2. Display Staff Record");
+=======
                     System.out.println("Add Staff Record");
                     {
                         String staffID, password, sName, designation;
@@ -125,14 +138,15 @@ public class Staff {
                                 temp.getGender(), temp.getWorkingExperience(),
                                 temp.getDateOfEmployed().toString());
                     }
+>>>>>>> d90617ff7a2c793a793625c567f1189f00680bd3
                     break;
 
                 case 3:
-                    System.out.println("Modify Staff Record");
+                    System.out.println("3. Modify Staff Record");
                     break;
 
                 case 4:
-                    System.out.println("Search Staff Record");
+                    System.out.println("4. Search Staff Record");
                     break;
 
                 case 5:
@@ -148,6 +162,20 @@ public class Staff {
         } while (choice != 7);
     }
 
+<<<<<<< HEAD
+    public void addStaff(){
+
+
+
+
+
+
+
+    }
+
+
+
+=======
     public String getStaffID() { return staffID; }
     public void setStaffID(String staffID) { this.staffID = staffID; }
     public String getsName() { return sName; }
@@ -162,6 +190,7 @@ public class Staff {
     public void setDateOfEmployed(LocalDate dateOfEmployed) { this.dateOfEmployed = dateOfEmployed; }
     public String getPassword(){ return password; }
     public void setPassword(String password){ this.password = password; }
+>>>>>>> d90617ff7a2c793a793625c567f1189f00680bd3
 }
 
 
