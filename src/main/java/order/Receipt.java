@@ -10,6 +10,7 @@ public class Receipt extends CartOrReceipt {
         this.staffID         = c.getStaffID();
         this.customerID      = c.getCustomerID();
         this.transactionTime = LocalDateTime.now();
+        this.items           = c.getItems();
         this.total           = total;
     }
 
