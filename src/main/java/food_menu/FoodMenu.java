@@ -291,25 +291,26 @@ public class FoodMenu {
 
     private static ArrayList<Product> searchX(String term, int field) {
         ArrayList<Product> results = new ArrayList<>();
+        int termLength = term.length();
 
         switch (field) {
             case ID_FIELD:
                 for (Product p : products) {
-                    if (p.getId().equals(term)) {
+                    if (p.getId().substring(0, termLength).equals(term)) {
                         results.add(p);
                     }
                 }
                 break;
             case TITLE_FIELD:
                 for (Product p : products) {
-                    if (p.getTitle().equals(term)) {
+                    if (p.getTitle().substring(0, termLength).equals(term)) {
                         results.add(p);
                     }
                 }
                 break;
             case DESC_FIELD:
                 for (Product p : products) {
-                    if (p.getDesc().equals(term)) {
+                    if (p.getDesc().substring(0, termLength).equals(term)) {
                         results.add(p);
                     }
                 }
@@ -404,7 +405,7 @@ public class FoodMenu {
             }
             else {
                 // Search by ID
-                found = find(id);
+                found = searchX(id, ID_FIELD);
 
                 // Display results
                 showProducts(found);
