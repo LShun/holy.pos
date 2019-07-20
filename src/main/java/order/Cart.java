@@ -3,37 +3,27 @@ package order;
 import java.time.*;
 import java.util.HashMap;
 import java.util.Map;
-import food_menu.Product;
+import food_menu.*;
 
-public class Cart{
-    private String billID;
-    private String staffID;
-    private String customerID;
-    private LocalDateTime transactionTime;
-    private HashMap<Product , Integer> items;
+public class Cart extends CartOrReceipt{
 
 //    public Cart(String staffID, String customerID) {
 //        this.billID          = ID//generateID;
 //        this.staffID         = //from Authentication;
 //        this.customerID      = customerID;
 //        this.transactionTime = LocalDateTime.now();
-//        this.items           = new HashMap<Product , Integer>();
 //    }
-
-    public HashMap<Product , Integer> getItems(){
-        return this.items;
-    }
 
     public void addOrMinus(Product item, int qty){
-        this.items.put(item, this.items.getOrDefault(item, 0) + qty);
+        items.put(item, items.getOrDefault(item, 0) + qty);
     }
 
-//    public void del(Product obj){
-//        this.items.remove(obj);
-//    }
+    public void del(Product obj){
+        items.remove(obj);
+    }
 
     public void clearCart(){
-        this.items.clear();
+        items.clear();
     }
 
     public double proceed(){
@@ -43,4 +33,9 @@ public class Cart{
         }
         return total;
     }
+
+    public void setBillID(String billID) { this.billID = billID; }
+    public void setStaffID(String staffID) { this.staffID = staffID; }
+    public void setCustomerID(String customerID) { this.customerID = customerID; }
+    public void setTransactionTime(LocalDateTime transactionTime) { this.transactionTime = transactionTime; }
 }
