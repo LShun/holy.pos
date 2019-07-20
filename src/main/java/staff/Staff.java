@@ -15,7 +15,6 @@ public class Staff {
     private int month;
     private int year;
     private String designation;
-    private int workingExperience;
     private LocalDate dateOfEmployed;
     //Date dateOfEmployed = new Date();
         //public Staff(){
@@ -24,19 +23,18 @@ public class Staff {
 
     public static ArrayList<Staff> employeeList = new ArrayList<Staff>();
 
-    public Staff(String staffID, String password, String sName, char gender,String designation, int workingExperience,
+    public Staff(String staffID, String password, String sName, char gender,String designation,
                 int year,int month, int dayOfMonth){
         this.setStaffID(staffID);
         this.setPassword(password);
         this.setsName(sName);
         this.setGender(gender);
         this.setDesignation(designation);
-        this.setWorkingExperience(workingExperience);
         this.dateOfEmployed = LocalDate.of(year, month, dayOfMonth);
     }
     
-    public Staff(String staffID, String password, String sName, char gender,String designation, int workingExperience){
-        this(staffID, password, sName, gender, designation, workingExperience, 0, 0, 0);
+    public Staff(String staffID, String password, String sName, char gender,String designation){
+        this(staffID, password, sName, gender, designation,  0, 0, 0);
     }
 
 
@@ -57,13 +55,12 @@ public class Staff {
         //Display menu
         //header("Staff Information Module");
         System.out.printf("%20s%s\n", " ", "Staff Information Module");
-        System.out.printf("%20s%s\n", " ", "1. Display Existing Staff Record");
-        System.out.printf("%20s%s\n", " ", "2. Add Staff Record");
-        System.out.printf("%20s%s\n", " ", "3. Search Staff Record");
-        System.out.printf("%20s%s\n", " ", "4. Modify Staff Record");
-        System.out.printf("%20s%s\n", " ", "5. Remove Staff Record");
-        System.out.printf("%20s%s\n", " ", "6. Display Removed Staff Record");
-        System.out.printf("%20s%s\n\n", " ", "7. Exit");
+        System.out.printf("%20s%s\n", " ", "1. Add Staff Record");
+        System.out.printf("%20s%s\n", " ", "2. Display Staff Record");
+        System.out.printf("%20s%s\n", " ", "3. Modify Staff Record");
+        System.out.printf("%20s%s\n", " ", "4. Search Staff Record");
+        System.out.printf("%20s%s\n", " ", "5. Exit");
+
 
         //Input
         System.out.printf("%20s%s", " ", "Enter your selection : ");
@@ -85,37 +82,8 @@ public class Staff {
             switch(choice)
             {
                 case 1:
-                    System.out.println("Add Staff Record");
-                    {
-                        String staffID, password, sName, designation;
-                        char gender;
-                        int workingExperience;
-                        String[] dateOfEmployed;
-                        Scanner scan = new Scanner(System.in);
-
-                        System.out.println("Enter staff Id : ");
-                        staffID = scan.nextLine();
-                        System.out.println("Enter staff password : ");
-                        password = scan.nextLine();
-                        System.out.println("Enter staff name : ");
-                        sName = scan.nextLine();
-                        System.out.println("Enter staff gender : ");
-                        gender = scan.nextLine().charAt(0);
-                        System.out.println("Enter staff designation : ");
-                        designation = scan.nextLine();
-                        System.out.println("Enter staff working experience : ");
-                        workingExperience = scan.nextInt();
-                        scan.nextLine();
-                        System.out.println("Enter staff date of employed (yy-mm-dd): ");
-                        dateOfEmployed = scan.nextLine().split("[-/]");
-
-                        employeeList.add(new Staff(staffID, password, sName, gender,
-                                designation, workingExperience,
-                                Integer.parseInt(dateOfEmployed[0]),
-                                Integer.parseInt(dateOfEmployed[1]),
-                                Integer.parseInt(dateOfEmployed[2]))
-                        );
-                    }
+                    //System.out.println("Add Staff Record");
+                    addStaff();
                     break;
 
                 case 2:
@@ -124,17 +92,17 @@ public class Staff {
                         Staff temp = employeeList.get(i);
                         System.out.printf("%-8s%-16s%-16s%2c%4d%15s",
                                 temp.getStaffID(), temp.getPassword(),temp.getsName(),
-                                temp.getGender(), temp.getWorkingExperience(),
+                                temp.getGender(),
                                 temp.getDateOfEmployed().toString());
                     }
                     break;
 
                 case 3:
-                    System.out.println("3. Modify Staff Record");
+                    System.out.println("");
                     break;
 
                 case 4:
-                    System.out.println("4. Search Staff Record");
+                    System.out.println("");
                     break;
 
                 case 5:
@@ -158,12 +126,46 @@ public class Staff {
     public void setGender(char gender) { this.gender = gender; }
     public String getDesignation() { return designation; }
     public void setDesignation(String designation) { this.designation = designation; }
-    public int getWorkingExperience() { return workingExperience; }
-    public void setWorkingExperience(int workingExperience) { this.workingExperience = workingExperience; }
     public LocalDate getDateOfEmployed() { return dateOfEmployed; }
     public void setDateOfEmployed(LocalDate dateOfEmployed) { this.dateOfEmployed = dateOfEmployed; }
     public String getPassword(){ return password; }
     public void setPassword(String password){ this.password = password; }
+
+    public static void addStaff(){
+
+        String staffID, password, sName, designation;
+        char gender;
+        String[] dateOfEmployed;
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Enter staff Id : ");
+        staffID = scan.nextLine();
+
+        System.out.println("Enter staff password : ");
+        password = scan.nextLine();
+
+        System.out.println("Enter staff name : ");
+        sName = scan.nextLine();
+
+        System.out.println("Enter staff gender : ");
+        gender = scan.nextLine().charAt(0);
+
+        System.out.println("Enter staff designation : ");
+        designation = scan.nextLine();
+
+        scan.nextLine();
+        System.out.println("Enter staff date of employed (dd-mm-yyyy): ");
+        dateOfEmployed = scan.nextLine().split("[-/]");
+
+        employeeList.add(new Staff(staffID, password, sName, gender,
+                designation,
+                Integer.parseInt(dateOfEmployed[2]),
+                Integer.parseInt(dateOfEmployed[1]),
+                Integer.parseInt(dateOfEmployed[0]))
+        );
+
+
+    }
 
 }
 

@@ -51,6 +51,7 @@ public class Main {
                 case 6:
                     // put reporting classes under here
                     Reporting.reporting();
+                    break;
                 default:
                     return;
             }
