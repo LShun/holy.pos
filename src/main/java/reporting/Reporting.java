@@ -12,13 +12,14 @@ public class Reporting {
 
        int choice=0;
 
-        while (true){
+        do{
        System.out.println("List of reports: ");
        System.out.println("1. Daily Sales Report");
        System.out.println("2. Monthly Sales Report");
        System.out.println("3. Product Performance Report");
        System.out.println("4. Staff Performance Report");
        System.out.println("5. Tax Report");
+       System.out.println("6. Quit");
 
        System.out.print("Please select report: ");
        choice = scanner.nextInt();
@@ -33,9 +34,9 @@ public class Reporting {
            new StaffPerformanceReport();
        else if(choice==5)
            new TaxReport();
-       else
+       else if(choice==6)
            return;
-        }
+        }while(choice>=1 && choice <=6);
 
 
 
