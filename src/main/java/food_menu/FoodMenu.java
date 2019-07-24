@@ -246,11 +246,19 @@ public class FoodMenu {
 
             System.out.println("Select your operation: \n" +
                                 "1. View All\n" +
-                                "2. Search products\n");
-            if (in.nextInt() == 1) {
+                                "2. Search products\n" +
+                                "Other. exit\n");
+
+            basis = in.nextInt();
+
+            if (basis == 1) {
                 showProducts();
                 continue;
             }
+            else if (basis != 2) {
+                return;
+            }
+
             in.nextLine();
 
             System.out.println("Search on basis: \n");
