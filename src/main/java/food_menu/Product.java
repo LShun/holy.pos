@@ -4,6 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static pub.vScan.*;
+
 public class Product {
     private String id, title, desc;
     private double price;
@@ -85,11 +87,11 @@ public class Product {
         String id;
 
         System.out.print("Product ID [Max: 10 characters] or -1 to cancel: ");
-        id = in.nextLine();
+        id = getString();
 
         while (id.length() > 10) {
             System.out.print("ID Length > 10, Reenter: ");
-            id = in.nextLine();
+            id = getString();
         }
 
         setId(id);
@@ -100,7 +102,7 @@ public class Product {
         String title;
 
         System.out.print("Enter product title or -1 to cancel: ");
-        title = in.nextLine();
+        title = getString();
 
         setTitle(title);
     }
@@ -110,55 +112,36 @@ public class Product {
         String desc;
 
         System.out.print("Enter product description or -1 to cancel: ");
-        desc = in.nextLine();
+        desc = getString();
 
-        setTitle(desc);
+        setDesc(desc);
     }
 
     public void setPrice() {
         Scanner in = new Scanner(System.in);
-        double price = -0.1;
+        double price;
 
-        do {
-            try {
-                System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
-                price = in.nextDouble();
+        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
+        price = getDouble();
 
-                while (price < 0) {
-                    System.out.print("Negative price invalid, retry: ");
-                    price = in.nextDouble();
-                }
-                setPrice(price);
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Not a number.");
-            }
-            in.nextLine();
+        while (price < 0) {
+            System.out.print("Negative price invalid, retry: ");
+            price = getDouble();
         }
-        while (price <= 0);
+        setPrice(price);
     }
 
     public void setTax() {
-        Scanner in = new Scanner(System.in);
-        double tax = -0.1;
+        double tax;
 
-        do {
-            try {
-                System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
-                tax = in.nextDouble();
+        System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
+        tax = getDouble();
 
-                while (tax < 0) {
-                    System.out.print("Negative tax invalid, retry: ");
-                    tax = in.nextDouble();
-                }
-                setPrice(tax);
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Not a number.");
-            }
-            in.nextLine();
+        while (tax < 0) {
+            System.out.print("Negative tax invalid, retry: ");
+            tax = getDouble();
         }
-        while (tax <= 0);
+        setTax(tax);
 
     }
 
@@ -168,11 +151,11 @@ public class Product {
 
     public void showProduct() {
         System.out.println(
-                "ID: " + this.id + "\n" +
-                "TITLE: " + this.title + "\n" +
-                "DESC: " + this.desc + "\n" +
-                "PRICE: " + this.price + "\n" +
-                "TAX: " + this.tax + "\n");
+                "ID     : " + this.id + "\n" +
+                "TITLE  : " + this.title + "\n" +
+                "DESC   : " + this.desc + "\n" +
+                "PRICE  : " + this.price + "\n" +
+                "TAX    : " + this.tax + "\n");
     }
 
     @Override

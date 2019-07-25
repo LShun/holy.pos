@@ -1,0 +1,7 @@
+3
+1
+ABC12
+Audacious Burger Cheesy Deluxe No.12
+An extremely audacious burger
+12.50
+0.1

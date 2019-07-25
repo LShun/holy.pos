@@ -1,9 +1,10 @@
 package food_menu;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import static pub.vScan.*;
 
 public class FoodMenu {
     private static final int ID_FIELD = 1;
@@ -26,19 +27,22 @@ public class FoodMenu {
 
     // menu for manipulating the food menu
     public static void foodMenu() {
-        Scanner in = new Scanner(System.in);
         int choice;
 
         while (true) {
-            System.out.println("1.  New Product");
-            System.out.println("2.  Modify Product");
-            System.out.println("3.  Search Product");
-            System.out.println("4.  Delete Product");
-            System.out.println("Other. Back");
+            System.out.println(
+                    "\n" +
+                            "========= FOOD MENU =========" +
+                            "\n");
+            System.out.println("1.      New Product");
+            System.out.println("2.      Modify Product");
+            System.out.println("3.      Search Product");
+            System.out.println("4.      Delete Product");
+            System.out.println("Other.  Back");
             System.out.println();
             System.out.print("Enter your choice: ");
 
-            choice = in.nextInt();
+            choice = getInt();
 
             switch (choice) {
                 case 1:
@@ -62,7 +66,6 @@ public class FoodMenu {
     // add a new product to the array
     private static void add() {
         Product temp = new Product();
-        Scanner in = new Scanner(System.in);
 
         // obtain required details
         System.out.println("ADD PRODUCTS\n");
@@ -143,7 +146,6 @@ public class FoodMenu {
     // user can call this module to modify a product's details.
     private static void modify() {
         int index;
-        Scanner in = new Scanner(System.in);
         Product temp;
 
         System.out.println("\nPRODUCT MODIFICATION\n");
@@ -170,11 +172,10 @@ public class FoodMenu {
 
         System.out.println("Are you sure? (Y/N): ");
         // copy the temporary product back into the real product
-        if (in.nextLine().toLowerCase().equals("y")) {
+        if (getString().toLowerCase().equals("y")) {
             products.set(index, temp);
             System.out.println("Modification successful!");
-        }
-        else {
+        } else {
             System.out.println("Modification cancelled.");
         }
 
@@ -185,7 +186,6 @@ public class FoodMenu {
 
     // deletes a product from FoodMenu array
     private static void delete() {
-        Scanner in = new Scanner(System.in);
         int index;
         Product temp;
 
@@ -208,7 +208,7 @@ public class FoodMenu {
 
         System.out.println("Are you sure? (Y/N): ");
         // copy the temporary product back into the real product
-        if (in.nextLine().toLowerCase().equals("y")) {
+        if (getString().toLowerCase().equals("y")) {
             products.remove(index);
             System.out.println("Deletion successful!");
         } else {
@@ -218,7 +218,6 @@ public class FoodMenu {
 
     // searches products inside FoodMenu array
     private static void search() {
-        Scanner in = new Scanner(System.in);
         String term;
         int basis;
         ArrayList<Product> found = new ArrayList<>();
@@ -227,21 +226,20 @@ public class FoodMenu {
             System.out.println("Search product");
 
             System.out.println("Select your operation: \n" +
-                                "1. View All\n" +
-                                "2. Search products\n" +
-                                "Other. exit\n");
+                    "1. View All\n" +
+                    "2. Search products\n" +
+                    "Other. exit\n");
 
-            basis = in.nextInt();
+            basis = getInt();
 
             if (basis == 1) {
                 showProducts();
                 continue;
-            }
-            else if (basis != 2) {
+            } else if (basis != 2) {
                 return;
             }
 
-            in.nextLine();
+            getString();
 
             System.out.println("Search on basis: \n");
             System.out.println("1. ID\n" +
@@ -250,15 +248,15 @@ public class FoodMenu {
                     "Other. Cancel\n");
 
             System.out.print("Enter your basis: ");
-            basis = in.nextInt();
-            in.nextLine();
+            basis = getInt();
+            getString();
 
             if (basis < 1 || basis > 3) {
                 return;
             }
 
             System.out.print("Enter search term: ");
-            term = in.nextLine();
+            term = getString();
 
             switch (basis) {
                 case ID_FIELD:
@@ -285,7 +283,6 @@ public class FoodMenu {
 
         int basis;
         String term;
-        Scanner in = new Scanner(System.in);
 
         do {
             System.out.println("Search on basis: \n");
@@ -295,15 +292,15 @@ public class FoodMenu {
                     "4. Cancel\n");
 
             System.out.print("Enter your basis: ");
-            basis = in.nextInt();
-            in.nextLine();
+            basis = getInt();
+            getString();
 
             if (basis == 4) {
                 return null;
             }
 
             System.out.print("Enter your term: ");
-            term = in.nextLine();
+            term = getString();
 
             switch (basis) {
                 case ID_FIELD:
@@ -320,7 +317,7 @@ public class FoodMenu {
             if (results.size() > 1) {
                 showProducts(results);
                 System.out.println("Please enter the index of your choice: ");
-                return results.get(in.nextInt());
+                return results.get(getInt());
             } else if (results.size() < 1) {
                 System.out.println("No results found, please enter a new search term.");
             }
@@ -365,7 +362,6 @@ public class FoodMenu {
     // helper function
     private static Product modifyProd(Product temp) {
         int choice;
-        Scanner in = new Scanner(System.in);
         String replaceString;
         double replaceNumber;
 
@@ -381,8 +377,8 @@ public class FoodMenu {
                             + "5. Tax\n"
                             + "Other number. COMMIT/DISCARD changes\n"
                             + "Enter your choice (1-6): ");
-            choice = in.nextInt();
-            in.nextLine();
+            choice = getInt();
+            getString();
 
             System.out.print("Enter new ");
             switch (choice) {
