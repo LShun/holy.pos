@@ -61,50 +61,40 @@ public class FoodMenu {
 
     // add a new product to the array
     private static void add() {
-        String id, title, description;
-        double price;
-        double tax;
+        Product temp = new Product();
         Scanner in = new Scanner(System.in);
 
         // obtain required details
         System.out.println("ADD PRODUCTS\n");
 
-        id = getID(in);
-        if (id.equals("-1")) {
+        temp.setID();
+        if (temp.getId().equals("-1")) {
             return;
         }
 
-        System.out.print("Enter product title [Max: 64 characters] or -1 to cancel: ");
-        // TODO: Add tests for 64 characters & invalid input
-        title = in.nextLine();
-        if (title.equals("-1")) {
+        temp.setTitle();
+        if (temp.getTitle().equals("-1")) {
             return;
         }
 
 
-        System.out.print("Enter product description [Max: 128 characters] or -1 to cancel: ");
-        // TODO: Add tests for 128 characters & invalid input
-        description = in.nextLine();
-        if (description.equals("-1")) {
+        temp.setDesc();
+        if (temp.getDesc().equals("-1")) {
             return;
         }
 
-        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
-        // TODO: Add tests for invalid input
-        price = in.nextDouble();
-        if (price == -1) {
+        temp.setPrice();
+        if (temp.getPrice() == -1) {
             return;
         }
 
-        System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
-        // TODO: Add tests for invalid input
-        tax = in.nextDouble();
-        if (tax == -1) {
+        temp.setTax();
+        if (temp.getTax() == -1) {
             return;
         }
 
         // add into the products arrayList
-        products.add(new Product(id, title, description, price, tax));
+        products.add(temp);
 
         // print successful message
         System.out.println("Product addition successful!");
@@ -148,14 +138,6 @@ public class FoodMenu {
 //                System.err.println(e.getMessage());
 //            }
 //        }
-    }
-
-    private static String getID(Scanner in) {
-        String id;
-        System.out.print("Product ID [Max: 5 characters] or -1 to cancel: ");
-        // TODO: Add tests for 5 characters & invalid input
-        id = in.nextLine();
-        return id;
     }
 
     // user can call this module to modify a product's details.
@@ -405,29 +387,19 @@ public class FoodMenu {
             System.out.print("Enter new ");
             switch (choice) {
                 case 1: // ID
-                    System.out.print(" ID: ");
-                    replaceString = in.nextLine();
-                    temp.setId(replaceString);
+                    temp.setID();
                     break;
                 case 2: // TITLE
-                    System.out.print(" TITLE: ");
-                    replaceString = in.nextLine();
-                    temp.setTitle(replaceString);
+                    temp.setTitle();
                     break;
                 case 3: // DESC
-                    System.out.print(" DESC: ");
-                    replaceString = in.nextLine();
-                    temp.setDesc(replaceString);
+                    temp.setDesc();
                     break;
                 case 4: // PRICE
-                    System.out.print(" PRICE (Eg: 5.0): ");
-                    replaceNumber = in.nextDouble();
-                    temp.setPrice(replaceNumber);
+                    temp.setPrice();
                     break;
                 case 5: // TAX
-                    System.out.print(" TAX [Percentage/100] (Eg: 0.06): ");
-                    replaceNumber = in.nextDouble();
-                    temp.setTax(replaceNumber);
+                    temp.setTax();
                     break;
             }
         }
