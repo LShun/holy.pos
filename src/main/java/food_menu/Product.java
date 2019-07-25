@@ -1,6 +1,6 @@
 package food_menu;
 
-import javax.management.BadStringOperationException;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -77,9 +77,7 @@ public class Product {
     }
 
     /*
-
         Setters with validation
-
      */
 
     public void setID() {
@@ -119,30 +117,49 @@ public class Product {
 
     public void setPrice() {
         Scanner in = new Scanner(System.in);
-        double price;
+        double price = -0.1;
 
-        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
-        price = in.nextDouble();
+        do {
+            try {
+                System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
+                price = in.nextDouble();
 
-        while (price < 0) {
-            System.out.print("Negative price invalid, retry: ");
-            price = in.nextDouble();
+                while (price < 0) {
+                    System.out.print("Negative price invalid, retry: ");
+                    price = in.nextDouble();
+                }
+                setPrice(price);
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Not a number.");
+            }
+            in.nextLine();
         }
-        setPrice(price);
+        while (price <= 0);
     }
 
     public void setTax() {
         Scanner in = new Scanner(System.in);
-        double tax;
+        double tax = -0.1;
 
-        System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
-        tax = in.nextDouble();
+        do {
+            try {
+                System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
+                tax = in.nextDouble();
 
-        while (tax < 0) {
-            System.out.print("Negative tax invalid, retry: ");
-            tax = in.nextDouble();
+                while (tax < 0) {
+                    System.out.print("Negative tax invalid, retry: ");
+                    tax = in.nextDouble();
+                }
+                setPrice(tax);
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Not a number.");
+            }
+            in.nextLine();
         }
-        setPrice(tax);
+        while (tax <= 0);
+
     }
 
     /*
