@@ -8,7 +8,6 @@ public class Receipt extends CartOrReceipt {
     public Receipt(Cart c, double total){
         this.billID          = c.getBillID();
         this.staffID         = c.getStaffID();
-        this.customerID      = c.getCustomerID();
         this.transactionTime = LocalDateTime.now();
         this.items           = c.getItems();
         this.total           = total;
