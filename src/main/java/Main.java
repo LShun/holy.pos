@@ -15,7 +15,13 @@ public class Main {
         int choice;
 
         while (true) {
-            System.out.println();
+            System.out.println("\n" +
+                    "______  ________________  __     _______________________\n" +
+                    "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
+                    "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
+                    "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
+                    "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
+                    "                                                        \n");
             System.out.println("1. Example");
             System.out.println("2. Authentication");
             System.out.println("3. Food Menu");
