@@ -1,11 +1,19 @@
 package food_menu;
 
+import java.util.InputMismatchException;
 import java.util.Objects;
+import java.util.Scanner;
+
+import static pub.vScan.*;
 
 public class Product {
     private String id, title, desc;
     private double price;
     private double tax;
+
+    /*
+        Constructors
+    */
 
     public Product() {
         this.id = "";
@@ -22,6 +30,10 @@ public class Product {
         this.price = price;
         this.tax = tax;
     }
+
+    /*
+        Getters
+    */
 
     public String getTitle() {
         return title;
@@ -43,10 +55,9 @@ public class Product {
         return tax;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
+    /*
+        Setters
+    */
     public void setId(String id) {
         this.id = id;
     }
@@ -59,17 +70,92 @@ public class Product {
         this.desc = desc;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public void setTax(double tax) {
         this.tax = tax;
     }
 
+    /*
+        Setters with validation
+     */
+
+    public void setID() {
+        Scanner in = new Scanner(System.in);
+        String id;
+
+        System.out.print("Product ID [Max: 10 characters] or -1 to cancel: ");
+        id = getString();
+
+        while (id.length() > 10) {
+            System.out.print("ID Length > 10, Reenter: ");
+            id = getString();
+        }
+
+        setId(id);
+    }
+
+    public void setTitle() {
+        Scanner in = new Scanner(System.in);
+        String title;
+
+        System.out.print("Enter product title or -1 to cancel: ");
+        title = getString();
+
+        setTitle(title);
+    }
+
+    public void setDesc() {
+        Scanner in = new Scanner(System.in);
+        String desc;
+
+        System.out.print("Enter product description or -1 to cancel: ");
+        desc = getString();
+
+        setDesc(desc);
+    }
+
+    public void setPrice() {
+        Scanner in = new Scanner(System.in);
+        double price;
+
+        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
+        price = getDouble();
+
+        while (price < 0) {
+            System.out.print("Negative price invalid, retry: ");
+            price = getDouble();
+        }
+        setPrice(price);
+    }
+
+    public void setTax() {
+        double tax;
+
+        System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
+        tax = getDouble();
+
+        while (tax < 0) {
+            System.out.print("Negative tax invalid, retry: ");
+            tax = getDouble();
+        }
+        setTax(tax);
+
+    }
+
+    /*
+        Other methods
+    */
+
     public void showProduct() {
         System.out.println(
-                "ID: " + this.id + "\n" +
-                "TITLE: " + this.title + "\n" +
-                "DESC: " + this.desc + "\n" +
-                "PRICE: " + this.price + "\n" +
-                "TAX: " + this.tax + "\n");
+                "ID     : " + this.id + "\n" +
+                "TITLE  : " + this.title + "\n" +
+                "DESC   : " + this.desc + "\n" +
+                "PRICE  : " + this.price + "\n" +
+                "TAX    : " + this.tax + "\n");
     }
 
     @Override
@@ -90,6 +176,5 @@ public class Product {
             return true;
         else
             return false;
-
     }
 }

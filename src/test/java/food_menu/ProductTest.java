@@ -1,50 +1,40 @@
 package food_menu;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ProductTest {
 
-    private Product p = new Product("BBEEF", "Beefburger",	"Beefburger Deluxe", 5.99, 0.16);
-    private Product q = new Product("BC", "Cheeseburger", "Cheeseburger", 5.99, 0.16);
-    private final double THREEDP = 0.001;
-    private final int EXPECTHASH = -1413175596;
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
+
+    // Tests for Setters
 
     @Test
-    public void getTitle() {
-        assertEquals("Beefburger", p.getTitle());
+    public void setId() {
     }
 
     @Test
-    public void getDesc() {
-        assertEquals("Beefburger Deluxe", p.getDesc());
+    public void setTitle() {
     }
 
     @Test
-    public void getPrice() {
-        assertEquals(5.99, p.getPrice(), THREEDP);
+    public void setDesc() {
     }
 
     @Test
-    public void getId() {
-        assertEquals("BBEEF", p.getId());
+    public void setPrice() {
     }
 
     @Test
-    public void getTax() {
-        assertEquals(0.16, p.getTax(), THREEDP);
-    }
-
-    @Test
-    public void hashCode1() {
-        assertEquals(EXPECTHASH, p.hashCode());
-    }
-
-    @Test
-    public void equals1() {
-        assertEquals(false, p.equals(q));
-        assertEquals(true, p.equals(p));
-        assertEquals(false, p.equals(null));
+    public void setTax() {
     }
 }

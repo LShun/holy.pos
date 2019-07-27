@@ -7,11 +7,12 @@ import staff.Staff;
 
 import java.util.Scanner;
 
+import static pub.vScan.*;
+
 public class Main {
     public static void main(String[] args) {
 
-        Scanner in = new Scanner(System.in);
-        int choice = 0;
+        int choice;
 
         while (true) {
             System.out.println();
@@ -25,7 +26,7 @@ public class Main {
             System.out.println();
             System.out.print("Please select your module: ");
 
-            choice = in.nextInt();
+            choice = getInt();
 
             switch (choice) {
                 case 1:
