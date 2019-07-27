@@ -1,18 +1,18 @@
 package order;
 
 import java.time.*;
-import java.util.HashMap;
 import java.util.Map;
+
+import auth.Auth;
 import food_menu.*;
 
 public class Cart extends CartOrReceipt{
 
-//    public Cart(String staffID, String customerID) {
-//        this.billID          = ID//generateID;
-//        this.staffID         = //from Authentication;
-//        this.customerID      = customerID;
-//        this.transactionTime = LocalDateTime.now();
-//    }
+    public Cart() {
+        this.billID          = "0001";
+        this.staffID         = Auth.s.getStaffID();
+        this.transactionTime = LocalDateTime.now();
+    }
 
     public void addOrMinus(Product item, int qty){
         items.put(item, items.getOrDefault(item, 0) + qty);
@@ -36,6 +36,5 @@ public class Cart extends CartOrReceipt{
 
     public void setBillID(String billID) { this.billID = billID; }
     public void setStaffID(String staffID) { this.staffID = staffID; }
-    public void setCustomerID(String customerID) { this.customerID = customerID; }
     public void setTransactionTime(LocalDateTime transactionTime) { this.transactionTime = transactionTime; }
 }
