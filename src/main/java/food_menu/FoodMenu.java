@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class FoodMenu {
     private static final int ID_FIELD = 1;
     private static final int TITLE_FIELD = 2;
