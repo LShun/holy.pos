@@ -6,19 +6,27 @@ public class vScan {
     private static Scanner in = new Scanner(System.in);
 
     public static int getInt() {
+        int i;
+
         while(!in.hasNextInt()) {
             System.out.print("Enter a number: ");
             in.next();
         }
-        return in.nextInt();
+        i = in.nextInt();
+        in.nextLine();
+        return i;
     }
 
     public static double getDouble() {
+        double d;
+
         while(!in.hasNextDouble()) {
             System.out.print("Enter a number: ");
             in.next();
         }
-        return in.nextDouble();
+        d = in.nextDouble();
+        in.nextLine();
+        return d;
     }
 
     public static String getString() {
