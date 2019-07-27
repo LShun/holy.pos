@@ -34,7 +34,7 @@ public class Order {
         orderMenu();
 
         //Action
-        System.out.print("Enter the action code > ");
+        System.out.print("Enter the action code : ");
         action = vScan.getInt();
 
         while(action>=1 && action <=5) {
@@ -45,7 +45,10 @@ public class Order {
             } else if (action == 3) {
                 c.clearCart();
             } else if (action == 4) {
-                break;
+                if(c.getItems().isEmpty())
+                    System.out.println("The cart is empty!");
+                else
+                    break;
             } else if (action == 5) {
                 return;
             } else {
@@ -56,11 +59,11 @@ public class Order {
             orderMenu();
 
             //Action
-            System.out.print("Enter the action code > ");
+            System.out.print("Enter the action code : ");
             action = vScan.getInt();
         }
 
-        total = c.proceed();
+        total = c.getTotal();
 
         System.out.println("The total price is RM" + total);
         System.out.print("Amount Received is RM");
@@ -73,12 +76,8 @@ public class Order {
         double change = amountReceived - total;
         System.out.println("Change Amount is RM" + change);
 
-        Receipt r = new Receipt(c, total);
-        System.out.printf("%-8s%-25s%4s%8s%8s\n","ID","Name","Qty","RM","RM");
-        System.out.println("---------------------------------------------+-------");
+        Receipt r = new Receipt(c, amountReceived);
         r.display();
-        System.out.println("---------------------------------------------+-------");
-        System.out.printf("%45s%8.2f\n","Total", r.getTotal());
 
         receiptList.add(r);
     }
@@ -105,7 +104,7 @@ public class Order {
         }
     }
 
-    public static void addOrMinusProduct(){
+    private static void addOrMinusProduct(){
         //Declaration
         Product p = null;
         String code;
@@ -115,13 +114,13 @@ public class Order {
         FoodMenu.showProducts();
 
         //Prompt input message
-        System.out.print("Enter the product code > ");
+        System.out.print("Enter the product code or -1 to quit : ");
         code = vScan.getString();
 
         //When the input is not 'q'
         while (!code.equalsIgnoreCase("-1")) {
             p = FoodMenu.getProductByID(code);
-            p = new Product(code, p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
+            p = new Product(p.getId(), p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
 
             //When the product exists in the menu
             if (p.getId() != "") {
@@ -129,7 +128,7 @@ public class Order {
                 if (c.getItems().containsKey(p)) {
                     System.out.println("The items has already existed in the cart");
                 }
-                System.out.print("How many you want to add ? > ");
+                System.out.print("How many you want to add ? : ");
                 qty = vScan.getInt();
 
                 c.addOrMinus(p, qty);
@@ -139,8 +138,16 @@ public class Order {
 
             p = null;
 
-            System.out.print("Enter the product code or -1 to quit > ");
+            System.out.print("Enter the product code or -1 to quit : ");
             code = vScan.getString();
         }
+    }
+
+    /*
+    * For Reporting
+    */
+
+    public static ArrayList<Receipt> getReceiptList(){
+        return receiptList;
     }
 }
