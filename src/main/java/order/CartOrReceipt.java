@@ -1,18 +1,17 @@
 package order;
 
-import food_menu.Product;
 import staff.Staff;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public abstract class CartOrReceipt {
     protected String billID;
     protected Staff staff;
     protected static int transactionMade = 0;
-    protected HashMap<Product, Integer> items = new HashMap<Product , Integer>();
+    protected ArrayList<Item> listOfItems = new ArrayList<Item>();
 
     public String getBillID()                 { return billID; }
     public Staff getStaff()                  { return staff; }
-    public HashMap<Product , Integer> getItems(){ return items; }
+    public ArrayList<Item> getListOfItems(){ return listOfItems; }
 
     abstract public void display();
 

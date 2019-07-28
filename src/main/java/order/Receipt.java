@@ -15,7 +15,7 @@ public class Receipt extends CartOrReceipt {
         this.billID          = c.getBillID();
         this.staff           = c.getStaff();
         this.transactionTime = LocalDateTime.now();
-        this.items           = c.getItems();
+        this.listOfItems = c.getListOfItems();
         this.total           = c.getTotal();
         this.amountReceived  = amountReceived;
         super.transactionMade++;
@@ -54,10 +54,10 @@ public class Receipt extends CartOrReceipt {
         System.out.println("\u251c" + String.valueOf(horizontal) + "\u2524");
 
         int i = 1;
-        for (Map.Entry<Product, Integer> e : items.entrySet()) {
+        for (Item e : listOfItems) {
             content = String.format("\u2502%4d\u2502%-6s\u2502%-25s\u2502%3d\u2502%7.2f\u2502%8.2f\u2502",
-                    i++, e.getKey().getId(), e.getKey().getTitle(), e.getValue(),
-                    e.getKey().getPrice(), e.getKey().getPrice() * e.getValue());
+                    i++, e.getProduct().getId(), e.getProduct().getTitle(), e.getQty(),
+                    e.getProduct().getPrice(), e.getProduct().getPrice() * e.getQty());
             System.out.println(content);
         }
 

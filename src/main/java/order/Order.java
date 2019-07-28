@@ -45,7 +45,7 @@ public class Order {
             } else if (action == 3) {
                 c.clearCart();
             } else if (action == 4) {
-                if(c.getItems().isEmpty())
+                if(c.getListOfItems().isEmpty())
                     System.out.println("The cart is empty!");
                 else
                     break;
@@ -99,14 +99,14 @@ public class Order {
 
         p = FoodMenu.getProductByID(code);
         p = new Product(code, p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
-        if (c.getItems().containsKey(p)) {
+        if (c.getListOfItems().contains(p)) {
             c.del(p);
         }
     }
 
     private static void addOrMinusProduct(){
         //Declaration
-        Product p = null;
+        Item p = null;
         String code;
         int qty;
 
@@ -119,19 +119,21 @@ public class Order {
 
         //When the input is not 'q'
         while (!code.equalsIgnoreCase("-1")) {
-            p = FoodMenu.getProductByID(code);
-            p = new Product(p.getId(), p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
+            p = new Item(FoodMenu.getProductByID(code), 0);
+            //p = new Product(p.getId(), p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
 
             //When the product exists in the menu
-            if (p.getId() != "") {
+            if (p.getProduct().getId() != "") {
                 //And already exists in the cart
-                if (c.getItems().containsKey(p)) {
-                    System.out.println("The items has already existed in the cart");
+                if (c.getListOfItems().contains(p)) {
+                    System.out.println("The item has already existed in the cart.");
                 }
                 System.out.print("How many you want to add ? : ");
                 qty = vScan.getInt();
 
-                c.addOrMinus(p, qty);
+                p.setQty(qty);
+                c.addOrMinus(p);
+                c.display();
             } else {
                 System.out.println("The code does not exists.");
             }

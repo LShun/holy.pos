@@ -2,12 +2,12 @@ package order;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
 import auth.Auth;
 import food_menu.*;
-
 
 public class Cart extends CartOrReceipt{
 
@@ -16,30 +16,33 @@ public class Cart extends CartOrReceipt{
     public Cart() {
         this.billID  = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd")) + String.format("%04d", super.transactionMade);
         this.staff   = Auth.s;
+        //this.listOfItems = new ArrayList<Item>();
     }
 
-    public void addOrMinus(Product item, int qty){
-        if(items.getOrDefault(item, 0) + qty <= 0)
-            return;
+    public void addOrMinus(Item item){
+        int index = listOfItems.indexOf(item);
+
+        if(index == -1)
+            listOfItems.add(item);
         else
-            items.put(item, items.getOrDefault(item, 0) + qty );
+            listOfItems.get(index).setQty(item.getQty() + listOfItems.get(index).getQty());
         total = calculateTotal();
     }
 
     public void del(Product obj){
-        items.remove(obj);
+        listOfItems.remove(obj);
         total = calculateTotal();
     }
 
     public void clearCart(){
-        items.clear();
+        listOfItems.clear();
         total = 0;
     }
 
     public double calculateTotal(){
         double total = 0;
-        for(Map.Entry<Product , Integer> e : items.entrySet()){
-            total += e.getKey().getPrice() * e.getValue();
+        for(Item e : listOfItems){
+            total += e.getProduct().getPrice() * e.getQty();
         }
         return total;
     }
@@ -60,10 +63,10 @@ public class Cart extends CartOrReceipt{
         System.out.println("\u251c" + String.valueOf(horizontal) + "\u2524");
 
         int i = 1;
-        for (Map.Entry<Product, Integer> e : items.entrySet()) {
+        for (Item e : listOfItems) {
             content = String.format("\u2502%4d\u2502%-6s\u2502%-25s\u2502%3d\u2502%7.2f\u2502%8.2f\u2502",
-                    i++, e.getKey().getId(), e.getKey().getTitle(), e.getValue(),
-                    e.getKey().getPrice(), e.getKey().getPrice() * e.getValue());
+                    i++, e.getProduct().getId(), e.getProduct().getTitle(), e.getQty(),
+                    e.getProduct().getPrice(), e.getProduct().getPrice() * e.getQty());
             System.out.println(content);
         }
 
