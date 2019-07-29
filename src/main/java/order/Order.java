@@ -3,11 +3,15 @@ package order;
 import auth.Auth;
 import pub.vScan;
 import food_menu.*;
+import staff.Staff;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Order {
     private static Cart c;
     private static ArrayList<Receipt> receiptList = new ArrayList<Receipt>();
+    private static boolean haveBeenInitialized = false;
 
     public static void order() {
         /*
@@ -21,6 +25,31 @@ public class Order {
         * 8. Proceed
         * 9. Produce receipt
         * */
+
+        if(!haveBeenInitialized){
+//            ArrayList<Item> i = new ArrayList<>();
+//            Product p;
+//            Item item;
+            Cart initialization_cart = new Cart("1906270001",Staff.employeeList.get(0));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),2));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BC"),2));
+            receiptList.add(new Receipt(initialization_cart,50.0, LocalDateTime.of(2019,6,27,8,30,30)));
+
+            initialization_cart = new Cart("1906270002",Staff.employeeList.get(0));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BDC"),2));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BDH"),3));
+            receiptList.add(new Receipt(initialization_cart,20.0,LocalDateTime.of(2019,6,27,10,00,25)));
+
+            initialization_cart = new Cart("1906270002",Staff.employeeList.get(1));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),3));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BRSD"),1));
+            receiptList.add(new Receipt(initialization_cart,36.0, LocalDateTime.of(2019,6,27,10,20,35)));
+
+            initialization_cart = new Cart("1906270002",Staff.employeeList.get(2));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),4));
+            receiptList.add(new Receipt(initialization_cart,40.0, LocalDateTime.of(2019,6,27,10,50,57)));
+
+        }
 
         if(Auth.s == null){
             System.out.println("You have not log in.\nPlease log in to continue.");
@@ -80,6 +109,10 @@ public class Order {
         r.display();
 
         receiptList.add(r);
+
+//        for(Receipt receipt : receiptList){
+//            receipt.display();
+//        }
     }
 
     private static void orderMenu() {

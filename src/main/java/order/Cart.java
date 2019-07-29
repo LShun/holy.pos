@@ -4,10 +4,10 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 import auth.Auth;
 import food_menu.*;
+import staff.Staff;
 
 public class Cart extends CartOrReceipt{
 
@@ -16,7 +16,11 @@ public class Cart extends CartOrReceipt{
     public Cart() {
         this.billID  = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd")) + String.format("%04d", super.transactionMade);
         this.staff   = Auth.s;
-        //this.listOfItems = new ArrayList<Item>();
+    }
+
+    public Cart(String billID, Staff staff){
+        this.billID      = billID;
+        this.staff       = staff;
     }
 
     public void addOrMinus(Item item){
