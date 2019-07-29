@@ -2,11 +2,9 @@ package order;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import auth.Auth;
-import food_menu.*;
 import staff.Staff;
 
 public class Cart extends CartOrReceipt{
@@ -19,23 +17,30 @@ public class Cart extends CartOrReceipt{
     }
 
     public Cart(String billID, Staff staff){
-        this.billID      = billID;
-        this.staff       = staff;
+        this.billID  = billID;
+        this.staff   = staff;
     }
 
     public void addOrMinus(Item item){
-        int index = listOfItems.indexOf(item);
+        int index       = listOfItems.indexOf(item);
+        int qtyInParam  = item.getQty();
 
-        if(index == -1)
+        if(index != -1) {
+            int qtyInList = listOfItems.get(index).getQty();
+            listOfItems.get(index).setQty(qtyInParam + qtyInList);
+        }else if(qtyInParam > 0) {
             listOfItems.add(item);
-        else
-            listOfItems.get(index).setQty(item.getQty() + listOfItems.get(index).getQty());
+        }else{
+            System.out.println("Invalid input quantity!");
+        }
         total = calculateTotal();
     }
 
-    public void del(Product obj){
-        listOfItems.remove(obj);
+    public boolean del(Item obj){
+        boolean ans = listOfItems.remove(obj);
         total = calculateTotal();
+
+        return ans;
     }
 
     public void clearCart(){
