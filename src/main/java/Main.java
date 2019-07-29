@@ -24,7 +24,7 @@ public class Main {
             System.out.println("6. Reporting");
             System.out.println("Enter any other number to exit.");
             System.out.println();
-            System.out.print("Please select your module: ");
+        System.out.print("Please select your module: ");
 
             choice = getInt();
 

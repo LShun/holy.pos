@@ -1,6 +1,10 @@
 package reporting;
 
+import food_menu.FoodMenu;
+import food_menu.Product;
+
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ProductPerformanceReport {
 
@@ -12,6 +16,7 @@ public class ProductPerformanceReport {
     // Constructor
     public ProductPerformanceReport()
     {
+        ArrayList<Product> products=FoodMenu.getProducts();
         // Frame initiallization
         f = new JFrame();
 
@@ -20,13 +25,13 @@ public class ProductPerformanceReport {
 
         // Data to be displayed in the JTable
         String[][] data = {
-                { "14 July 2019", "A001", "Fried Chicken","5","10","50" },
-                { "14 July 2019", "A002", "French Fries","5","10","50" },
+                { "14 July 2019", products.get(0).getId(), products.get(0).getTitle(),"5","10","50" },
+                { "14 July 2019", products.get(1).getId(), "French Fries","5","10","50" },
                 {"Total","","","10","20","100"}
         };
 
         // Column Names
-        String[] columnNames = { "Date", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
+        String[] columnNames = { "Date(month)", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
 
         // Initializing the JTable
         j = new JTable(data, columnNames);
