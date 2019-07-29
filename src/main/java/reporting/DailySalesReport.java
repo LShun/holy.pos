@@ -1,8 +1,13 @@
 package reporting;
 
+import order.Order;
+import order.Receipt;
+
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class DailySalesReport {
+
 
     // frame
     JFrame f;
@@ -12,6 +17,7 @@ public class DailySalesReport {
     // Constructor
     public DailySalesReport()
     {
+        ArrayList<Receipt> receipt= Order.getReceiptList();
         // Frame initiallization
         f = new JFrame();
 
@@ -19,14 +25,14 @@ public class DailySalesReport {
         f.setTitle("Daily Sales Report");
 
         // Data to be displayed in the JTable
-        String[][] data = {
-                { "14 July 2019", "A001", "Fried Chicken","5","2","0.6","10" },
-                { "14 July 2019", "A002", "French Fries","5","3","1.20","5" },
-                {"Total Sales per day","","","","","1.2","20"}
+        String[][] data = new String[][]{
+                new String[]{receipt.get(0).toString(), receipt.get(0).getBillID(), String.valueOf(receipt.get(0).getListOfItems()), "5", "2","", String.valueOf(receipt.get(0).getTotal())},
+                {receipt.get(1).toString(), receipt.get(1).getBillID(), "French Fries", "5", "3", "1.20", "5"},
+                {"Total Sales per day", "", "", "", "", "1.2", "20"}
         };
 
         // Column Names
-        String[] columnNames = { "Date", "Product ID", "Product Name","Price(RM)","Quantity","Tax Amount(RM)","Amount(RM)"};
+        String[] columnNames = { "Date", "Bill ID", "Product Name","Price(RM)","Quantity","Tax Amount(RM)","Amount(RM)"};
 
         // Initializing the JTable
         j = new JTable(data, columnNames);
