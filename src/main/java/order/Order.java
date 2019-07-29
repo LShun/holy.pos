@@ -27,9 +27,8 @@ public class Order {
         * */
 
         if(!haveBeenInitialized){
-//            ArrayList<Item> i = new ArrayList<>();
-//            Product p;
-//            Item item;
+            haveBeenInitialized = true;
+
             Cart initialization_cart = new Cart("1906270001",Staff.employeeList.get(0));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),2));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BC"),2));
@@ -48,7 +47,6 @@ public class Order {
             initialization_cart = new Cart("1906270002",Staff.employeeList.get(2));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),4));
             receiptList.add(new Receipt(initialization_cart,40.0, LocalDateTime.of(2019,6,27,10,50,57)));
-
         }
 
         if(Auth.s == null){
@@ -66,7 +64,7 @@ public class Order {
         System.out.print("Enter the action code : ");
         action = vScan.getInt();
 
-        while(action>=1 && action <=5) {
+        while(action != 4 || c.getListOfItems().isEmpty()) {
             if (action == 1) {
                 addOrMinusProduct();
             } else if (action == 2) {
@@ -125,21 +123,22 @@ public class Order {
 
     private static void delete() {
         String code;//Declaration
-        Product p;
+        Item item;
 
         System.out.print("Enter the product code > ");
         code = vScan.getString();
 
-        p = FoodMenu.getProductByID(code);
-        p = new Product(code, p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
-        if (c.getListOfItems().contains(p)) {
-            c.del(p);
-        }
+        item = new Item(FoodMenu.getProductByID(code), 0);
+        if(c.del(item))
+            System.out.println("The item has been delete successfully!");
+        else
+            System.out.println("The item has not been delete successfully!");
     }
 
     private static void addOrMinusProduct(){
         //Declaration
-        Item p = null;
+        Item item = null;
+        Product product;
         String code;
         int qty;
 
@@ -152,26 +151,24 @@ public class Order {
 
         //When the input is not 'q'
         while (!code.equalsIgnoreCase("-1")) {
-            p = new Item(FoodMenu.getProductByID(code), 0);
+            product = FoodMenu.getProductByID(code);
             //p = new Product(p.getId(), p.getTitle(), p.getDesc(), p.getPrice(), p.getTax());
 
             //When the product exists in the menu
-            if (p.getProduct().getId() != "") {
+            if (product.getId() != "") {
                 //And already exists in the cart
-                if (c.getListOfItems().contains(p)) {
+                if (c.getListOfItems().contains(new Item(product, 0))) {
                     System.out.println("The item has already existed in the cart.");
                 }
                 System.out.print("How many you want to add ? : ");
                 qty = vScan.getInt();
+                item = new Item(product, qty);
 
-                p.setQty(qty);
-                c.addOrMinus(p);
+                c.addOrMinus(item);
                 c.display();
             } else {
                 System.out.println("The code does not exists.");
             }
-
-            p = null;
 
             System.out.print("Enter the product code or -1 to quit : ");
             code = vScan.getString();
