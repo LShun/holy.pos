@@ -16,7 +16,12 @@ public class Item {
     public Product getProduct() { return product; }
     public int getQty() { return qty; }
     public void setProduct(Product p) { this.product = p; }
-    public void setQty(int qty) { this.qty = qty; }
+    public void setQty(int qty) {
+        if(qty > 0)
+            this.qty = qty;
+        else
+            System.out.println("Invalid input quantity!");
+    }
 
     @Override
     public boolean equals(Object o) {
