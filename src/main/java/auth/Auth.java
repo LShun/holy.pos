@@ -7,7 +7,8 @@ public class Auth {
 
     //If it is null means no login
     //Else means a user has login
-    public static Staff s = null;
+    //public static Staff s = null;
+    public static Staff s = new Staff("0001","123","Chun",'M',"Cashier",2019,2,24);
 
     public static void auth() {
         Scanner in = new Scanner(System.in);
