@@ -1,10 +1,7 @@
 package order;
 
-import food_menu.Product;
-
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Map;
 
 public class Receipt extends CartOrReceipt {
     final private double total;
@@ -12,13 +9,7 @@ public class Receipt extends CartOrReceipt {
     final private double amountReceived;
 
     public Receipt(Cart c, double amountReceived){
-        this.billID          = c.getBillID();
-        this.staff           = c.getStaff();
-        this.transactionTime = LocalDateTime.now();
-        this.listOfItems     = c.getListOfItems();
-        this.total           = c.getTotal();
-        this.amountReceived  = amountReceived;
-        super.transactionMade++;
+        this(c, amountReceived, LocalDateTime.now());
     }
 
     public Receipt(Cart c, double amountReceived, LocalDateTime transactionTime){
@@ -33,6 +24,7 @@ public class Receipt extends CartOrReceipt {
 
     public double getTotal(){ return total;}
     public double getAmountReceived() { return amountReceived; }
+    public LocalDateTime getTransactionTime() { return transactionTime; }
 
     public void display(){
         String content;
@@ -51,7 +43,7 @@ public class Receipt extends CartOrReceipt {
                 "\u2502 /_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/   \u2502\n"+
                 String.format("\u2502%58c\u2502\n", ' ')
         );
-        System.out.printf("\u2502%-16s:%-41s\u2502\n", "Transaction Time", transactionTime.toString());
+        System.out.printf("\u2502%-16s:%-41s\u2502\n", "Transaction Time", getTransactionTime().toString());
         System.out.printf("\u2502%-16s:%15s%26c\u2502\n", "Employee", staff.getName(),' ');
 
         horizontal[4] = horizontal[11] = horizontal[37] = horizontal[41] = horizontal[49] = '\u252c';
@@ -84,4 +76,6 @@ public class Receipt extends CartOrReceipt {
         System.out.println("\u2514" + String.valueOf(horizontal) + "\u2518");
 
     }
+
+
 }
