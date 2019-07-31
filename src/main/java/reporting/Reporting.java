@@ -35,8 +35,10 @@ public class Reporting {
        else if(choice==5)
            new TaxReport();
        else if(choice==6)
+           new test();
+       else if(choice==7)
            return;
-        }while(choice>=1 && choice <=6);
+        }while(choice>=1 && choice <=7);
 
 
 
