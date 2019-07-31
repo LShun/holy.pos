@@ -1,6 +1,9 @@
 package auth;
 
 import java.util.Scanner;
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import staff.*;
 
 public class Auth {
@@ -8,7 +11,8 @@ public class Auth {
     //If it is null means no login
     //Else means a user has login
     //public static Staff s = null;
-    public static Staff s = new Staff("0001","123","Chun",'M',"Cashier",2019,2,24);
+    public static Staff s = Staff.employeeList.get(1);
+    public static LocalDateTime clockInTime= LocalDateTime.now();
 
     public static void auth() {
         Scanner in = new Scanner(System.in);
@@ -35,12 +39,19 @@ public class Auth {
                 password = in.nextLine();
             }
         }else{
+            Duration durationWorked = Duration.between(clockInTime, LocalDateTime.now());
+            long second     = durationWorked.toMillis();
+            String duration = String.format("%02d:%02d:%02d", second/3600000, second%36000000/60000, second%36000000%60000/1000);
+
+            System.out.println("You have been working for " + duration);
             System.out.print("Do you want to log out ? > ");
-            if(in.nextLine().equals("y"))
+            if(in.nextLine().equalsIgnoreCase("y")) {
+                s.setTotalDurationWorked(s.getTotalDurationWorked().plus(durationWorked));
                 s = null;
+            }
         }
 
-        System.out.println("Press any key to continue :)");
+        System.out.println("Press enter to continue :)");
         in.nextLine();
         return;
     }
