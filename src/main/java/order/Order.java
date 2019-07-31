@@ -36,15 +36,15 @@ public class Order {
 
             initialization_cart = new Cart("1906270002",Staff.employeeList.get(0));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BDC"),2));
-            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BDH"),3));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BCH"),3));
             receiptList.add(new Receipt(initialization_cart,20.0,LocalDateTime.of(2019,6,27,10,00,25)));
 
-            initialization_cart = new Cart("1906270002",Staff.employeeList.get(1));
+            initialization_cart = new Cart("1906270003",Staff.employeeList.get(1));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),3));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BRSD"),1));
             receiptList.add(new Receipt(initialization_cart,36.0, LocalDateTime.of(2019,6,27,10,20,35)));
 
-            initialization_cart = new Cart("1906270002",Staff.employeeList.get(2));
+            initialization_cart = new Cart("1906270004",Staff.employeeList.get(2));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),4));
             receiptList.add(new Receipt(initialization_cart,40.0, LocalDateTime.of(2019,6,27,10,50,57)));
         }
