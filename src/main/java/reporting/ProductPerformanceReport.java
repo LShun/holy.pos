@@ -2,6 +2,8 @@ package reporting;
 
 import food_menu.FoodMenu;
 import food_menu.Product;
+import order.Order;
+import order.Receipt;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class ProductPerformanceReport {
     public ProductPerformanceReport()
     {
         ArrayList<Product> products=FoodMenu.getProducts();
+        ArrayList<Receipt> receipt = Order.getReceiptList();
+
         // Frame initiallization
         f = new JFrame();
 
@@ -30,19 +34,19 @@ public class ProductPerformanceReport {
 
         double[] sales= new double[6];
 
-        sales[0] = 5 * products.get(0).getPrice();
+                sales[0] = 5 * products.get(0).getPrice();
 
-        sales[1] = 5 * products.get(1).getPrice();
+                sales[1] = 5 * products.get(1).getPrice();
 
-        sales[2] = 5 * products.get(2).getPrice();
+                sales[2] = 5 * products.get(2).getPrice();
 
-        sales[3] = 5 * products.get(3).getPrice();
+                sales[3] = 5 * products.get(3).getPrice();
 
-        sales[4] = 5 * products.get(4).getPrice();
+                sales[4] = 5 * products.get(4).getPrice();
 
-        sales[5] = 5 * products.get(5).getPrice();
+                sales[5] = 5 * products.get(5).getPrice();
 
-        //sales[6] = 5 * products.get(6).getPrice();
+                sales[6] = 5 * products.get(6).getPrice();
 
         String[][] data =new String[][]{
                 {"14 July 2019", products.get(0).getId(), products.get(0).getTitle(), "5", String.valueOf(products.get(0).getPrice()), String.valueOf(sales[0])},

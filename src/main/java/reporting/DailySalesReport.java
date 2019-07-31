@@ -20,7 +20,7 @@ public class DailySalesReport {
     // Constructor
     public DailySalesReport() {
         ArrayList<Receipt> receipt = Order.getReceiptList();
-        ArrayList<Product> products = FoodMenu.getProducts();
+
         // Frame initiallization
         f = new JFrame();
 
@@ -38,7 +38,35 @@ public class DailySalesReport {
                 {"Total Sales per day", "", "", "", "", "1.2", "20"}
         };*/
 
-      // String[][]data= addRowToJTable();
+
+
+        ArrayList<Object[]> rowData = new ArrayList<Object[]>();
+        for(int i = 0; i < receipt.size(); i++){
+            int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
+
+            for(int j = 0;j < sizeOfListOfItems ; j++){
+                Object[] temp = new Object[7];
+
+                temp[0] = receipt.get(i).getTransactionTime().toString();
+                temp[1] = receipt.get(i).getBillID();
+                temp[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
+                temp[3] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
+                temp[4] = receipt.get(i).getListOfItems().get(j).getQty();
+                temp[5] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
+                temp[6] = receipt.get(i).getTotal();
+
+                rowData.add(temp);
+
+            }
+
+        }
+
+        Object[][] realRowData = new Object[rowData.size()][];
+        for(int i = 0; i < rowData.size(); i++){
+            realRowData[i] = rowData.get(i);
+        }
+
+
 
         // Column Names
         String[] columnNames = { "Date", "Bill ID", "Product Name","Price(RM)","Quantity","Tax Amount(RM)","Amount(RM)"};
@@ -46,7 +74,7 @@ public class DailySalesReport {
         //addRowToJTable();
 
         // Initializing the JTable
-        j = new JTable(addRowToJTable(), columnNames);
+        j = new JTable(realRowData, columnNames);
         j.setBounds(30, 200, 200, 30);
 
         // adding it to JScrollPane
@@ -59,27 +87,5 @@ public class DailySalesReport {
     }
 
 
-    public String[][] addRowToJTable()
-    {
-        DefaultTableModel model= (DefaultTableModel) j.getModel();
-        //ArrayList<User> list = ListUsers();
-
-        ArrayList<Receipt> receipt = Order.getReceiptList();
-        Object rowData[] = new Object[7];
-        for(int i = 0; i < receipt.size(); i++)
-        {
-            rowData[0] =receipt.get(i).getTransactionTime();
-            rowData[1]=receipt.get(i).getBillID();
-            rowData[2]=receipt.get(i).getListOfItems().get(i).getProduct().getTitle();
-            rowData[3]=receipt.get(i).getListOfItems().get(i).getProduct().getPrice();
-            rowData[4]=receipt.get(i).getListOfItems().get(i).getQty();
-            rowData[5]=receipt.get(i).getListOfItems().get(i).getProduct().getTax();
-            rowData[6]=receipt.get(i).getTotal();
-
-            model.addRow(rowData);
-        }
-
-        return (String[][]) rowData;
-    }
 
 }
