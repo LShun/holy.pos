@@ -44,21 +44,32 @@ public class DailySalesReport {
         for(int i = 0; i < receipt.size(); i++){
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
-            for(int j = 0;j < sizeOfListOfItems ; j++){
-                Object[] temp = new Object[7];
+            Object[] temp = new Object[7];
+            temp[0] = receipt.get(i).getTransactionTime().toString();
+            temp[1] = receipt.get(i).getBillID();
 
-                temp[0] = receipt.get(i).getTransactionTime().toString();
-                temp[1] = receipt.get(i).getBillID();
+            for(int j = 0;j < sizeOfListOfItems ; j++){
+
                 temp[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
                 temp[3] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
                 temp[4] = receipt.get(i).getListOfItems().get(j).getQty();
                 temp[5] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
-                temp[6] = receipt.get(i).getTotal();
-
+                temp[6] = receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
                 rowData.add(temp);
 
+                temp = new Object[7];
+                temp[0] = "";
+                temp[1] = "";
             }
 
+            temp[0] = "Total Amount";
+            temp[2] = temp[3] = temp[4] = temp[5] = "";
+            temp[6] = receipt.get(i).getTotal();
+            rowData.add(temp);
+
+            temp = new Object[7];
+            temp[0] = temp[6] = "";
+            rowData.add(temp);
         }
 
         Object[][] realRowData = new Object[rowData.size()][];

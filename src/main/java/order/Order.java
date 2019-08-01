@@ -47,6 +47,17 @@ public class Order {
             initialization_cart = new Cart("1906270004",Staff.employeeList.get(2));
             initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),4));
             receiptList.add(new Receipt(initialization_cart,40.0, LocalDateTime.of(2019,6,27,10,50,57)));
+
+            initialization_cart = new Cart("1906270005",Staff.employeeList.get(3));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),4));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BRSD"),10));
+            receiptList.add(new Receipt(initialization_cart,150, LocalDateTime.of(2019,7,28,11,50,57)));
+
+            initialization_cart = new Cart("1906270006",Staff.employeeList.get(2));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BDC"),2));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),4));
+            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BCH"),1));
+            receiptList.add(new Receipt(initialization_cart,40.0, LocalDateTime.of(2019,7,29,14,50,57)));
         }
 
         if(Auth.s == null){
