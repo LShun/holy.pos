@@ -118,10 +118,7 @@ public class Order {
         r.display();
 
         receiptList.add(r);
-
-//        for(Receipt receipt : receiptList){
-//            receipt.display();
-//        }
+        Auth.s.setSalesReceived(Auth.s.getSalesReceived()+1);
     }
 
     private static void orderMenu() {

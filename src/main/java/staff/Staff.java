@@ -4,6 +4,7 @@ import pub.vScan;
 
 import java.util.Scanner;
 //import java.util.Date;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -14,35 +15,36 @@ public class Staff {
     private String password;
     private String sName;
     private char gender;
-    private static int day;
-    private int month;
-    private int year;
     private String designation;
     private LocalDate dateOfEmployed;
+    private Duration totalDurationWorked;
+    private int salesReceived;
     //Date dateOfEmployed = new Date();
         //public Staff(){
 
    // }
 
     public static ArrayList<Staff> employeeList = new ArrayList<Staff>(Arrays.asList(
-            new Staff("0001","123","Long Shun",'M',"Holy 1",2001,1,1),
-            new Staff("0002","456","Jun Rong",'M',"Holy 2",2000,2,2),
-            new Staff("0003","789","Shannen",'F',"Holy 3",2000,3,3),
-            new Staff("0004","000","Kim Chun",'M',"Holy 4",2000,4,4)
+            new Staff("0001","123","Long Shun",'M',"Holy 1",2001,1,1,100,10),
+            new Staff("0002","456","Jun Rong",'M',"Holy 2",2000,2,2,200,20),
+            new Staff("0003","789","Shannen",'F',"Holy 3",2000,3,3,300,30),
+            new Staff("0004","000","Kim Chun",'M',"Holy 4",2000,4,4,400,40)
     ));
 
-    public Staff(String staffID, String password, String sName, char gender,String designation,
-                int year,int month, int dayOfMonth){
+    public Staff(String staffID, String password, String sName, char gender, String designation,
+                 int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
         this.setStaffID(staffID);
         this.setPassword(password);
         this.setName(sName);
         this.setGender(gender);
         this.setDesignation(designation);
         this.dateOfEmployed = LocalDate.of(year, month, dayOfMonth);
+        this.setTotalDurationWorked(Duration.ofHours(totalDurationWorked));
+        this.setSalesReceived(salesReceived);
     }
     
     public Staff(String staffID, String password, String sName, char gender,String designation){
-        this(staffID, password, sName, gender, designation,  2019, 1, 1);
+        this(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
     }
 
 
@@ -136,6 +138,10 @@ public class Staff {
     public void setDateOfEmployed(LocalDate dateOfEmployed) { this.dateOfEmployed = dateOfEmployed; }
     public String getPassword(){ return password; }
     public void setPassword(String password){ this.password = password; }
+    public Duration getTotalDurationWorked() { return totalDurationWorked; }
+    public void setTotalDurationWorked(Duration totalDurationWorked) { this.totalDurationWorked = totalDurationWorked; }
+    public int getSalesReceived() { return salesReceived; }
+    public void setSalesReceived(int salesReceived) { this.salesReceived = salesReceived; }
 
     public static void addStaff(){
 
@@ -167,7 +173,7 @@ public class Staff {
                 designation,
                 Integer.parseInt(dateOfEmployed[2]),
                 Integer.parseInt(dateOfEmployed[1]),
-                Integer.parseInt(dateOfEmployed[0]))
+                Integer.parseInt(dateOfEmployed[0]),0,0)
         );
 
 

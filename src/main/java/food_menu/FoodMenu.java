@@ -1,10 +1,15 @@
 package food_menu;
 
-import java.sql.*;
+import de.vandermeer.asciitable.AsciiTable;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.Date;
 
+import static pub.formatPrint.printHeader;
+import static pub.vScan.*;
 
 public class FoodMenu {
     private static final int ID_FIELD = 1;
@@ -12,14 +17,14 @@ public class FoodMenu {
     private static final int DESC_FIELD = 3;
 
     // array storing all the food being sold in fast food restaurant
-    private static ArrayList<Product> products = new ArrayList<Product>(Arrays.asList
-            (new Product("BBEEF", "Beefburger",	"Beefburger", 5.99, 0.16),
+    private static ArrayList<Product> products = new ArrayList<>(Arrays.asList
+            (new Product("BBEEF", "Beefburger", "Beefburger", 5.99, 0.16),
                     new Product("BC", "Cheeseburger", "Cheeseburger", 5.99, 0.16),
                     new Product("BDC", "Double cheeseburger", "Double cheeseburger", 7.99, 0.16),
                     new Product("BCH", "Chicken Burger", "Chicken Burger", 5.99, 0.16),
                     new Product("BRSD", "Sausage Deluxe Breakfast", "Sausage burger x 1 + Hashbrown + 1 x coffee (S)", 8.99, 0.16),
                     new Product("LUBS", "Burger Set Lunch", "Double chicken burger + French fries (L) x Chicken nuggets (S) + Coca Cola Drink (L)", 8.99, 0.16)
-    ));
+            ));
 
     // =======================
     // FOODMENU USE ONLY
@@ -27,19 +32,22 @@ public class FoodMenu {
 
     // menu for manipulating the food menu
     public static void foodMenu() {
-        Scanner in = new Scanner(System.in);
+        // variables
         int choice;
 
+        // show user possible actions & accept choice
         while (true) {
-            System.out.println("1.  New Product");
-            System.out.println("2.  Modify Product");
-            System.out.println("3.  Search Product");
-            System.out.println("4.  Delete Product");
-            System.out.println("Other. Back");
-            System.out.println();
+            // show user possible actions
+            printHeader("FOOD MENU");
+            System.out.println("1.      New Product");
+            System.out.println("2.      Modify Product");
+            System.out.println("3.      Search Product");
+            System.out.println("4.      Delete Product");
+            System.out.println("Other.  Back");
             System.out.print("Enter your choice: ");
 
-            choice = in.nextInt();
+            // accept choice
+            choice = getInt();
 
             switch (choice) {
                 case 1:
@@ -55,6 +63,7 @@ public class FoodMenu {
                     delete();
                     break;
                 default:
+                    printHeader("END");
                     return;
             }
         }
@@ -62,56 +71,46 @@ public class FoodMenu {
 
     // add a new product to the array
     private static void add() {
-        String id, title, description;
-        double price;
-        int tax;
-        Scanner in = new Scanner(System.in);
-        Connection connection = null;
+        Product temp = new Product();
 
         // obtain required details
-        System.out.println("ADD PRODUCTS");
-        System.out.println();
-        System.out.print("Enter product ID [Max: 5 characters] or -1 to cancel: ");
-        // TODO: Add tests for 5 characters & invalid input
-        id = in.nextLine();
-        if (id.equals("-1")) {
+        printHeader("ADD PRODUCTS");
+
+        do {
+            temp.setID();
+        }
+        while (!validateID(temp));
+
+        if (temp.getId().equals("-1")) {
             return;
         }
 
-        System.out.print("Enter product title [Max: 64 characters] or -1 to cancel: ");
-        // TODO: Add tests for 64 characters & invalid input
-        title = in.nextLine();
-        if (title.equals("-1")) {
+        temp.setTitle();
+        if (temp.getTitle().equals("-1")) {
             return;
         }
 
-
-        System.out.print("Enter product description [Max: 128 characters] or -1 to cancel: ");
-        // TODO: Add tests for 128 characters & invalid input
-        description = in.nextLine();
-        if (description.equals("-1")) {
+        temp.setDesc();
+        if (temp.getDesc().equals("-1")) {
             return;
         }
 
-        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
-        // TODO: Add tests for invalid input
-        price = in.nextDouble();
-        if (price == -1) {
+        temp.setPrice();
+        if (temp.getPrice() == -1) {
             return;
         }
 
-        System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
-        // TODO: Add tests for invalid input
-        tax = in.nextInt();
-        if (tax == -1) {
+        temp.setTax();
+        if (temp.getTax() == -1) {
             return;
         }
 
         // add into the products arrayList
-        products.add(new Product(id, title, description, price, tax));
+        products.add(temp);
 
         // print successful message
-        System.out.println("Product addition successful!");
+        printHeader("Product addition successful!");
+        System.out.println(temp.toString());
 
         // commented out...not using database
 //        try {
@@ -156,95 +155,211 @@ public class FoodMenu {
 
     // user can call this module to modify a product's details.
     private static void modify() {
-        Scanner in = new Scanner(System.in);
-        String term;
-        int basis, index;
-        ArrayList<Product> results = new ArrayList<>();
+        int index;
         Product temp;
 
-        System.out.println("PRODUCT MODIFICATION");
+        printHeader("PRODUCT MODIFICATION");
+
+        // get the specific Product
+        temp = filterProduct(products);
+
+        // if cancelled, return
+        if (temp == null) {
+            return;
+        }
+
+        /* keep the product index */
+        index = products.indexOf(temp);
+
+        /* copy the Product to make it local, to allow non-destructive editing */
+        temp = new Product(temp.getId(), temp.getTitle(), temp.getDesc(), temp.getPrice(), temp.getTax());
+
+        // accept all temporary changes from the user
+        modifyProd(temp);
+
+        // ask for confirmation
+        printHeader("WARNING: You are irreversibly changing: ");
+        System.out.println(products.get(index).toString());
+        printHeader("TO");
+        System.out.println(temp.toString());
+
+        System.out.print("Are you sure? (Y/N): ");
+        // copy the temporary product back into the real product
+        if (getString().toLowerCase().equals("y")) {
+            products.set(index, temp);
+            printHeader("Modification successful!");
+        } else {
+            printHeader("Modification cancelled.");
+        }
+
+        // display successful message
+        System.out.println("Product Details: ");
+        System.out.println(products.get(index).toString());
+    }
+
+    // deletes a product from FoodMenu array
+    private static void delete() {
+        int index;
+        Product temp;
+
+        printHeader("PRODUCT DELETION");
+
+        // Copy the single product entry into a new temporary product variable
+        temp = filterProduct(products);
+
+        // quit if returned 'null'
+        if (temp == null) {
+            return;
+        }
+
+        // keep the product index
+        index = products.indexOf(temp);
+
+        // ask for confirmation
+        printHeader("WARNING: You are irreversibly delete");
+        System.out.print(products.get(index).toString());
+
+        System.out.print("Are you sure? (Y/N): ");
+        // copy the temporary product back into the real product
+        if (getString().toLowerCase().equals("y")) {
+            products.remove(index);
+            printHeader("Deletion successful!");
+        } else {
+            printHeader("Deletion cancelled.");
+        }
+    }
+
+    // searches products inside FoodMenu array
+    private static void search() {
+        int basis;
+        Product found;
+
+        while (true) {
+            printHeader("SEARCH PRODUCT");
+
+            System.out.println("Select your operation: \n" +
+                    "1. View All\n" +
+                    "2. Search products\n" +
+                    "Other. exit\n");
+
+            basis = getInt();
+
+            if (basis == 1) {
+                showProducts();
+                continue;
+            } else if (basis != 2) {
+                return;
+            }
+
+            found = filterProduct(products);
+
+            // Display results
+            if (found != null) {
+                System.out.println(found.toString());
+            }
+        }
+    }
+
+    // helper function -- modify, delete -- gets a single Product
+    // returns null if either no product is found, or user choose to quit
+    private static Product filterProduct(ArrayList<Product> results) {
+
+        int basis, choice;
+        String term;
 
         do {
             System.out.println("Search on basis: \n");
             System.out.println("1. ID\n" +
-                               "2. Name\n" +
-                               "3. Description\n" +
-                    "4. Cancel\n");
+                    "2. Name\n" +
+                    "3. Description\n" +
+                    "4. Show all\n" +
+                    "Other. Cancel\n");
 
             System.out.print("Enter your basis: ");
-            basis = in.nextInt();
-            in.nextLine();
+            basis = getInt();
+
+            if (basis < 1 || basis > 4) {
+                return null;
+            }
 
             if (basis == 4) {
-                return;
+                results = products;
+            } else {
+                System.out.print("Enter your term: ");
+                term = getString();
+
+                switch (basis) {
+                    case ID_FIELD:
+                        results = searchX(term, ID_FIELD);
+                        break;
+                    case TITLE_FIELD:
+                        results = searchX(term, TITLE_FIELD);
+                        break;
+                    case DESC_FIELD:
+                        results = searchX(term, DESC_FIELD);
+                        break;
+                }
             }
 
-            System.out.print("Enter your term: ");
-            term = in.nextLine();
-
-            switch (basis) {
-                case ID_FIELD:
-                    results = searchX(term, ID_FIELD);
-                    break;
-                case TITLE_FIELD:
-                    results = searchX(term, TITLE_FIELD);
-                    break;
-                case DESC_FIELD:
-                    results = searchX(term, DESC_FIELD);
-                    break;
-            }
-            showProducts(results);
             if (results.size() > 1) {
-                System.out.println("We found: ");
                 showProducts(results);
-                System.out.println("Please narrow down your search term so it only match 1 product!");
-            }
-            else if (results.size() < 1) {
+                System.out.print("Please enter the index of your choice (outside range = exit): ");
+                choice = getInt();
+                if (choice < 0 || choice >= results.size()) {
+                    return null;
+                }
+                return results.get(choice);
+            } else if (results.size() < 1) {
                 System.out.println("No results found, please enter a new search term.");
             }
         }
         while (results.size() != 1);
 
-        // Copy the single product entry into a new temporary product variable
-        temp = results.get(0);
-
-        // keep the product index
-        index = products.indexOf(temp);
-
-        // accept all temporary changes from the user
-        temp = modifyProd(temp);
-
-        // ask for confirmation
-        System.out.println("WARNING: You are going to irreversibly change: ");
-        results.get(0).showProduct();
-        System.out.println("== TO ==");
-        temp.showProduct();
-
-        System.out.println("Are you sure you want to commit the changes (Y/N): ");
-        // copy the temporary product back into the real product
-        if (in.nextLine().toLowerCase().equals("y")) {
-            products.set(index, temp);
-            System.out.println("Modification successful!");
-        }
-        else {
-            System.out.println("No modification has been done.");
-        }
-
-        // display successful message
-        products.get(index).showProduct();
+        return results.get(0);
     }
 
-    // helper function
-    private static Product modifyProd(Product temp) {
+    // helper function -- search() -- narrows down the list of Products
+    private static ArrayList<Product> searchX(String term, int field) {
+        ArrayList<Product> results = new ArrayList<>();
+        int termLength = term.length();
+        term = term.toLowerCase();
+
+        for (Product p : products) {
+            switch (field) {
+                case ID_FIELD:
+                    if (termLength <= p.getId().length()) {
+                        if (p.getId().substring(0, termLength).toLowerCase().equals(term)) {
+                            results.add(p);
+                        }
+                    }
+                    break;
+                case TITLE_FIELD:
+                    if (termLength <= p.getTitle().length()) {
+                        if (p.getTitle().substring(0, termLength).toLowerCase().equals(term)) {
+                            results.add(p);
+                        }
+                    }
+                    break;
+                case DESC_FIELD:
+                    if (termLength <= p.getDesc().length()) {
+                        if (p.getDesc().substring(0, termLength).toLowerCase().equals(term)) {
+                            results.add(p);
+                        }
+                    }
+                    break;
+            }
+        }
+        return results;
+    }
+
+    // helper function -- modify
+    private static void modifyProd(Product temp) {
         int choice;
-        Scanner in = new Scanner (System.in);
-        String replaceString;
-        double replaceNumber;
 
         do {
-            System.out.println("Product Details (uncommitted): \n");
-            temp.showProduct();
-            System.out.println(
+            printHeader("Product Details (uncommitted)");
+            System.out.println(temp.toString());
+            System.out.print(
                     "What do you want to modify: \n"
                             + "1. ID\n"
                             + "2. Title\n"
@@ -252,183 +367,44 @@ public class FoodMenu {
                             + "4. Price\n"
                             + "5. Tax\n"
                             + "Other number. COMMIT/DISCARD changes\n"
-                            + "Enter your choice (1-6): ");
-            choice = in.nextInt();
-            in.nextLine();
+                            + "Enter your choice (Any number): ");
+            choice = getInt();
 
             System.out.print("Enter new ");
-            switch(choice) {
+            switch (choice) {
                 case 1: // ID
-                    System.out.print(" ID: ");
-                    replaceString = in.nextLine();
-                    temp.setId(replaceString);
+                    do {
+                        temp.setID();
+                    } while (!validateID(temp));
                     break;
                 case 2: // TITLE
-                    System.out.print(" TITLE: ");
-                    replaceString = in.nextLine();
-                    temp.setTitle(replaceString);
+                    temp.setTitle();
                     break;
                 case 3: // DESC
-                    System.out.print(" DESC: ");
-                    replaceString = in.nextLine();
-                    temp.setDesc(replaceString);
+                    temp.setDesc();
                     break;
                 case 4: // PRICE
-                    System.out.print(" PRICE (Eg: 5.0): ");
-                    replaceNumber = in.nextDouble();
-                    temp.setPrice(replaceNumber);
+                    temp.setPrice();
                     break;
                 case 5: // TAX
-                    System.out.print(" TAX [Percentage/100] (Eg: 0.06): ");
-                    replaceNumber = in.nextDouble();
-                    temp.setTax(replaceNumber);
+                    temp.setTax();
                     break;
             }
         }
         while (choice >= 1 && choice <= 5);
 
-        return temp;
     }
 
-    private static ArrayList<Product> searchX(String term, int field) {
-        ArrayList<Product> results = new ArrayList<>();
-
-        switch (field) {
-            case ID_FIELD:
-                for (Product p : products) {
-                    if (p.getId().equals(term)) {
-                        results.add(p);
-                    }
-                }
-                break;
-            case TITLE_FIELD:
-                for (Product p : products) {
-                    if (p.getTitle().equals(term)) {
-                        results.add(p);
-                    }
-                }
-                break;
-            case DESC_FIELD:
-                for (Product p : products) {
-                    if (p.getDesc().equals(term)) {
-                        results.add(p);
-                    }
-                }
-                break;
-        }
-        return results;
-    }
-
-    private static void delete() {
-        Scanner in = new Scanner(System.in);
-        String term;
-        int basis, index;
-        ArrayList<Product> results = new ArrayList<>();
-        Product temp;
-
-        System.out.println("PRODUCT DELETION");
-
-        do {
-            System.out.println("Search on basis: \n");
-            System.out.println("1. ID\n" +
-                    "2. Name\n" +
-                    "3. Description\n" +
-                    "4. Cancel\n");
-
-            System.out.print("Enter your basis: ");
-            basis = in.nextInt();
-            in.nextLine();
-
-            if (basis == 4) {
-                return;
-            }
-
-            System.out.print("Enter your term: ");
-            term = in.nextLine();
-
-            switch (basis) {
-                case ID_FIELD:
-                    results = searchX(term, ID_FIELD);
-                    break;
-                case TITLE_FIELD:
-                    results = searchX(term, TITLE_FIELD);
-                    break;
-                case DESC_FIELD:
-                    results = searchX(term, DESC_FIELD);
-                    break;
-            }
-            showProducts(results);
-            if (results.size() > 1) {
-                System.out.println("We found: ");
-                showProducts(results);
-                System.out.println("Please narrow down your search term so it only match 1 product!");
-            }
-            else if (results.size() < 1) {
-                System.out.println("No results found, please enter a new search term.");
-            }
-        }
-        while (results.size() != 1);
-
-        // Copy the single product entry into a new temporary product variable
-        temp = results.get(0);
-
-        // keep the product index
-        index = products.indexOf(temp);
-
-        // ask for confirmation
-        System.out.println("WARNING: You are going to irreversibly delete: ");
-        results.get(0).showProduct();
-
-        System.out.println("Are you sure you want to delete the product (Y/N): ");
-        // copy the temporary product back into the real product
-        if (in.nextLine().toLowerCase().equals("y")) {
-            products.remove(index);
-            System.out.println("Deletion successful!");
-        }
-        else {
-            System.out.println("No deletion has been done.");
-        }
-    }
-
-    private static void search() {
-        Scanner in = new Scanner(System.in);
-        String id;
-        ArrayList<Product> found = new ArrayList<>();
-
-        while(true) {
-            System.out.println("Search product");
-            System.out.println("Enter product ID (or -1 to view all): ");
-            id = in.nextLine();
-
-            if (id.equals("-1")) {
-                showProducts(products);
-            }
-            else {
-                // Search by ID
-                found = find(id);
-
-                // Display results
-                showProducts(found);
-            }
-            System.out.println("Search again? (Y = yes/Other = no)");
-            if (in.nextLine().equalsIgnoreCase("y")) {
-                continue;
-            }
-            else {
-                return;
-            }
-        }
-    }
-
-    // narrow down the amount of products satisfying the given criteria
-    private static ArrayList<Product> find(String criteria) {
-        ArrayList<Product> found = new ArrayList<>();
+    // helper function -- add, modify -- validates the product ID to ensure no repetition before adding
+    private static boolean validateID(Product temp) {
+        // get new ID
         for (Product p : products) {
-            if (p.getId().equals(criteria)) {
-                found.add(p);
+            if (temp.getId().equals(p.getId())) {
+                System.out.println("Duplicate product ID is not allowed.\n");
+                return false;
             }
         }
-        return found;
+        return true;
     }
 
     // =======================
@@ -437,17 +413,30 @@ public class FoodMenu {
 
     // show the products inside the array in a consistent format
     private static void showProducts(ArrayList<Product> products) {
-        // TODO: Print header
-        System.out.printf("%40s", "PRODUCTS\n");
-        System.out.printf("| %5.24s | %24.24s | %24.24s | %6s | %6s | %6s |\n", "ID", "TITLE", "DESC.", "PRICE", "TAX", "NETT");
-        System.out.printf("| %5.24s | %24.24s | %24.24s | %6s | %6s | %6s |\n", "**", "*****", "*****", "*****", "***", "****");
-        // TODO: Print content
+        int index = 0;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        AsciiTable at = new AsciiTable();
+
+        // Print Header
+        printHeader("PRODUCTS");
+        printHeader("REPORT GENERATED ON: " + dateFormat.format(date));
+
+        // Format contents
+        at.addRule();
+        at.addRow("Index", "ID", "TITLE", "DESC.", "PRICE", "TAX", "NETT");
+        at.addRule();
+
         for (Product p : products) {
-            System.out.printf("| %5.24s | %24.24s | %24.24s | %6.2f | %6.2f | %6.2f |\n", p.getId(), p.getTitle(), p.getDesc(), p.getPrice(), p.getTax(), p.getPrice() + p.getPrice() * p.getTax());
+            at.addRow(index++, p.getId(), p.getTitle(), p.getDesc(), p.getPrice(), p.getTax(), p.getPrice() + p.getPrice() * p.getTax());
+            at.addRule();
         }
-        // TODO: Print footer
-        System.out.println("=END=");
+
+        // Print the table
+        String rend = at.render();
+        System.out.println(rend);
     }
+
     // overloading: show all products
     public static void showProducts() {
         showProducts(products);
@@ -471,6 +460,4 @@ public class FoodMenu {
         }
         return new Product();
     }
-
-
 }

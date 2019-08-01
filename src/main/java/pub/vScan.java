@@ -34,7 +34,7 @@ public class vScan {
 
         s = in.nextLine();
 
-        while(s.length() <= 1) {
+        while(s.length() <= 0) {
             System.out.print("Enter a string: ");
             s = in.nextLine();
         }
