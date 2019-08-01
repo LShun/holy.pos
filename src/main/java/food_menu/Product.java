@@ -8,7 +8,7 @@ import static pub.vScan.*;
 public class Product {
     private String id, title, desc;
     private double price;
-    private double tax;
+    private static double tax = 0.16;
 
     /*
         Constructors
@@ -19,15 +19,13 @@ public class Product {
         this.title = "";
         this.desc = "";
         this.price = 0.0;
-        this.tax = 0.0;
     }
 
-    public Product(String id, String title, String desc, double price, double tax) {
+    public Product(String id, String title, String desc, double price) {
         this.id = id;
         this.title = title;
         this.desc = desc;
         this.price = price;
-        this.tax = tax;
     }
 
     /*
@@ -50,31 +48,31 @@ public class Product {
         return id;
     }
 
-    public double getTax() {
+    public static double getTax() {
         return tax;
     }
 
     /*
-        Setters
-    */
+            Setters
+        */
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setTitle(String title) {
+    private void setTitle(String title) {
         this.title = title;
     }
 
-    public void setDesc(String desc) {
+    private void setDesc(String desc) {
         this.desc = desc;
     }
 
-    public void setPrice(double price) {
+    private void setPrice(double price) {
         this.price = price;
     }
 
-    public void setTax(double tax) {
-        this.tax = tax;
+    public static void setTax(double tax) {
+        Product.tax = tax;
     }
 
     /*
@@ -93,10 +91,6 @@ public class Product {
             id = getString();
         }
 
-        if (id.equals("-1")) {
-            return;
-        }
-
         setId(id);
     }
 
@@ -106,10 +100,6 @@ public class Product {
 
         System.out.print("Enter product title or -1 to cancel: ");
         title = getString();
-
-        if (title.equals("-1")) {
-            return;
-        }
 
         setTitle(title);
     }
@@ -121,10 +111,6 @@ public class Product {
         System.out.print("Enter product description or -1 to cancel: ");
         desc = getString();
 
-        if (desc.equals("-1")) {
-            return;
-        }
-
         setDesc(desc);
     }
 
@@ -135,11 +121,6 @@ public class Product {
         System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
         price = getDouble();
 
-        if (price == -1) {
-            return;
-        }
-
-
         while (price < 0) {
             System.out.print("Negative price invalid, retry: ");
             price = getDouble();
@@ -147,22 +128,8 @@ public class Product {
         setPrice(price);
     }
 
-    public void setTax() {
-        double tax;
-
-        System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
-        tax = getDouble();
-
-        if (tax == -1) {
-            return;
-        }
-
-        while (tax < 0) {
-            System.out.print("Negative tax invalid, retry: ");
-            tax = getDouble();
-        }
-        setTax(tax);
-
+    public double getNetPrice() {
+        return this.price * this.tax;
     }
 
     /*
@@ -174,8 +141,7 @@ public class Product {
                 "ID     : " + this.id + "\n" +
                 "TITLE  : " + this.title + "\n" +
                 "DESC   : " + this.desc + "\n" +
-                "PRICE  : " + this.price + "\n" +
-                "TAX    : " + this.tax + "\n");
+                "PRICE  : " + this.price + "\n");
     }
 
     @Override
@@ -192,9 +158,6 @@ public class Product {
 
         int hash = hashCode();
 
-        if (hash == p.hashCode())
-            return true;
-        else
-            return false;
+        return hash == p.hashCode();
     }
 }

@@ -18,12 +18,14 @@ public class FoodMenu {
 
     // array storing all the food being sold in fast food restaurant
     private static ArrayList<Product> products = new ArrayList<>(Arrays.asList
-            (new Product("BBEEF", "Beefburger", "Beefburger", 5.99, 0.16),
-                    new Product("BC", "Cheeseburger", "Cheeseburger", 5.99, 0.16),
-                    new Product("BDC", "Double cheeseburger", "Double cheeseburger", 7.99, 0.16),
-                    new Product("BCH", "Chicken Burger", "Chicken Burger", 5.99, 0.16),
-                    new Product("BRSD", "Sausage Deluxe Breakfast", "Sausage burger x 1 + Hashbrown + 1 x coffee (S)", 8.99, 0.16),
-                    new Product("LUBS", "Burger Set Lunch", "Double chicken burger + French fries (L) x Chicken nuggets (S) + Coca Cola Drink (L)", 8.99, 0.16)
+            (new Product("BBEEF", "Beefburger", "Beefburger", 5.99),
+                    new Product("BC", "Cheeseburger", "Cheeseburger", 5.99),
+                    new Product("BDC", "Double cheeseburger", "Double cheeseburger", 7.99),
+                    new Product("BCH", "Chicken Burger", "Chicken Burger", 5.99),
+                    new Product("BRSD", "Sausage Deluxe Breakfast", "Sausage burger x 1 + Hashbrown + 1 x coffee (S)", 8.99),
+                    new Product("LUBS", "Burger Set Lunch", "Double chicken burger + French fries (L) x Chicken nuggets (S) + Coca Cola Drink (L)", 8.99),
+                    new Product("COLAS", "Coca-cola Drink (Small)", "Small coca-cola drink, 250ml x1", 1.99),
+                    new Product("COLAL", "Coca-cola Drink (Large)", "Large coca-cola drink, 500ml x1", 1.99)
             ));
 
     // =======================
@@ -78,12 +80,11 @@ public class FoodMenu {
 
         do {
             temp.setID();
+            if (temp.getId().equals("-1")) {
+                return;
+            }
         }
         while (!validateID(temp));
-
-        if (temp.getId().equals("-1")) {
-            return;
-        }
 
         temp.setTitle();
         if (temp.getTitle().equals("-1")) {
@@ -97,11 +98,6 @@ public class FoodMenu {
 
         temp.setPrice();
         if (temp.getPrice() == -1) {
-            return;
-        }
-
-        temp.setTax();
-        if (temp.getTax() == -1) {
             return;
         }
 
@@ -172,7 +168,7 @@ public class FoodMenu {
         index = products.indexOf(temp);
 
         /* copy the Product to make it local, to allow non-destructive editing */
-        temp = new Product(temp.getId(), temp.getTitle(), temp.getDesc(), temp.getPrice(), temp.getTax());
+        temp = new Product(temp.getId(), temp.getTitle(), temp.getDesc(), temp.getPrice());
 
         // accept all temporary changes from the user
         modifyProd(temp);
@@ -365,7 +361,6 @@ public class FoodMenu {
                             + "2. Title\n"
                             + "3. Description\n"
                             + "4. Price\n"
-                            + "5. Tax\n"
                             + "Other number. COMMIT/DISCARD changes\n"
                             + "Enter your choice (Any number): ");
             choice = getInt();
@@ -386,12 +381,9 @@ public class FoodMenu {
                 case 4: // PRICE
                     temp.setPrice();
                     break;
-                case 5: // TAX
-                    temp.setTax();
-                    break;
             }
         }
-        while (choice >= 1 && choice <= 5);
+        while (choice >= 1 && choice <= 4);
 
     }
 
@@ -421,14 +413,15 @@ public class FoodMenu {
         // Print Header
         printHeader("PRODUCTS");
         printHeader("REPORT GENERATED ON: " + dateFormat.format(date));
+        printHeader("TAX AMOUNT: " + Product.getTax());
 
         // Format contents
         at.addRule();
-        at.addRow("Index", "ID", "TITLE", "DESC.", "PRICE", "TAX", "NETT");
+        at.addRow("Index", "ID", "TITLE", "DESC.", "PRICE", "NETT");
         at.addRule();
 
         for (Product p : products) {
-            at.addRow(index++, p.getId(), p.getTitle(), p.getDesc(), p.getPrice(), p.getTax(), p.getPrice() + p.getPrice() * p.getTax());
+            at.addRow(index++, p.getId(), p.getTitle(), p.getDesc(), String.format("%.2f", p.getPrice()), String.format("%.2f", p.getPrice() + p.getPrice() * Product.getTax()));
             at.addRule();
         }
 
