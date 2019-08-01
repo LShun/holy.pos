@@ -24,7 +24,7 @@ public class FoodMenu {
                     new Product("BCH", "Chicken Burger", "Chicken Burger", 5.99, 0.16),
                     new Product("BRSD", "Sausage Deluxe Breakfast", "Sausage burger x 1 + Hashbrown + 1 x coffee (S)", 8.99, 0.16),
                     new Product("LUBS", "Burger Set Lunch", "Double chicken burger + French fries (L) x Chicken nuggets (S) + Coca Cola Drink (L)", 8.99, 0.16)
-    ));
+            ));
 
     // =======================
     // FOODMENU USE ONLY
@@ -71,11 +71,7 @@ public class FoodMenu {
 
     // add a new product to the array
     private static void add() {
-        String id, title, description;
-        double price;
-        int tax;
-        Scanner in = new Scanner(System.in);
-        Connection connection = null;
+        Product temp = new Product();
 
         // obtain required details
         printHeader("ADD PRODUCTS");
@@ -89,10 +85,8 @@ public class FoodMenu {
             return;
         }
 
-        System.out.print("Enter product title [Max: 64 characters] or -1 to cancel: ");
-        // TODO: Add tests for 64 characters & invalid input
-        title = in.nextLine();
-        if (title.equals("-1")) {
+        temp.setTitle();
+        if (temp.getTitle().equals("-1")) {
             return;
         }
 
@@ -101,22 +95,18 @@ public class FoodMenu {
             return;
         }
 
-        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
-        // TODO: Add tests for invalid input
-        price = in.nextDouble();
-        if (price == -1) {
+        temp.setPrice();
+        if (temp.getPrice() == -1) {
             return;
         }
 
-        System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
-        // TODO: Add tests for invalid input
-        tax = in.nextInt();
-        if (tax == -1) {
+        temp.setTax();
+        if (temp.getTax() == -1) {
             return;
         }
 
         // add into the products arrayList
-        products.add(new Product(id, title, description, price, tax));
+        products.add(temp);
 
         // print successful message
         printHeader("Product addition successful!");
@@ -165,10 +155,7 @@ public class FoodMenu {
 
     // user can call this module to modify a product's details.
     private static void modify() {
-        Scanner in = new Scanner(System.in);
-        String term;
-        int basis, index;
-        ArrayList<Product> results = new ArrayList<>();
+        int index;
         Product temp;
 
         printHeader("PRODUCT MODIFICATION");
@@ -180,10 +167,6 @@ public class FoodMenu {
         if (temp == null) {
             return;
         }
-        while (results.size() != 1);
-
-        // Copy the single product entry into a new temporary product variable
-        temp = results.get(0);
 
         /* keep the product index */
         index = products.indexOf(temp);
@@ -202,7 +185,7 @@ public class FoodMenu {
 
         System.out.print("Are you sure? (Y/N): ");
         // copy the temporary product back into the real product
-        if (in.nextLine().toLowerCase().equals("y")) {
+        if (getString().toLowerCase().equals("y")) {
             products.set(index, temp);
             printHeader("Modification successful!");
         } else {
@@ -275,9 +258,6 @@ public class FoodMenu {
                 System.out.println(found.toString());
             }
         }
-        while (choice >= 1 && choice <= 5);
-
-        return temp;
     }
 
     // helper function -- modify, delete -- gets a single Product
@@ -286,11 +266,6 @@ public class FoodMenu {
 
         int basis, choice;
         String term;
-        int basis, index;
-        ArrayList<Product> results = new ArrayList<>();
-        Product temp;
-
-        System.out.println("PRODUCT DELETION");
 
         do {
             System.out.println("Search on basis: \n");
@@ -327,7 +302,6 @@ public class FoodMenu {
             }
 
             if (results.size() > 1) {
-                System.out.println("We found: ");
                 showProducts(results);
                 System.out.print("Please enter the index of your choice (outside range = exit): ");
                 choice = getInt();
@@ -341,8 +315,8 @@ public class FoodMenu {
         }
         while (results.size() != 1);
 
-        // Copy the single product entry into a new temporary product variable
-        temp = results.get(0);
+        return results.get(0);
+    }
 
     // helper function -- search() -- narrows down the list of Products
     private static ArrayList<Product> searchX(String term, int field) {
@@ -375,6 +349,7 @@ public class FoodMenu {
                     break;
             }
         }
+        return results;
     }
 
     // helper function -- modify
@@ -416,7 +391,7 @@ public class FoodMenu {
                     break;
             }
         }
-    }
+        while (choice >= 1 && choice <= 5);
 
     }
 
@@ -461,6 +436,7 @@ public class FoodMenu {
         String rend = at.render();
         System.out.println(rend);
     }
+
     // overloading: show all products
     public static void showProducts() {
         showProducts(products);
@@ -484,6 +460,4 @@ public class FoodMenu {
         }
         return new Product();
     }
-
-
 }
