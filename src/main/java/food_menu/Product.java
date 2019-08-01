@@ -93,6 +93,10 @@ public class Product {
             id = getString();
         }
 
+        if (id.equals("-1")) {
+            return;
+        }
+
         setId(id);
     }
 
@@ -102,6 +106,10 @@ public class Product {
 
         System.out.print("Enter product title or -1 to cancel: ");
         title = getString();
+
+        if (title.equals("-1")) {
+            return;
+        }
 
         setTitle(title);
     }
@@ -113,6 +121,10 @@ public class Product {
         System.out.print("Enter product description or -1 to cancel: ");
         desc = getString();
 
+        if (desc.equals("-1")) {
+            return;
+        }
+
         setDesc(desc);
     }
 
@@ -122,6 +134,11 @@ public class Product {
 
         System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
         price = getDouble();
+
+        if (price == -1) {
+            return;
+        }
+
 
         while (price < 0) {
             System.out.print("Negative price invalid, retry: ");
@@ -136,6 +153,10 @@ public class Product {
         System.out.print("Enter product tax percentage (ex: 0.1) or -1 to cancel: ");
         tax = getDouble();
 
+        if (tax == -1) {
+            return;
+        }
+
         while (tax < 0) {
             System.out.print("Negative tax invalid, retry: ");
             tax = getDouble();
@@ -148,8 +169,8 @@ public class Product {
         Other methods
     */
 
-    public void showProduct() {
-        System.out.println(
+    public String toString() {
+        return (
                 "ID     : " + this.id + "\n" +
                 "TITLE  : " + this.title + "\n" +
                 "DESC   : " + this.desc + "\n" +
