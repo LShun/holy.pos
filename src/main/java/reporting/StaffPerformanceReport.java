@@ -1,6 +1,7 @@
 package reporting;
 
 import staff.Staff;
+import staff.Worker;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class StaffPerformanceReport {
 
     public StaffPerformanceReport()
     {
-        ArrayList<Staff> staff= Staff.employeeList;
+        ArrayList<Worker> workers = Staff.getEmployeeList();
         // Frame initiallization
         f = new JFrame();
 
@@ -29,16 +30,16 @@ public class StaffPerformanceReport {
         };
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
-        for(int i = 0; i < staff.size(); i++){
-            //int sizeOfListOfItems = staff.get(i)
+        for(int i = 0; i < workers.size(); i++){
+            //int sizeOfListOfItems = workers.get(i)
 
                 Object[] emp = new Object[5];
 
-                emp[0] = staff.get(i).getDateOfEmployed();
-                emp[1] = staff.get(i).getStaffID();
-                emp[2] = staff.get(i).getName();
-                emp[3] = staff.get(i).getTotalDurationWorked();
-                emp[4] = staff.get(i).getSalesReceived();
+                emp[0] = workers.get(i).getDateOfEmployed();
+                emp[1] = workers.get(i).getStaffID();
+                emp[2] = workers.get(i).getName();
+                emp[3] = workers.get(i).getTotalDurationWorked();
+                emp[4] = workers.get(i).getSalesReceived();
 
                 rowData.add(emp);
 

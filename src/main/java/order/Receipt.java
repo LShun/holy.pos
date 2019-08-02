@@ -14,7 +14,7 @@ public class Receipt extends CartOrReceipt {
 
     public Receipt(Cart c, double amountReceived, LocalDateTime transactionTime){
         this.billID          = c.getBillID();
-        this.staff           = c.getStaff();
+        this.worker = c.getWorker();
         this.transactionTime = transactionTime;
         this.listOfItems     = c.getListOfItems();
         this.total           = c.getTotal();
@@ -44,7 +44,7 @@ public class Receipt extends CartOrReceipt {
                 String.format("\u2502%58c\u2502\n", ' ')
         );
         System.out.printf("\u2502%-16s:%-41s\u2502\n", "Transaction Time", getTransactionTime().toString());
-        System.out.printf("\u2502%-16s:%15s%26c\u2502\n", "Employee", staff.getName(),' ');
+        System.out.printf("\u2502%-16s:%15s%26c\u2502\n", "Employee", worker.getName(),' ');
 
         horizontal[4] = horizontal[11] = horizontal[37] = horizontal[41] = horizontal[49] = '\u252c';
         System.out.println("\u251c" + String.valueOf(horizontal) + "\u2524");

@@ -1,16 +1,17 @@
 package order;
 
-import staff.Staff;
+import staff.Worker;
+
 import java.util.ArrayList;
 
 public abstract class CartOrReceipt {
     protected String billID;
-    protected Staff staff;
+    protected Worker worker;
     protected static int transactionMade = 0;
     protected ArrayList<Item> listOfItems = new ArrayList<Item>();
 
     public String getBillID()                 { return billID; }
-    public Staff getStaff()                  { return staff; }
+    public Worker getWorker()                  { return worker; }
     public ArrayList<Item> getListOfItems(){ return listOfItems; }
 
     abstract public void display();

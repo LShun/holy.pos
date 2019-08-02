@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import auth.Auth;
-import staff.Staff;
+import staff.Worker;
 
 public class Cart extends CartOrReceipt{
 
@@ -13,12 +13,12 @@ public class Cart extends CartOrReceipt{
 
     public Cart() {
         this.billID  = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd")) + String.format("%04d", super.transactionMade);
-        this.staff   = Auth.s;
+        this.worker = Auth.s;
     }
 
-    public Cart(String billID, Staff staff){
+    public Cart(String billID, Worker worker){
         this.billID  = billID;
-        this.staff   = staff;
+        this.worker = worker;
     }
 
     public void addOrMinus(Item item){
