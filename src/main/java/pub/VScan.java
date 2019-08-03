@@ -2,7 +2,7 @@ package pub;
 
 import java.util.Scanner;
 
-public class vScan {
+public class VScan {
     private static Scanner in = new Scanner(System.in);
 
     public static int getInt() {

@@ -1,6 +1,6 @@
 package staff;
 
-import pub.vScan;
+import pub.VScan;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -73,7 +73,7 @@ public class Manager extends Worker {
         else if(data.size() > 1){    //If more than one worker, user have to select which one to modify
             displayStaff(data);
             System.out.print("Enter the index : ");
-            int target = vScan.getInt();
+            int target = VScan.getInt();
             workerToBeModified = data.get(target - 1);
         }
         else
@@ -84,29 +84,29 @@ public class Manager extends Worker {
         System.out.println("3. Worker Gender");
         System.out.println("4. Worker Designation");
         System.out.print("Select which one the modify : ");
-        int choice = vScan.getInt();
+        int choice = VScan.getInt();
         String inputString;
         char inputChar;
 
         switch(choice){
             case 1:
                 System.out.print("Enter the worker Id : ");
-                inputString = vScan.getString();
+                inputString = VScan.getString();
                 workerToBeModified.setStaffID(inputString);
                 break;
 
             case 2:
                 System.out.print("Enter the worker name : ");
-                inputString = vScan.getString();
+                inputString = VScan.getString();
                 workerToBeModified.setName(inputString);
                 break;
             case 3:
                 System.out.print("Enter the worker gender : ");
-                inputChar = vScan.getChar();
+                inputChar = VScan.getChar();
                 workerToBeModified.setGender(inputChar);
             case 4:
                 System.out.print("Enter the worker designation : ");
-                inputString = vScan.getString();
+                inputString = VScan.getString();
                 workerToBeModified.setDesignation(inputString);
                 break;
             default:
@@ -124,12 +124,12 @@ public class Manager extends Worker {
         System.out.println("3. Worker Gender");
         System.out.println("4. Worker Designation");
         System.out.println("Select the search criteria : ");
-        int choice = vScan.getInt();
+        int choice = VScan.getInt();
 
         switch(choice) {
             case 1:
                 System.out.print("Enter the worker Id : ");
-                searchInput = vScan.getString();
+                searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
                     if (searchInput.equals(employeeList.get(i).getStaffID()))
@@ -138,7 +138,7 @@ public class Manager extends Worker {
                 break;
             case 2:
                 System.out.print("Enter the worker name : ");
-                searchInput = vScan.getString();
+                searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
                     if (searchInput.equals(employeeList.get(i).getName()))
@@ -147,7 +147,7 @@ public class Manager extends Worker {
                 break;
             case 3:
                 System.out.print("Enter the worker gender : ");
-                searchInput = vScan.getString();
+                searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
                     if (searchInput.equals(employeeList.get(i).getGender()))
@@ -156,7 +156,7 @@ public class Manager extends Worker {
                 break;
             case 4:
                 System.out.print("Enter the worker designation : ");
-                searchInput = vScan.getString();
+                searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
                     if (searchInput.equals(employeeList.get(i).getDesignation()))

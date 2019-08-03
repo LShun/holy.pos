@@ -1,7 +1,7 @@
 package order;
 
 import auth.Auth;
-import pub.vScan;
+import pub.VScan;
 import food_menu.*;
 import staff.Staff;
 
@@ -73,7 +73,7 @@ public class Order {
 
         //Action
         System.out.print("Enter the action code : ");
-        action = vScan.getInt();
+        action = VScan.getInt();
 
         while(action != 4 || c.getListOfItems().isEmpty()) {
             if (action == 1) {
@@ -98,18 +98,18 @@ public class Order {
 
             //Action
             System.out.print("Enter the action code : ");
-            action = vScan.getInt();
+            action = VScan.getInt();
         }
 
         total = c.getTotal();
 
         System.out.println("The total price is RM" + total);
         System.out.print("Amount Received is RM");
-        double amountReceived = vScan.getDouble();
+        double amountReceived = VScan.getDouble();
         while(amountReceived < total) {
             System.out.println("Not enough!");
             System.out.print("Amount Received is RM");
-            amountReceived = vScan.getDouble();
+            amountReceived = VScan.getDouble();
         }
         double change = amountReceived - total;
         System.out.println("Change Amount is RM" + change);
@@ -134,7 +134,7 @@ public class Order {
         Item item;
 
         System.out.print("Enter the product code > ");
-        code = vScan.getString();
+        code = VScan.getString();
 
         item = new Item(FoodMenu.getProductByID(code), 0);
         if(c.del(item))
@@ -155,7 +155,7 @@ public class Order {
 
         //Prompt input message
         System.out.print("Enter the product code or -1 to quit : ");
-        code = vScan.getString();
+        code = VScan.getString();
 
         //When the input is not 'q'
         while (!code.equalsIgnoreCase("-1")) {
@@ -169,7 +169,7 @@ public class Order {
                     System.out.println("The item has already existed in the cart.");
                 }
                 System.out.print("How many you want to add ? : ");
-                qty = vScan.getInt();
+                qty = VScan.getInt();
                 item = new Item(product, qty);
 
                 c.addOrMinus(item);
@@ -179,7 +179,7 @@ public class Order {
             }
 
             System.out.print("Enter the product code or -1 to quit : ");
-            code = vScan.getString();
+            code = VScan.getString();
         }
     }
 

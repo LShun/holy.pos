@@ -4,12 +4,16 @@ import order.Order;
 import reporting.Reporting;
 import staff.Staff;
 
-import static pub.vScan.*;
+import static pub.VScan.*;
 
 public class Main {
     public static void main(String[] args) {
 
         int choice;
+
+        System.out.println();
+
+        // Authenticate
 
         while (true) {
             System.out.println("\n" +
@@ -19,14 +23,14 @@ public class Main {
                     "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
                     "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
                     "                                                        \n");
-            System.out.println("1. Authentication");
-            System.out.println("2. Food Menu");
-            System.out.println("3. Order");
-            System.out.println("4. Staff");
-            System.out.println("5. Reporting");
-            System.out.println("Enter any other number to exit.");
-            System.out.println();
-        System.out.print("Please select your module: ");
+            System.out.println("1. Authentication\n" +
+                    "2. Food Menu\n" +
+                    "3. Order\n" +
+                    "4. Staff\n" +
+                    "5. Reporting\n" +
+                    "Enter any other number to exit.\n\n" +
+
+                    "Please select your module: ");
 
             choice = getInt();
 

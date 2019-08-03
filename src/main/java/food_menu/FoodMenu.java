@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-import static pub.formatPrint.printHeader;
-import static pub.vScan.*;
+import static pub.FormatPrint.printHeader;
+import static pub.VScan.*;
 
 public class FoodMenu {
     private static final int ID_FIELD = 1;
@@ -79,24 +79,24 @@ public class FoodMenu {
         printHeader("ADD PRODUCTS");
 
         do {
-            temp.setID();
+            temp.inputId();
             if (temp.getId().equals("-1")) {
                 return;
             }
         }
         while (!validateID(temp));
 
-        temp.setTitle();
+        temp.inputTitle();
         if (temp.getTitle().equals("-1")) {
             return;
         }
 
-        temp.setDesc();
+        temp.inputDesc();
         if (temp.getDesc().equals("-1")) {
             return;
         }
 
-        temp.setPrice();
+        temp.inputPrice();
         if (temp.getPrice() == -1) {
             return;
         }
@@ -157,7 +157,7 @@ public class FoodMenu {
         printHeader("PRODUCT MODIFICATION");
 
         // get the specific Product
-        temp = filterProduct(products);
+        temp = getProduct(products);
 
         // if cancelled, return
         if (temp == null) {
@@ -201,7 +201,7 @@ public class FoodMenu {
         printHeader("PRODUCT DELETION");
 
         // Copy the single product entry into a new temporary product variable
-        temp = filterProduct(products);
+        temp = getProduct(products);
 
         // quit if returned 'null'
         if (temp == null) {
@@ -247,7 +247,7 @@ public class FoodMenu {
                 return;
             }
 
-            found = filterProduct(products);
+            found = getProduct(products);
 
             // Display results
             if (found != null) {
@@ -258,7 +258,7 @@ public class FoodMenu {
 
     // helper function -- modify, delete -- gets a single Product
     // returns null if either no product is found, or user choose to quit
-    private static Product filterProduct(ArrayList<Product> results) {
+    private static Product getProduct(ArrayList<Product> results) {
 
         int basis, choice;
         String term;
@@ -286,13 +286,13 @@ public class FoodMenu {
 
                 switch (basis) {
                     case ID_FIELD:
-                        results = searchX(term, ID_FIELD);
+                        results = filterProduct(term, ID_FIELD);
                         break;
                     case TITLE_FIELD:
-                        results = searchX(term, TITLE_FIELD);
+                        results = filterProduct(term, TITLE_FIELD);
                         break;
                     case DESC_FIELD:
-                        results = searchX(term, DESC_FIELD);
+                        results = filterProduct(term, DESC_FIELD);
                         break;
                 }
             }
@@ -315,7 +315,7 @@ public class FoodMenu {
     }
 
     // helper function -- search() -- narrows down the list of Products
-    private static ArrayList<Product> searchX(String term, int field) {
+    private static ArrayList<Product> filterProduct(String term, int field) {
         ArrayList<Product> results = new ArrayList<>();
         int termLength = term.length();
         term = term.toLowerCase();
@@ -369,17 +369,17 @@ public class FoodMenu {
             switch (choice) {
                 case 1: // ID
                     do {
-                        temp.setID();
+                        temp.inputId();
                     } while (!validateID(temp));
                     break;
                 case 2: // TITLE
-                    temp.setTitle();
+                    temp.inputTitle();
                     break;
                 case 3: // DESC
-                    temp.setDesc();
+                    temp.inputDesc();
                     break;
                 case 4: // PRICE
-                    temp.setPrice();
+                    temp.inputPrice();
                     break;
             }
         }

@@ -3,7 +3,7 @@ package food_menu;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static pub.vScan.*;
+import static pub.VScan.*;
 
 public class Product {
     private String id, title, desc;
@@ -53,9 +53,9 @@ public class Product {
     }
 
     /*
-            Setters
-        */
-    public void setId(String id) {
+        Setters : Assume Validated Values are entered through the input.. functions
+     */
+    private void setId(String id) {
         this.id = id;
     }
 
@@ -76,10 +76,10 @@ public class Product {
     }
 
     /*
-        Setters with validation
+        Accepts fields to be passed to setters from the user.
      */
 
-    public void setID() {
+    public void inputId() {
         Scanner in = new Scanner(System.in);
         String id;
 
@@ -94,7 +94,7 @@ public class Product {
         setId(id);
     }
 
-    public void setTitle() {
+    public void inputTitle() {
         Scanner in = new Scanner(System.in);
         String title;
 
@@ -104,7 +104,7 @@ public class Product {
         setTitle(title);
     }
 
-    public void setDesc() {
+    public void inputDesc() {
         Scanner in = new Scanner(System.in);
         String desc;
 
@@ -114,7 +114,7 @@ public class Product {
         setDesc(desc);
     }
 
-    public void setPrice() {
+    public void inputPrice() {
         Scanner in = new Scanner(System.in);
         double price;
 

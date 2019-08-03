@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import staff.*;
 
 public class Auth {
-
     //If it is null means no login
     //Else means a user has login
     //public static Worker s = null;

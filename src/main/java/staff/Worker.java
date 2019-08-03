@@ -1,6 +1,6 @@
 package staff;
 
-import pub.vScan;
+import pub.VScan;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -67,19 +67,19 @@ public class Worker {
         System.out.println("1. Worker Name");
         System.out.println("2. Worker Gender");
         System.out.print("Select which one the modify : ");
-        int choice = vScan.getInt();
+        int choice = VScan.getInt();
         String inputString;
         char inputChar;
 
         switch(choice){
             case 1:
                 System.out.print("Enter the worker name : ");
-                inputString = vScan.getString();
+                inputString = VScan.getString();
                 this.setName(inputString);
                 break;
             case 2:
                 System.out.print("Enter the worker gender : ");
-                inputChar = vScan.getChar();
+                inputChar = VScan.getChar();
                 this.setGender(inputChar);
                 break;
             default:

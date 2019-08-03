@@ -2,7 +2,7 @@ package pub;
 
 import java.util.ArrayList;
 
-public class formatPrint {
+public class FormatPrint {
     // constants
     final static int LINE_LENGTH = 85;
 
