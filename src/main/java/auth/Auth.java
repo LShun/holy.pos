@@ -1,5 +1,6 @@
 package auth;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -10,8 +11,8 @@ public class Auth {
 
     //If it is null means no login
     //Else means a user has login
-    //public static Staff s = null;
-    public static Staff s = Staff.employeeList.get(1);
+    //public static Worker s = null;
+    public static Worker s = Staff.getEmployeeList().get(1);
     public static LocalDateTime clockInTime= LocalDateTime.now();
 
     public static void auth() {
@@ -57,11 +58,12 @@ public class Auth {
     }
 
     public static boolean login(String id, String password) {
-        for(int i = 0; i < Staff.employeeList.size(); i++){
-            Staff tempStaff = Staff.employeeList.get(i);
-            if(tempStaff.getStaffID().equals(id) && tempStaff.getPassword().equals(password)){
+        ArrayList<Worker> employeeList = Staff.getEmployeeList();
+        for(int i = 0; i < employeeList.size(); i++){
+            Worker tempWorker = employeeList.get(i);
+            if(tempWorker.getStaffID().equals(id) && tempWorker.getPassword().equals(password)){
                 System.out.println("Authenticated User!");
-                s = tempStaff;
+                s = tempWorker;
                 return true;
             }
         }
