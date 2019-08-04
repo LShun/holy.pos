@@ -15,8 +15,7 @@ public class MonthlySalesReport {
     JTable j;
 
     // Constructor
-    public MonthlySalesReport()
-    {
+    public MonthlySalesReport() {
         ArrayList<Receipt> receipt = Order.getReceiptList();
         // Frame initiallization
         f = new JFrame();
@@ -24,16 +23,23 @@ public class MonthlySalesReport {
         // Frame Title
         f.setTitle("Monthly Sales Report");
 
-        // Data to be displayed in the JTable
-        /*String[][] data = {
-                { "14 July 2019", "A001", "Fried Chicken","5","2","0.6","10" },
-                { "15 July 2019", "A002", "French Fries","5","2","0.6","10" },
-                {"Total Sales per month","","","","","1.2","20"}
-        };*/
-
         Scanner scanner=new Scanner(System.in);
         int month;
-        System.out.print("Please enter month of report for viewing: ");
+
+        System.out.println("\n\n1.January\n"+
+                "2.February\n"+
+                "3.March\n"+
+                "4.April\n"+
+                "5.May\n"+
+                "6.June\n"+
+                "7.July\n"+
+                "8.August\n"+
+                "9.September\n"+
+                "10.October\n"+
+                "11.November\n"+
+                "12.December\n\n"+
+
+                "Please enter month of report for viewing: ");
         month=scanner.nextInt();
 
 
@@ -41,6 +47,7 @@ public class MonthlySalesReport {
         for(int i = 0; i < receipt.size(); i++){
             if(month!=receipt.get(i).getTransactionTime().getMonthValue())
                 continue;
+
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 

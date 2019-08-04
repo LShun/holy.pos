@@ -23,11 +23,11 @@ public class StaffPerformanceReport {
         f.setTitle("Staff Performance Report");
 
         // Data to be displayed in the JTable
-        String[][] data = {
+       /* String[][] data = {
                 { "14 July 2019", "A001", "Fried Chicken","5","10","50" },
                 { "14 July 2019", "A002", "French Fries","5","10","50" },
                 {"Total","","","10","20","100"}
-        };
+        };*/
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         for(int i = 0; i < workers.size(); i++){

@@ -7,6 +7,7 @@ import order.Receipt;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static javax.swing.UIManager.get;
 
@@ -29,57 +30,66 @@ public class ProductPerformanceReport {
         // Frame Title
         f.setTitle("Product Performance Report");
 
+        Scanner scanner=new Scanner(System.in);
+        int month;
+
+        System.out.println("\n\n1.January\n"+
+                "2.February\n"+
+                "3.March\n"+
+                "4.April\n"+
+                "5.May\n"+
+                "6.June\n"+
+                "7.July\n"+
+                "8.August\n"+
+                "9.September\n"+
+                "10.October\n"+
+                "11.November\n"+
+                "12.December\n\n"+
+
+                "Please enter month of report for viewing: ");
+        month=scanner.nextInt();
 
         // Data to be displayed in the JTable
 
-        double[] sales= new double[6];
-
-                sales[0] = 5 * products.get(0).getPrice();
-
-                sales[1] = 5 * products.get(1).getPrice();
-
-                sales[2] = 5 * products.get(2).getPrice();
-
-                sales[3] = 5 * products.get(3).getPrice();
-
-                sales[4] = 5 * products.get(4).getPrice();
-
-                sales[5] = 5 * products.get(5).getPrice();
-
-                //sales[6] = 5 * products.get(6).getPrice();
-
-       /* String[][] data =new String[][]{
-                {"14 July 2019", products.get(0).getId(), products.get(0).getTitle(), "5", String.valueOf(products.get(0).getPrice()), String.valueOf(sales[0])},
-                {"14 July 2019", products.get(1).getId(), products.get(1).getTitle(), "5", String.valueOf(products.get(1).getPrice()), String.valueOf(sales[1])},
-                {"14 July 2019", products.get(2).getId(), products.get(2).getTitle(), "5", String.valueOf(products.get(2).getPrice()), String.valueOf(sales[2])},
-                {"14 July 2019", products.get(3).getId(), products.get(3).getTitle(), "5", String.valueOf(products.get(3).getPrice()), String.valueOf(sales[3])},
-                {"14 July 2019", products.get(4).getId(), products.get(4).getTitle(), "5", String.valueOf(products.get(4).getPrice()), String.valueOf(sales[4])},
-                {"14 July 2019", products.get(5).getId(), products.get(5).getTitle(), "5", String.valueOf(products.get(5).getPrice()), String.valueOf(sales[5])},
-
-
-                {"Total", "", "", "10", "5", "100"}
-        };*/
-
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         for(int i = 0; i < receipt.size(); i++){
+            if(month!=receipt.get(i).getTransactionTime().getMonthValue())
+                continue;
+
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
             for(int j = 0;j < sizeOfListOfItems ; j++){
                 Object[] product = new Object[6];
 
                 product[0]  = receipt.get(i).getTransactionTime().toString();
-                product[1] = receipt.get(i).getBillID();
+                product[1] = receipt.get(i).getListOfItems().get(j).getProduct().getId();
+                //product[1] = products.get(i).getId();
                 product[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
+                //product[2] = products.get(i).getTitle();
                 product[3] = receipt.get(i).getListOfItems().get(j).getQty();
                 product[4] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
-                product[5] = receipt.get(i).getTotal();
+                product[5] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice()*receipt.get(i).getListOfItems().get(j).getQty();
                 //product[6] = receipt.get(i).getTotal();
 
                 rowData.add(product);
 
             }
-
         }
+
+        /*for(int i=0;i<products.size();i++){
+            int sizeOfListOfItems=products.size();
+
+            for(int j=0;j<sizeOfListOfItems;i++){
+                Object[] product=new Object[3];
+
+                product[0]=products.get(i).getTitle();
+                product[1]=products.get(i).getId();
+                product[2]=products.get(i).getPrice();
+                //product[3]=receipt.get(i).getListOfItems().get(j).getProduct().getPrice()*receipt.get(i).getListOfItems().get(j).getQty();
+
+                rowData.add(product);
+            }
+        }*/
 
         Object[][] realRowData = new Object[rowData.size()][];
         for(int i = 0; i < rowData.size(); i++){
