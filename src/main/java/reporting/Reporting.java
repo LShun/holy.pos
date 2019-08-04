@@ -2,17 +2,16 @@ package reporting;
 
 import java.util.Scanner;
 
+import static pub.FormatPrint.printHeader;
+
 public class Reporting {
     public static void reporting() {
-       /* System.out.println("Daily Sales Report");
-        System.out.println(" ___________________________________________________________________________");
-        System.out.println("|___________________________________________________________________________|");*/
-
        Scanner scanner=new Scanner(System.in);
 
        int choice=0;
 
         do{
+            printHeader("REPORTS");
        System.out.println("List of reports: ");
        System.out.println("1. Daily Sales Report");
        System.out.println("2. Monthly Sales Report");
@@ -35,10 +34,8 @@ public class Reporting {
        else if(choice==5)
            new TaxReport();
        else if(choice==6)
-           new test();
-       else if(choice==7)
            return;
-        }while(choice>=1 && choice <=7);
+        }while(choice>=1 && choice <=6);
 
 
 
