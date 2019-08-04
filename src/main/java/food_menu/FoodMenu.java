@@ -238,6 +238,7 @@ public class FoodMenu {
                     "2. Search products\n" +
                     "Other. exit\n");
 
+            System.out.print("Enter your operation (Number): ");
             basis = getInt();
 
             if (basis == 1) {
@@ -251,6 +252,7 @@ public class FoodMenu {
 
             // Display results
             if (found != null) {
+                printHeader("Detailed information");
                 System.out.println(found.toString());
             }
         }
@@ -264,7 +266,7 @@ public class FoodMenu {
         String term;
 
         do {
-            System.out.println("Search on basis: \n");
+            System.out.println("\nSearch on basis: \n");
             System.out.println("1. ID\n" +
                     "2. Name\n" +
                     "3. Description\n" +
@@ -365,7 +367,9 @@ public class FoodMenu {
                             + "Enter your choice (Any number): ");
             choice = getInt();
 
-            System.out.print("Enter new ");
+            if (choice >= 1 && choice <= 4) {
+                System.out.print("Enter new ");
+            }
             switch (choice) {
                 case 1: // ID
                     do {
@@ -413,11 +417,11 @@ public class FoodMenu {
         // Print Header
         printHeader("PRODUCTS");
         printHeader("REPORT GENERATED ON: " + dateFormat.format(date));
-        printHeader("TAX AMOUNT: " + Product.getTax());
+        printHeader("TAX AMOUNT: " + Product.getTax() * 100 + "%");
 
         // Format contents
         at.addRule();
-        at.addRow("Index", "ID", "TITLE", "DESC.", "PRICE", "NETT");
+        at.addRow("Index", "ID", "TITLE", "DESC.", "PRICE (Exclude Tax)", "NETT (Include Tax)");
         at.addRule();
 
         for (Product p : products) {
