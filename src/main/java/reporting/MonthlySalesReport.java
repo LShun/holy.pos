@@ -5,6 +5,7 @@ import order.Receipt;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MonthlySalesReport {
 
@@ -30,13 +31,22 @@ public class MonthlySalesReport {
                 {"Total Sales per month","","","","","1.2","20"}
         };*/
 
+        Scanner scanner=new Scanner(System.in);
+        int month;
+        System.out.print("Please enter month of report for viewing: ");
+        month=scanner.nextInt();
+
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         for(int i = 0; i < receipt.size(); i++){
+            if(month!=receipt.get(i).getTransactionTime().getMonthValue())
+                continue;
+
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
+
             Object[] temp = new Object[7];
-            temp[0] = receipt.get(i).getTransactionTime().toString();
+            temp[0] = receipt.get(i).getTransactionTime();
             //temp[1] = receipt.get(i).getBillID();
 
             for(int j = 0;j < sizeOfListOfItems ; j++){
