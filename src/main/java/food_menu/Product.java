@@ -138,10 +138,11 @@ public class Product {
 
     public String toString() {
         return (
-                "ID     : " + this.id + "\n" +
-                "TITLE  : " + this.title + "\n" +
-                "DESC   : " + this.desc + "\n" +
-                "PRICE  : " + this.price + "\n");
+                "ID                   : " + this.id + "\n" +
+                "TITLE                : " + this.title + "\n" +
+                "DESC                 : " + this.desc + "\n" +
+                "PRICE (Exclude tax)  : " + this.price + "\n" +
+                "NETT (Include tax)   : " + this.getNetPrice()+ "\n");
     }
 
     @Override
