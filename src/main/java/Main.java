@@ -24,66 +24,57 @@ public class Main {
     public static final int WORKER = 2;
 
     public static void main(String[] args) {
-        int choice, userLevel = 0;
-        AuthV2 auth = new AuthV2();
+        int choice;
 
         // Authenticate
 
         while (true) {
             showLogo();
-            printHeader("MAIN MENU");
-            auth.auth();
-
-            switch (userLevel) {
-                case ADMIN:
-                    System.out.print("1. Authentication\n" +
-                            "2. Food Menu\n" +
-                            "3. Order\n" +
-                            "4. Staff\n" +
-                            "5. Reporting\n" +
-                            "Enter any other number to exit/logout.\n\n" +
-
-                            "Please select your module: ");
-
-                    choice = getInt();
-
-                    switch (choice) {
-                        case 1:
-                            // put auth classes under here
-                            break;
-                        case 2:
-                            // put food_menu classes under here
-                            FoodMenu.foodMenu();
-                            break;
-                        case 3:
-                            // put order classes under here
-                            Order.order();
-                            break;
-                        case 4:
-                            // put staff classes under here
-                            Staff.staff();
-                            break;
-                        case 5:
-                            // put reporting classes under here
-                            Reporting.reporting();
-                            break;
-                        default:
-                            auth.endSession();
-                    }
-                case MANAGER:
-
+            if (AuthV2.getSession() == null) {
+                AuthV2.auth();
             }
 
+            printHeader("MAIN MENU");
+            System.out.print(
+                    "1. Food Menu\n" +
+                    "2. Order\n" +
+                    "3. Staff\n" +
+                    "4. Reporting\n" +
+                    "Enter any other number to exit/logout.\n\n" +
+
+                    "Please select your module: ");
+
+            choice = getInt();
+
+            switch (choice) {
+                case 1:
+                    // put food_menu classes under here
+                    FoodMenu.foodMenu();
+                    break;
+                case 2:
+                    // put order classes under here
+                    Order.order();
+                    break;
+                case 3:
+                    // put staff classes under here
+                    Staff.staff();
+                    break;
+                case 4:
+                    // put reporting classes under here
+                    Reporting.reporting();
+                    break;
+                default:
+                    AuthV2.endSession();
+            }
         }
     }
-
-    private static void showLogo() {
-        System.out.println(ANSI_YELLOW + "\n" +
-                "______  ________________  __     _______________________\n" +
-                "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
-                "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
-                "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
-                "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
-                "                                                        \n" + ANSI_RESET);
-    }
+        private static void showLogo() {
+            System.out.println(ANSI_YELLOW + "\n" +
+                    "______  ________________  __     _______________________\n" +
+                    "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
+                    "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
+                    "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
+                    "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
+                    "                                                        \n" + ANSI_RESET);
+        }
 }

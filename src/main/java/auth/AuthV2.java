@@ -10,17 +10,19 @@ import java.util.ArrayList;
 
 
 public class AuthV2 {
-    private Worker session = null;
+    private static Worker session = Staff.getEmployeeList().get(0);
     private static LocalDateTime clockInTime;
     private static LocalDateTime clockOutTime;
 
-    public void startSession(Worker w) {
+    private static void startSession(Worker w) {
         clockInTime = LocalDateTime.now();
-        this.session = w;
+        session = w;
+        FormatPrint.printHeader("Clock-in time: " + clockInTime.toLocalTime());
     }
 
-    public void endSession() {
-        LocalDateTime clockOutTime = LocalDateTime.now();
+    public static void endSession() {
+        clockOutTime = LocalDateTime.now();
+
         LocalDateTime tempDateTime = LocalDateTime.from(clockInTime);
 
         long hrs = tempDateTime.until(clockOutTime, ChronoUnit.HOURS);
@@ -32,13 +34,14 @@ public class AuthV2 {
         long secs = tempDateTime.until(clockOutTime, ChronoUnit.SECONDS);
 
 
-        System.out.println("You worked for Hours: " + hrs + "Minutes: " + min + "Seconds: " + secs);
+        FormatPrint.printHeader("Clock-out time: " + clockOutTime.toLocalTime());
+        FormatPrint.printHeader("You worked for " + hrs + " Hours, " + min + " Minutes, " + secs + " Seconds");
         // write back into Worker
-        this.session.setTotalDurationWorked(this.session.getTotalDurationWorked().plusHours(hrs).plusMinutes(min).plusSeconds(secs));
-        this.session = null;
+        session.setTotalDurationWorked(session.getTotalDurationWorked().plusHours(hrs).plusMinutes(min).plusSeconds(secs));
+        session = null;
     }
 
-    public void auth() {
+    public static void auth() {
         final int TRIES = 3;
         String id, password;
         int error = 0;
@@ -67,9 +70,8 @@ public class AuthV2 {
 
     private static Worker login(String id, String password) {
         ArrayList<Worker> employeeList = Staff.getEmployeeList();
-        for(int i = 0; i < employeeList.size(); i++){
-            Worker matchAttempt = employeeList.get(i);
-            if(matchAttempt.getStaffID().equals(id) && matchAttempt.getPassword().equals(password)){
+        for (Worker matchAttempt : employeeList) {
+            if (matchAttempt.getStaffID().equals(id) && matchAttempt.getPassword().equals(password)) {
                 FormatPrint.printHeader("Authentication Success!");
                 return matchAttempt;
             }
@@ -78,11 +80,7 @@ public class AuthV2 {
         return null;
     }
 
-    public static LocalDateTime getClockOutTime() {
-        return clockOutTime;
-    }
-
-    public static void setClockOutTime(LocalDateTime clockOutTime) {
-        AuthV2.clockOutTime = clockOutTime;
+    public static Worker getSession() {
+        return session;
     }
 }

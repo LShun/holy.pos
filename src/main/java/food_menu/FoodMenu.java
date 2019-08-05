@@ -128,7 +128,7 @@ public class FoodMenu {
 ////                System.out.println("New product information: ");
 ////
 ////                // read the result set
-////                System.out.println("id = " + rs.getString("id"));
+////                System.out.println("id = " + rs.getTable("id"));
 ////                System.out.println("title = " + rs.getInt("title"));
 ////                System.out.println("description = " + rs.getInt("description"));
 ////                System.out.println("price = " + rs.getInt("price"));
@@ -210,7 +210,6 @@ public class FoodMenu {
                 printHeader("Tax successfully set, new tax is: " + Product.getTax() * 100 + "% ");
                 break;
         }
-        return;
     }
 
     // deletes a product from FoodMenu array
@@ -427,8 +426,24 @@ public class FoodMenu {
     // EXTERNAL & INTERNAL USE
     // =======================
 
+
+    @Override
+    public String toString() {
+        return getTable(products);
+    }
+
     // show the products inside the array in a consistent format
-    private static void showProducts(ArrayList<Product> products) {
+    public static void showProducts(ArrayList<Product> products) {
+        String rend = getTable(products);
+        System.out.println(rend);
+    }
+
+    // overloading: show all products
+    public static void showProducts() {
+        showProducts(products);
+    }
+
+    private static String getTable(ArrayList<Product> products) {
         int index = 0;
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
@@ -450,13 +465,7 @@ public class FoodMenu {
         }
 
         // Print the table
-        String rend = at.render();
-        System.out.println(rend);
-    }
-
-    // overloading: show all products
-    public static void showProducts() {
-        showProducts(products);
+        return at.render();
     }
 
     // void -> ArrayList<Product>
@@ -477,4 +486,14 @@ public class FoodMenu {
         }
         return new Product();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        else if (o == null) return false;
+        else if (this.getClass() != o.getClass()) return false;
+        return true;
+    }
+
+
 }
