@@ -1,13 +1,10 @@
 package reporting;
 
-import food_menu.FoodMenu;
-import food_menu.Product;
 import order.Order;
 import order.Receipt;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DailySalesReport {
 
@@ -27,21 +24,18 @@ public class DailySalesReport {
         // Frame Title
         f.setTitle("Daily Sales Report");
 
+        Scanner s=new Scanner(System.in);
+        int date;
 
-
-        // Data to be displayed in the JTable
-       /* String[][] data = new String[][]{
-                new String[]{String.valueOf(receipt.get(0).getTransactionTime()), receipt.get(0).getBillID(), String.valueOf(receipt.get(0).getListOfItems().get(0).getProduct().getTitle()), String.valueOf(receipt.get(0).getListOfItems().get(0).getProduct().getPrice()), String.valueOf(receipt.get(0).getListOfItems().get(0).getQty()), String.valueOf(receipt.get(0).getListOfItems().get(0).getProduct().getTax()), String.valueOf(receipt.get(0).getTotal())},
-                new String[]{String.valueOf(receipt.get(1).getTransactionTime()), receipt.get(1).getBillID(), String.valueOf(receipt.get(1).getListOfItems().get(1).getProduct().getTitle()), String.valueOf(receipt.get(1).getListOfItems().get(1).getProduct().getPrice()), String.valueOf(receipt.get(1).getListOfItems().get(1).getQty()), String.valueOf(receipt.get(1).getListOfItems().get(1).getProduct().getTax()), String.valueOf(receipt.get(1).getTotal())},
-                //new String[]{String.valueOf(receipt.get(2).getTransactionTime()), receipt.get(2).getBillID(), String.valueOf(receipt.get(2).getListOfItems().get(2).getProduct().getTitle()), String.valueOf(receipt.get(2).getListOfItems().get(2).getProduct().getPrice()), String.valueOf(receipt.get(2).getListOfItems().get(2).getQty()), String.valueOf(receipt.get(2).getListOfItems().get(2).getProduct().getTax()), String.valueOf(receipt.get(2).getTotal())},
-
-                {"Total Sales per day", "", "", "", "", "1.2", "20"}
-        };*/
-
-
+        System.out.println("Please enter the day of report for viewing: ");
+        date=s.nextInt();
+        date=s.nextInt();
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         for(int i = 0; i < receipt.size(); i++){
+            if(date!=receipt.get(i).getTransactionTime().getDayOfMonth()&&date!=receipt.get(i).getTransactionTime().getMonthValue())
+                continue;
+
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
             Object[] temp = new Object[7];
