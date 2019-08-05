@@ -1,4 +1,5 @@
 import auth.Auth;
+import auth.AuthV2;
 import food_menu.FoodMenu;
 import order.Order;
 import reporting.Reporting;
@@ -18,58 +19,71 @@ public class Main {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public static void main(String[] args) {
-        int choice;
+    public static final int ADMIN = 0;
+    public static final int MANAGER = 1;
+    public static final int WORKER = 2;
 
-        System.out.println();
+    public static void main(String[] args) {
+        int choice, userLevel = 0;
+        AuthV2 auth = new AuthV2();
 
         // Authenticate
 
         while (true) {
-            printHeader("");
-            System.out.println(ANSI_YELLOW + "\n" +
-                    "______  ________________  __     _______________________\n" +
-                    "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
-                    "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
-                    "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
-                    "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
-                    "                                                        \n" + ANSI_RESET);
+            showLogo();
             printHeader("MAIN MENU");
-            System.out.print("1. Authentication\n" +
-                    "2. Food Menu\n" +
-                    "3. Order\n" +
-                    "4. Staff\n" +
-                    "5. Reporting\n" +
-                    "Enter any other number to exit.\n\n" +
+            auth.auth();
 
-                    "Please select your module: ");
+            switch (userLevel) {
+                case ADMIN:
+                    System.out.print("1. Authentication\n" +
+                            "2. Food Menu\n" +
+                            "3. Order\n" +
+                            "4. Staff\n" +
+                            "5. Reporting\n" +
+                            "Enter any other number to exit/logout.\n\n" +
 
-            choice = getInt();
+                            "Please select your module: ");
 
-            switch (choice) {
-                case 1:
-                    // put auth classes under here
-                    Auth.auth();
-                    break;
-                case 2:
-                    // put food_menu classes under here
-                    FoodMenu.foodMenu();
-                    break;
-                case 3:
-                    // put order classes under here
-                    Order.order();
-                    break;
-                case 4:
-                    // put staff classes under here
-                    Staff.staff();
-                    break;
-                case 5:
-                    // put reporting classes under here
-                    Reporting.reporting();
-                    break;
-                default:
-                    return;
+                    choice = getInt();
+
+                    switch (choice) {
+                        case 1:
+                            // put auth classes under here
+                            break;
+                        case 2:
+                            // put food_menu classes under here
+                            FoodMenu.foodMenu();
+                            break;
+                        case 3:
+                            // put order classes under here
+                            Order.order();
+                            break;
+                        case 4:
+                            // put staff classes under here
+                            Staff.staff();
+                            break;
+                        case 5:
+                            // put reporting classes under here
+                            Reporting.reporting();
+                            break;
+                        default:
+                            auth.endSession();
+                    }
+                case MANAGER:
+
             }
+
         }
+    }
+
+    private static void showLogo() {
+        System.out.println(ANSI_YELLOW + "\n" +
+                "______  ________________  __     _______________________\n" +
+                "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
+                "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
+                "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
+                "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
+                "                                                        \n" + ANSI_RESET);
     }
 }

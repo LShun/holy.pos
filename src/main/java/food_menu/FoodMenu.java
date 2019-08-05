@@ -42,7 +42,7 @@ public class FoodMenu {
             // show user possible actions
             printHeader("FOOD MENU");
             System.out.println("1.      New Product");
-            System.out.println("2.      Modify Product");
+            System.out.println("2.      Modify Product/Tax");
             System.out.println("3.      Search Product");
             System.out.println("4.      Delete Product");
             System.out.println("Other.  Back");
@@ -151,46 +151,66 @@ public class FoodMenu {
 
     // user can call this module to modify a product's details.
     private static void modify() {
-        int index;
+        int index, choice;
         Product temp;
 
         printHeader("PRODUCT MODIFICATION");
 
-        // get the specific Product
-        temp = getProduct(products);
+        System.out.print(
+                "What do you want to modify? \n" +
+                "1. Products\n" +
+                "2: Tax\n" +
+                "Other. Cancel\n" +
+                "Enter your choice: ");
+        choice = getInt();
 
-        // if cancelled, return
-        if (temp == null) {
-            return;
+        switch(choice) {
+            case 1:
+                // get the specific Product
+                temp = getProduct(products);
+
+                // if cancelled, return
+                if (temp == null) {
+                    return;
+                }
+
+                /* keep the product index */
+                index = products.indexOf(temp);
+
+                /* copy the Product to make it local, to allow non-destructive editing */
+                temp = new Product(temp.getId(), temp.getTitle(), temp.getDesc(), temp.getPrice());
+
+                // accept all temporary changes from the user
+                modifyProd(temp);
+
+                // ask for confirmation
+                printHeader("WARNING: You are irreversibly changing: ");
+                System.out.println(products.get(index).toString());
+                printHeader("TO");
+                System.out.println(temp.toString());
+
+                System.out.print("Are you sure? (Y/N): ");
+                // copy the temporary product back into the real product
+                if (getString().toLowerCase().equals("y")) {
+                    products.set(index, temp);
+                    printHeader("Modification successful!");
+                } else {
+                    printHeader("Modification cancelled.");
+                }
+
+                // display successful message
+                System.out.println("Product Details: ");
+                System.out.println(products.get(index).toString());
+                break;
+            case 2:
+                printHeader("Tax modification (all products)");
+                System.out.println("Current tax amount: " + Product.getTax() * 100 + " %");
+                System.out.print("Enter new tax percentage/100 (ex: 0.16 for 16%), enter same amount to cancel: ");
+                Product.setTax(getDouble());
+                printHeader("Tax successfully set, new tax is: " + Product.getTax() * 100 + "% ");
+                break;
         }
-
-        /* keep the product index */
-        index = products.indexOf(temp);
-
-        /* copy the Product to make it local, to allow non-destructive editing */
-        temp = new Product(temp.getId(), temp.getTitle(), temp.getDesc(), temp.getPrice());
-
-        // accept all temporary changes from the user
-        modifyProd(temp);
-
-        // ask for confirmation
-        printHeader("WARNING: You are irreversibly changing: ");
-        System.out.println(products.get(index).toString());
-        printHeader("TO");
-        System.out.println(temp.toString());
-
-        System.out.print("Are you sure? (Y/N): ");
-        // copy the temporary product back into the real product
-        if (getString().toLowerCase().equals("y")) {
-            products.set(index, temp);
-            printHeader("Modification successful!");
-        } else {
-            printHeader("Modification cancelled.");
-        }
-
-        // display successful message
-        System.out.println("Product Details: ");
-        System.out.println(products.get(index).toString());
+        return;
     }
 
     // deletes a product from FoodMenu array
