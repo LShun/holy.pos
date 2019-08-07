@@ -31,7 +31,7 @@ public class ProductPerformanceReport {
         Scanner scanner=new Scanner(System.in);
         int month;
 
-        System.out.println("\n\n1.January\n"+
+        System.out.print("\n\n1.January\n"+
                 "2.February\n"+
                 "3.March\n"+
                 "4.April\n"+
@@ -51,8 +51,23 @@ public class ProductPerformanceReport {
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
 
-        String[] name={"Beefburger","Cheeseburger","Double cheeseburger","Chicken burger","Sausage Deluxe Breakfast","Burger Set Lunch"};
+        //String[] name={"Beefburger","Cheeseburger","Double cheeseburger","Chicken burger","Sausage Deluxe Breakfast","Burger Set Lunch"};
 
+        /*ArrayList<Product> food=FoodMenu.getProducts();
+        for(int i=0;i<food.size();i++){
+            double[] total=new double[10];
+
+            //int size = receipt.get(i).getListOfItems().size();
+
+            for(int j=0;j<receipt.get(i).getListOfItems().size();j++)
+            if(!(food.get(i).getId() == receipt.get(i).getListOfItems().get(j).getProduct().getId())){
+                total[i]=receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
+
+            }
+
+            System.out.println(food.get(i).getId()+"="+total[i]);
+
+        }*/
 
 
         for(int i = 0; i < receipt.size(); i++){
