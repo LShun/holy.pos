@@ -25,15 +25,16 @@ public class DailySalesReport {
         f.setTitle("Daily Sales Report");
 
         Scanner s=new Scanner(System.in);
-        int date;
+        int day,month;
 
-        System.out.println("Please enter the day of report for viewing: ");
-        date=s.nextInt();
-        date=s.nextInt();
+        System.out.print("Please enter the day of report for viewing(DD): ");
+        day=s.nextInt();
+        System.out.print("Please enter the month of report for viewing(MM): ");
+        month=s.nextInt();
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         for(int i = 0; i < receipt.size(); i++){
-            if(date!=receipt.get(i).getTransactionTime().getDayOfMonth()&&date!=receipt.get(i).getTransactionTime().getMonthValue())
+            if(day!=receipt.get(i).getTransactionTime().getDayOfMonth()||month!=receipt.get(i).getTransactionTime().getMonthValue())
                 continue;
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();

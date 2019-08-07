@@ -56,7 +56,7 @@ public class StaffPerformanceReport {
 
         // Initializing the JTable
         j = new JTable(realRowData, columnNames);
-        j.setBounds(30, 200, 200, 30);
+        j.setBounds(30, 300, 300, 30);
 
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);

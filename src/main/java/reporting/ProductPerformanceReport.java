@@ -4,12 +4,10 @@ import food_menu.FoodMenu;
 import food_menu.Product;
 import order.Order;
 import order.Receipt;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static javax.swing.UIManager.get;
 
 public class ProductPerformanceReport {
 
@@ -52,6 +50,11 @@ public class ProductPerformanceReport {
         // Data to be displayed in the JTable
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
+
+        String[] name={"Beefburger","Cheeseburger","Double cheeseburger","Chicken burger","Sausage Deluxe Breakfast","Burger Set Lunch"};
+
+
+
         for(int i = 0; i < receipt.size(); i++){
             if(month!=receipt.get(i).getTransactionTime().getMonthValue())
                 continue;
