@@ -22,6 +22,9 @@ public class Item {
         else
             System.out.println("Invalid input quantity!");
     }
+    public void increment(int qty){
+        this.setQty(this.qty + qty);
+    }
 
     @Override
     public boolean equals(Object o) {
