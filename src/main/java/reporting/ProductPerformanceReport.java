@@ -145,7 +145,7 @@ public class ProductPerformanceReport {
             temp.add(item.get(i).getProduct().getTitle());
             temp.add(item.get(i).getQty());
             temp.add(item.get(i).getProduct().getPrice());
-            temp.add(item.get(i).getProduct().getPrice() * item.get(i).getQty());
+            temp.add(String.format("%.2f",item.get(i).getProduct().getPrice() * item.get(i).getQty()));
 
             allRowData.add(temp);
         }

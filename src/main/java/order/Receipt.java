@@ -1,6 +1,9 @@
 package order;
 
+import staff.Worker;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Receipt extends CartOrReceipt {
@@ -12,9 +15,18 @@ public class Receipt extends CartOrReceipt {
         this(c, amountReceived, LocalDateTime.now());
     }
 
+    public Receipt(String billID, Worker worker, ArrayList<Item> listOfItems, double total, double amountReceived, LocalDateTime transactionTime){
+        this.billID = billID;
+        this.worker = worker;
+        this.listOfItems = listOfItems;
+        this.total = total;
+        this.amountReceived = amountReceived;
+        this.transactionTime = transactionTime;
+    }
+
     public Receipt(Cart c, double amountReceived, LocalDateTime transactionTime){
         this.billID          = c.getBillID();
-        this.worker = c.getWorker();
+        this.worker          = c.getWorker();
         this.transactionTime = transactionTime;
         this.listOfItems     = c.getListOfItems();
         this.total           = c.getTotal();
