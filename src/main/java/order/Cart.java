@@ -9,7 +9,7 @@ import staff.Worker;
 
 public class Cart extends CartOrReceipt{
 
-    private double total;
+    private double subTotal;
 
     public Cart() {
         this.billID  = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd")) + String.format("%04d", super.transactionMade);
@@ -33,19 +33,19 @@ public class Cart extends CartOrReceipt{
         }else{
             System.out.println("Invalid input quantity!");
         }
-        total = calculateTotal();
+        subTotal = calculateTotal();
     }
 
     public boolean del(Item obj){
         boolean ans = listOfItems.remove(obj);
-        total = calculateTotal();
+        subTotal = calculateTotal();
 
         return ans;
     }
 
     public void clearCart(){
         listOfItems.clear();
-        total = 0;
+        subTotal = 0;
     }
 
     public double calculateTotal(){
@@ -82,7 +82,7 @@ public class Cart extends CartOrReceipt{
         horizontal[4] = horizontal[11] = horizontal[37] = horizontal[41]  = '\u2534';
         horizontal[49] = '\u253c';
         System.out.println("\u251c" + String.valueOf(horizontal) + "\u2524");
-        System.out.printf("\u2502%49s\u2502%8.2f\u2502\n","Total", this.getTotal());
+        System.out.printf("\u2502%49s\u2502%8.2f\u2502\n","Total", this.getSubTotal());
 
         horizontal[4] = horizontal[11] = horizontal[37] = horizontal[41] = '\u2500';
         horizontal[49] = '\u2534';
@@ -92,5 +92,5 @@ public class Cart extends CartOrReceipt{
 
     public void setBillID(String billID) { this.billID = billID; }
 
-    public double getTotal() { return total; }
+    public double getSubTotal() { return subTotal; }
 }

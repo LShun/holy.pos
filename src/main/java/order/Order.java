@@ -128,7 +128,7 @@ public class Order {
             action = VScan.getInt();
         }
 
-        total = c.getTotal();
+        total = c.getSubTotal();
 
         System.out.println("The total price is RM" + total);
         System.out.print("Amount Received is RM");

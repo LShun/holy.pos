@@ -1,5 +1,6 @@
 package order;
 
+import food_menu.Product;
 import staff.Worker;
 
 import java.time.LocalDateTime;
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Receipt extends CartOrReceipt {
+    final private double subTotal;
+    final private double tax;
     final private double total;
     final private LocalDateTime transactionTime;
     final private double amountReceived;
@@ -15,11 +18,13 @@ public class Receipt extends CartOrReceipt {
         this(c, amountReceived, LocalDateTime.now());
     }
 
-    public Receipt(String billID, Worker worker, ArrayList<Item> listOfItems, double total, double amountReceived, LocalDateTime transactionTime){
+    public Receipt(String billID, Worker worker, ArrayList<Item> listOfItems, double subTotal, double amountReceived, LocalDateTime transactionTime){
         this.billID = billID;
         this.worker = worker;
         this.listOfItems = listOfItems;
-        this.total = total;
+        this.subTotal = subTotal;
+        this.tax = subTotal * Product.getTax();
+        this.total = subTotal + getTax();
         this.amountReceived = amountReceived;
         this.transactionTime = transactionTime;
     }
@@ -29,12 +34,14 @@ public class Receipt extends CartOrReceipt {
         this.worker          = c.getWorker();
         this.transactionTime = transactionTime;
         this.listOfItems     = c.getListOfItems();
-        this.total           = c.getTotal();
+        this.subTotal        = c.getSubTotal();
+        this.tax   = subTotal * Product.getTax();
+        this.total = subTotal + getTax();
         this.amountReceived  = amountReceived;
         super.transactionMade++;
     }
 
-    public double getTotal(){ return total;}
+    public double getSubTotal(){ return subTotal;}
     public double getAmountReceived() { return amountReceived; }
     public LocalDateTime getTransactionTime() { return transactionTime; }
 
@@ -78,9 +85,9 @@ public class Receipt extends CartOrReceipt {
         horizontal[4] = horizontal[11] = horizontal[37] = horizontal[41]  = '\u2534';
         horizontal[49] = '\u253c';
         System.out.println("\u251c" + String.valueOf(horizontal) + "\u2524");
-        System.out.printf("\u2502%49s\u2502%8.2f\u2502\n","Total", total);
+        System.out.printf("\u2502%49s\u2502%8.2f\u2502\n","Total", subTotal);
         System.out.printf("\u2502%49s\u2502%8.2f\u2502\n","Amount Received", amountReceived);
-        System.out.printf("\u2502%49s\u2502%8.2f\u2502\n","Change", amountReceived - total);
+        System.out.printf("\u2502%49s\u2502%8.2f\u2502\n","Change", amountReceived - subTotal);
 
         horizontal[4] = horizontal[11] = horizontal[37] = horizontal[41] = '\u2500';
         horizontal[49] = '\u2534';
@@ -90,4 +97,11 @@ public class Receipt extends CartOrReceipt {
     }
 
 
+    public double getTax() {
+        return tax;
+    }
+
+    public double getTotal() {
+        return total;
+    }
 }
