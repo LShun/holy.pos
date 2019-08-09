@@ -17,18 +17,7 @@ public class Receipt extends CartOrReceipt {
     public Receipt(Cart c, double amountReceived){
         this(c, amountReceived, LocalDateTime.now());
     }
-
-    public Receipt(String billID, Worker worker, ArrayList<Item> listOfItems, double subTotal, double amountReceived, LocalDateTime transactionTime){
-        this.billID = billID;
-        this.worker = worker;
-        this.listOfItems = listOfItems;
-        this.subTotal = subTotal;
-        this.tax = subTotal * Product.getTax();
-        this.total = subTotal + getTax();
-        this.amountReceived = amountReceived;
-        this.transactionTime = transactionTime;
-    }
-
+    
     public Receipt(Cart c, double amountReceived, LocalDateTime transactionTime){
         this.billID          = c.getBillID();
         this.worker          = c.getWorker();

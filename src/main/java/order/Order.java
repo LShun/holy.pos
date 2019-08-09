@@ -12,33 +12,45 @@ import java.util.Arrays;
 public class Order {
     private static Cart c;
     private static ArrayList<Receipt> receiptList = new ArrayList<Receipt>(Arrays.asList(
-            new Receipt("1906270001", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
+            new Receipt(new Cart("1906270001", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("LUBS"),2),
                     new Item(FoodMenu.getProductByID("BC"),2)
-                    )),80.0,50.00, LocalDateTime.of(2019,6,27,8,30,30)),
-            new Receipt("1906270002", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
+                    ))),50.00, LocalDateTime.of(2019,6,27,8,30,30)),
+            new Receipt(new Cart("1906270002", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("BDC"),2),
                     new Item(FoodMenu.getProductByID("BCH"),3)
-                    )),15,20,LocalDateTime.of(2019,6,27,10,00,25)),
-            new Receipt("1906270003", Staff.getEmployeeList().get(1), new ArrayList<Item>(Arrays.asList(
+                    ))),20, LocalDateTime.of(2019,6,27,10,00,25)),
+            new Receipt(new Cart("1906270003", Staff.getEmployeeList().get(1), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("LUBS"),3),
                     new Item(FoodMenu.getProductByID("BRSD"),1)
-                    )),30,36,LocalDateTime.of(2019,6,27,10,20,35)),
-            new Receipt("1906270004", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
+                    ))),36, LocalDateTime.of(2019,6,27,10,20,35)),
+            new Receipt(new Cart("1906270004", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("LUBS"),4)
-                    )),30,40, LocalDateTime.of(2019,6,27,10,50,57)),
-            new Receipt("1906270005", Staff.getEmployeeList().get(3), new ArrayList<Item>(Arrays.asList(
+                    ))),40, LocalDateTime.of(2019,6,27,10,50,57)),
+            new Receipt(new Cart("1906270005", Staff.getEmployeeList().get(3), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("LUBS"),4),
                     new Item(FoodMenu.getProductByID("BRSD"),10)
-                    )),100,150,LocalDateTime.of(2019,7,28,11,50,57)),
-            new Receipt("1906270006", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
+                    ))),150, LocalDateTime.of(2019,7,28,11,50,57)),
+            new Receipt(new Cart("1906270006", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("BDC"),2),
                     new Item(FoodMenu.getProductByID("LUBS"),4),
                     new Item(FoodMenu.getProductByID("BCH"),1)
-                    )), 39,40,LocalDateTime.of(2019,7,29,14,50,57))
-            ));
+                    ))), 40, LocalDateTime.of(2019,7,29,14,50,57)),
+            new Receipt(new Cart("1906270007", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
+                    new Item(FoodMenu.getProductByID("COLAS"),6),
+                    new Item(FoodMenu.getProductByID("BRSD"),4),
+                    new Item(FoodMenu.getProductByID("BCH"),2)
+                    ))), 40, LocalDateTime.of(2019,8,14,16,40,57)),
+            new Receipt(new Cart("1906270006", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
+                    new Item(FoodMenu.getProductByID("BC"),6),
+                    new Item(FoodMenu.getProductByID("COLAL"),4),
+                    new Item(FoodMenu.getProductByID("BCH"),1),
+                    new Item(FoodMenu.getProductByID("LUBS"),1)
+            ))), 40, LocalDateTime.of(2019,8,14,15,32,29))
+            )
+    );
 
-    private static boolean haveBeenInitialized = false;
+//    private static boolean haveBeenInitialized = false;
 
     public static void order() {
         /*
@@ -53,8 +65,8 @@ public class Order {
         * 9. Produce receipt
         * */
 
-        if(!haveBeenInitialized){
-            haveBeenInitialized = true;
+//        if(!haveBeenInitialized){
+//            haveBeenInitialized = true;
 
 //            Cart initialization_cart = new Cart("1906270001", Staff.getEmployeeList().get(0));
 //            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),2));
@@ -85,7 +97,7 @@ public class Order {
 //            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("LUBS"),4));
 //            initialization_cart.addOrMinus(new Item(FoodMenu.getProductByID("BCH"),1));
 //            receiptList.add(new Receipt(initialization_cart,40.0, LocalDateTime.of(2019,7,29,14,50,57)));
-        }
+//        }
 
         if(Auth.s == null){
             System.out.println("You have not log in.\nPlease log in to continue.");

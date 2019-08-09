@@ -2,6 +2,7 @@ package order;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import auth.Auth;
@@ -19,6 +20,11 @@ public class Cart extends CartOrReceipt{
     public Cart(String billID, Worker worker){
         this.billID  = billID;
         this.worker = worker;
+    }
+
+    public Cart(String billID, Worker worker, ArrayList<Item> item){
+        this(billID, worker);
+        this.listOfItems = item;
     }
 
     public void addOrMinus(Item item){
