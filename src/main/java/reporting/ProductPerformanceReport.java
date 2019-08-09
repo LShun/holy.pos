@@ -129,7 +129,7 @@ public class ProductPerformanceReport {
         // Column Names
 //        String[] columnNames = { "Date(month)", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
         Vector columnNames = new Vector();
-        columnNames.add("Date(month)");
+        columnNames.add("Month");
         columnNames.add("Product ID");
         columnNames.add("Product Name");
         columnNames.add("Quantity");
@@ -140,7 +140,7 @@ public class ProductPerformanceReport {
         for(int i = 0;i < item.size(); i++){
             Vector temp = new Vector<Vector>();
 
-            temp.add("MONTH");
+            temp.add(month);
             temp.add(item.get(i).getProduct().getId());
             temp.add(item.get(i).getProduct().getTitle());
             temp.add(item.get(i).getQty());
@@ -150,7 +150,7 @@ public class ProductPerformanceReport {
             allRowData.add(temp);
         }
         // Initializing the JTable
-//        j = new JTable(realRowData, columnNames);
+        //j = new JTable(realRowData, columnNames);
         j = new JTable(allRowData, columnNames);
         j.setBounds(30, 200, 200, 30);
 
