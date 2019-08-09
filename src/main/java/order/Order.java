@@ -1,16 +1,18 @@
 package order;
 
 import auth.Auth;
+import auth.AuthV2;
 import pub.VScan;
 import food_menu.*;
 import staff.Staff;
+import staff.Worker;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Order {
-    private static Cart c;
+    private static Cart c = null;
     private static ArrayList<Receipt> receiptList = new ArrayList<Receipt>(Arrays.asList(
             new Receipt(new Cart("1906270001", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("LUBS"),2),
@@ -41,7 +43,7 @@ public class Order {
                     new Item(FoodMenu.getProductByID("BRSD"),4),
                     new Item(FoodMenu.getProductByID("BCH"),2)
                     ))), 40, LocalDateTime.of(2019,8,14,16,40,57)),
-            new Receipt(new Cart("1906270006", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
+            new Receipt(new Cart("1906270008", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("BC"),6),
                     new Item(FoodMenu.getProductByID("COLAL"),4),
                     new Item(FoodMenu.getProductByID("BCH"),1),
@@ -99,12 +101,24 @@ public class Order {
 //            receiptList.add(new Receipt(initialization_cart,40.0, LocalDateTime.of(2019,7,29,14,50,57)));
 //        }
 
-        if(Auth.s == null){
+        Worker session = AuthV2.getSession();
+        if(session == null){
             System.out.println("You have not log in.\nPlease log in to continue.");
             return;
         }
 
+//        if(c != null && c.getWorker().equals(session)){
+//            System.out.println("There is still transaction undone last time.");
+//            System.out.println("Do you want to continue the transaction ?");
+//            System.out.println("Y - Yes | N- No");
+//            if(VScan.getChar() == 'N')
+//                c = new Cart();
+//        }else {
+//            c = new Cart();
+//        }
+
         c = new Cart();
+
         int action;
         double total;
 

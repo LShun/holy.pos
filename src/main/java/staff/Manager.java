@@ -1,7 +1,11 @@
 package staff;
 
-import pub.VScan;
+import de.vandermeer.asciitable.AT_Row;
+import de.vandermeer.asciitable.AsciiTable;
 
+import de.vandermeer.asciitable.CWC_FixedWidth;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+import pub.VScan;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -55,13 +59,26 @@ public class Manager extends Worker {
     }
 
     public void displayStaff(ArrayList<Worker> data) {
+        AsciiTable at = new AsciiTable();
+        at.addRule();
+        CWC_FixedWidth width = new CWC_FixedWidth();
+        at.getRenderer().setCWC(width);
+        width.add(8).add(16).add(3).add(25); //Specify the width of each column
+
+        //Display the heading
+        AT_Row heading = at.addRow("STAFF ID", "STAFF NAME", "SEX", "DATE OF EMPLOYED");
+        heading.setTextAlignment(TextAlignment.CENTER);
+        at.addRule();
+
         for(int i = 0; i< data.size(); i++){
             Worker temp = data.get(i);
-            System.out.printf("%-8s%-16s%-16s%2c%15s\n",
-                    temp.getStaffID(), temp.getPassword(),temp.getName(),
-                    temp.getGender(),
-                    temp.getDateOfEmployed().toString());
+            AT_Row row = at.addRow(temp.getStaffID(), temp.getName(), temp.getGender(), temp.getDateOfEmployed().toString());
+            row.getCells().get(0).getContext().setTextAlignment(TextAlignment.RIGHT);
+            row.getCells().get(2).getContext().setTextAlignment(TextAlignment.CENTER);
+            at.addRule();
         }
+
+        System.out.println(at.render());
     }
 
     public void modifyStaff(){
