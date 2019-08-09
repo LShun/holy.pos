@@ -94,7 +94,7 @@ public class ProductPerformanceReport {
 //                product[3] = receipt.get(i).getListOfItems().get(j).getQty();
 //                product[4] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
 //                product[5] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice()*receipt.get(i).getListOfItems().get(j).getQty();
-//                //product[6] = receipt.get(i).getTotal();
+//                //product[6] = receipt.get(i).getSubTotal();
 //
 //                rowData.add(product);
 

@@ -45,7 +45,7 @@ public TaxReport()
 
             tax[2] = receipt.get(i).getListOfItems().get(j).getQty();
             tax[3] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
-            tax[4] = receipt.get(i).getTotal();
+            tax[4] = receipt.get(i).getSubTotal();
             tax[5] = "";
 
             rowData.add(tax);
