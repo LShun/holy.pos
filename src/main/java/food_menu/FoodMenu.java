@@ -1,5 +1,6 @@
 package food_menu;
 
+import auth.AuthV2;
 import de.vandermeer.asciitable.AsciiTable;
 
 import java.text.DateFormat;
@@ -42,28 +43,34 @@ public class FoodMenu {
             // show user possible actions
             printHeader("FOOD MENU");
             System.out.println("1.      Search Product");
-            System.out.println("2.      New Product");
-            System.out.println("3.      Modify Product");
-            System.out.println("4.      Delete Product");
+            if (AuthV2.isManager()) {
+                System.out.println("2.      New Product");
+                System.out.println("3.      Modify Product");
+                System.out.println("4.      Delete Product");
+            }
             System.out.println("Other.  Back");
             System.out.print("Enter your choice: ");
 
             // accept choice
             choice = getInt();
 
+            if (AuthV2.isManager()) {
+                switch (choice) {
+                    case 2:
+                        add();
+                        break;
+                    case 3:
+                        modify();
+                        break;
+                    case 4:
+                        delete();
+                        break;
+                }
+            }
+
             switch (choice) {
                 case 1:
                     search();
-                    break;
-                case 2:
-                    add();
-
-                    break;
-                case 3:
-                    modify();
-                    break;
-                case 4:
-                    delete();
                     break;
                 default:
                     printHeader("EXITED MODULE");
