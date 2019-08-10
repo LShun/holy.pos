@@ -7,7 +7,6 @@ import static pub.VScan.getDouble;
 import static pub.VScan.getString;
 
 public class Product {
-    private static double tax = 0.16;
     private String id, title, desc;
     private double price;
 
@@ -32,14 +31,6 @@ public class Product {
     /*
         Getters
     */
-
-    public static double getTax() {
-        return tax;
-    }
-
-    public static void setTax(double tax) {
-        Product.tax = tax;
-    }
 
     public String getTitle() {
         return title;
@@ -130,10 +121,6 @@ public class Product {
         setPrice(price);
     }
 
-    public double getNetPrice() {
-        return this.price * this.tax;
-    }
-
     /*
         Other methods
     */
@@ -143,8 +130,7 @@ public class Product {
                 "ID                   : " + this.id + "\n" +
                         "TITLE                : " + this.title + "\n" +
                         "DESC                 : " + this.desc + "\n" +
-                        "PRICE (Exclude tax)  : " + this.price + "\n" +
-                        "NETT (Include tax)   : " + this.getNetPrice() + "\n");
+                        "PRICE  : " + this.price + "\n");
     }
 
     @Override
