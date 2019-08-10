@@ -62,7 +62,7 @@ public class MonthlySalesReport {
                 temp[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
                 temp[3] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
                 temp[4] = receipt.get(i).getListOfItems().get(j).getQty();
-                temp[5] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
+                temp[5] = receipt.get(i).getTax();
                 temp[6] = receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
                 rowData.add(temp);
 

@@ -31,8 +31,10 @@ public class Receipt extends CartOrReceipt {
         this.transactionTime = transactionTime;
         this.listOfItems     = c.getListOfItems();
         this.subTotal        = c.calculateSubTotal();
+        System.out.println(subTotal);
         this.tax   = subTotal * Product.getTax();
-        this.total = subTotal + getTax();
+        this.total = subTotal + tax;
+        System.out.println("TOtal - " + total);
         this.amountReceived  = amountReceived;
         super.transactionMade++;
     }

@@ -39,7 +39,7 @@ public class DailySalesReport {
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
-            Object[] temp = new Object[7];
+            Object[] temp = new Object[6];
             temp[0] = receipt.get(i).getTransactionTime().toString();
             temp[1] = receipt.get(i).getBillID();
 
@@ -48,22 +48,31 @@ public class DailySalesReport {
                 temp[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
                 temp[3] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
                 temp[4] = receipt.get(i).getListOfItems().get(j).getQty();
-                temp[5] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
-                temp[6] = receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
+                //temp[5] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
+                temp[5] = receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
                 rowData.add(temp);
 
-                temp = new Object[7];
+                temp = new Object[6];
                 temp[0] = "";
                 temp[1] = "";
             }
 
-            temp[0] = "Total Amount";
-            temp[2] = temp[3] = temp[4] = temp[5] = "";
-            temp[6] = receipt.get(i).getTotal();
+            temp[0] = "";
+            temp[2] = temp[3] ="";
+            temp[4]= "Total Tax";
+            temp[5] = receipt.get(i).getTax();
+
+            //System.out.println(receipt.get(i).getTotal());
             rowData.add(temp);
 
-            temp = new Object[7];
-            temp[0] = temp[6] = "";
+            temp = new Object[6];
+            temp[0] = "";
+            temp[4] = "Total Amount";
+            temp[5] = receipt.get(i).getTotal();
+            rowData.add(temp);
+
+            temp = new Object[6];
+            temp[0] = temp[5] = "";
             rowData.add(temp);
         }
 
@@ -75,7 +84,7 @@ public class DailySalesReport {
 
 
         // Column Names
-        String[] columnNames = { "Date", "Bill ID", "Product Name","Price(RM)","Quantity","Tax Amount(RM)","Amount(RM)"};
+        String[] columnNames = { "Date", "Bill ID", "Product Name","Price(RM)","Quantity","Amount(RM)"};
 
         //addRowToJTable();
 
