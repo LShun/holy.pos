@@ -83,4 +83,13 @@ public class AuthV2 {
     public static Worker getSession() {
         return session;
     }
+
+    public static boolean isManager() {
+        if (session.getDesignation().equals("Manager")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

@@ -41,9 +41,9 @@ public class FoodMenu {
         while (true) {
             // show user possible actions
             printHeader("FOOD MENU");
-            System.out.println("1.      New Product");
-            System.out.println("2.      Modify Product/Tax");
-            System.out.println("3.      Search Product");
+            System.out.println("1.      Search Product");
+            System.out.println("2.      New Product");
+            System.out.println("3.      Modify Product");
             System.out.println("4.      Delete Product");
             System.out.println("Other.  Back");
             System.out.print("Enter your choice: ");
@@ -53,19 +53,20 @@ public class FoodMenu {
 
             switch (choice) {
                 case 1:
-                    add();
+                    search();
                     break;
                 case 2:
-                    modify();
+                    add();
+
                     break;
                 case 3:
-                    search();
+                    modify();
                     break;
                 case 4:
                     delete();
                     break;
                 default:
-                    printHeader("END");
+                    printHeader("EXITED MODULE");
                     return;
             }
         }
@@ -158,13 +159,13 @@ public class FoodMenu {
 
         System.out.print(
                 "What do you want to modify? \n" +
-                "1. Products\n" +
-                "2: Tax\n" +
-                "Other. Cancel\n" +
-                "Enter your choice: ");
+                        "1. Products\n" +
+                        "2: Tax\n" +
+                        "Other. Cancel\n" +
+                        "Enter your choice: ");
         choice = getInt();
 
-        switch(choice) {
+        switch (choice) {
             case 1:
                 // get the specific Product
                 temp = getProduct(products);
@@ -426,12 +427,6 @@ public class FoodMenu {
     // EXTERNAL & INTERNAL USE
     // =======================
 
-
-    @Override
-    public String toString() {
-        return getTable(products);
-    }
-
     // show the products inside the array in a consistent format
     public static void showProducts(ArrayList<Product> products) {
         String rend = getTable(products);
@@ -488,11 +483,15 @@ public class FoodMenu {
     }
 
     @Override
+    public String toString() {
+        return getTable(products);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         else if (o == null) return false;
-        else if (this.getClass() != o.getClass()) return false;
-        return true;
+        else return this.getClass() == o.getClass();
     }
 
 

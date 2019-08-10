@@ -3,12 +3,13 @@ package food_menu;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static pub.VScan.*;
+import static pub.VScan.getDouble;
+import static pub.VScan.getString;
 
 public class Product {
+    private static double tax = 0.16;
     private String id, title, desc;
     private double price;
-    private static double tax = 0.16;
 
     /*
         Constructors
@@ -32,47 +33,48 @@ public class Product {
         Getters
     */
 
+    public static double getTax() {
+        return tax;
+    }
+
+    public static void setTax(double tax) {
+        Product.tax = tax;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDesc() {
         return desc;
     }
 
+    /*
+        Setters : Assume validation already done after entering through the input.. functions
+     */
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public double getPrice() {
         return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getId() {
         return id;
     }
 
-    public static double getTax() {
-        return tax;
-    }
-
-    /*
-        Setters : Assume Validated Values are entered through the input.. functions
-     */
-    private void setId(String id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    private void setTitle(String title) {
-        this.title = title;
-    }
-
-    private void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    private void setPrice(double price) {
-        this.price = price;
-    }
-
-    public static void setTax(double tax) {
-        Product.tax = tax;
     }
 
     /*
@@ -139,10 +141,10 @@ public class Product {
     public String toString() {
         return (
                 "ID                   : " + this.id + "\n" +
-                "TITLE                : " + this.title + "\n" +
-                "DESC                 : " + this.desc + "\n" +
-                "PRICE (Exclude tax)  : " + this.price + "\n" +
-                "NETT (Include tax)   : " + this.getNetPrice()+ "\n");
+                        "TITLE                : " + this.title + "\n" +
+                        "DESC                 : " + this.desc + "\n" +
+                        "PRICE (Exclude tax)  : " + this.price + "\n" +
+                        "NETT (Include tax)   : " + this.getNetPrice() + "\n");
     }
 
     @Override
