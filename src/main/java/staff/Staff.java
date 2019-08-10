@@ -21,7 +21,7 @@ public class Staff {
     }
 
 
-    public static int mainMenu() //To allow the user to perform any of the transaction
+    public static int mainMenu() //To allow the user to perform any of the task
     {
         //Local Variables declaration
         int selection;
