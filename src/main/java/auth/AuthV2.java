@@ -5,19 +5,20 @@ import staff.Worker;
 import pub.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 
 public class AuthV2 {
     private static Worker session = Staff.getEmployeeList().get(0);
-    private static LocalDateTime clockInTime;
+    private static LocalDateTime clockInTime = LocalDateTime.now();
     private static LocalDateTime clockOutTime;
 
     private static void startSession(Worker w) {
         clockInTime = LocalDateTime.now();
         session = w;
-        FormatPrint.printHeader("Clock-in time: " + clockInTime.toLocalTime());
+        FormatPrint.printHeader("Clock-in time: " + clockInTime.toLocalTime().truncatedTo(ChronoUnit.SECONDS));
     }
 
     public static void endSession() {
@@ -34,7 +35,7 @@ public class AuthV2 {
         long secs = tempDateTime.until(clockOutTime, ChronoUnit.SECONDS);
 
 
-        FormatPrint.printHeader("Clock-out time: " + clockOutTime.toLocalTime());
+        FormatPrint.printHeader("Clock-out time: " + clockOutTime.toLocalTime().truncatedTo(ChronoUnit.SECONDS));
         FormatPrint.printHeader("You worked for " + hrs + " Hours, " + min + " Minutes, " + secs + " Seconds");
         // write back into Worker
         session.setTotalDurationWorked(session.getTotalDurationWorked().plusHours(hrs).plusMinutes(min).plusSeconds(secs));
@@ -82,5 +83,14 @@ public class AuthV2 {
 
     public static Worker getSession() {
         return session;
+    }
+
+    public static boolean isManager() {
+        if (session.getDesignation().equals("Manager") || session.getDesignation().equals("Holy Manager")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

@@ -19,10 +19,6 @@ public class Main {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public static final int ADMIN = 0;
-    public static final int MANAGER = 1;
-    public static final int WORKER = 2;
-
     public static void main(String[] args) {
         int choice;
 
