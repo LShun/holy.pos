@@ -164,41 +164,60 @@ public class FoodMenu {
 
         printHeader("PRODUCT MODIFICATION");
 
-        // get the specific Product
-        temp = getProduct(products);
+        System.out.print(
+                "What do you want to modify? \n" +
+                        "1. Products\n" +
+                        "2: Tax\n" +
+                        "Other. Cancel\n" +
+                        "Enter your choice: ");
+        choice = getInt();
 
-        // if cancelled, return
-        if (temp == null) {
-            return;
+        switch (choice) {
+            case 1:
+                // get the specific Product
+                temp = getProduct(products);
+
+                // if cancelled, return
+                if (temp == null) {
+                    return;
+                }
+
+                /* keep the product index */
+                index = products.indexOf(temp);
+
+                /* copy the Product to make it local, to allow non-destructive editing */
+                temp = new Product(temp.getId(), temp.getTitle(), temp.getDesc(), temp.getPrice());
+
+                // accept all temporary changes from the user
+                modifyProd(temp);
+
+                // ask for confirmation
+                printHeader("WARNING: You are irreversibly changing: ");
+                System.out.println(products.get(index).toString());
+                printHeader("TO");
+                System.out.println(temp.toString());
+
+                System.out.print("Are you sure? (Y/N): ");
+                // copy the temporary product back into the real product
+                if (getString().toLowerCase().equals("y")) {
+                    products.set(index, temp);
+                    printHeader("Modification successful!");
+                } else {
+                    printHeader("Modification cancelled.");
+                }
+
+                // display successful message
+                System.out.println("Product Details: ");
+                System.out.println(products.get(index).toString());
+                break;
+            case 2:
+                printHeader("Tax modification (all products)");
+                System.out.println("Current tax amount: " + Product.getTax() * 100 + " %");
+                System.out.print("Enter new tax percentage/100 (ex: 0.16 for 16%), enter same amount to cancel: ");
+                Product.setTax(getDouble());
+                printHeader("Tax successfully set, new tax is: " + Product.getTax() * 100 + "% ");
+                break;
         }
-
-        /* keep the product index */
-        index = products.indexOf(temp);
-
-        /* copy the Product to make it local, to allow non-destructive editing */
-        temp = new Product(temp.getId(), temp.getTitle(), temp.getDesc(), temp.getPrice());
-
-        // accept all temporary changes from the user
-        modifyProd(temp);
-
-        // ask for confirmation
-        printHeader("WARNING: You are irreversibly changing: ");
-        System.out.println(products.get(index).toString());
-        printHeader("TO");
-        System.out.println(temp.toString());
-
-        System.out.print("Are you sure? (Y/N): ");
-        // copy the temporary product back into the real product
-        if (getString().toLowerCase().equals("y")) {
-            products.set(index, temp);
-            printHeader("Modification successful!");
-        } else {
-            printHeader("Modification cancelled.");
-        }
-
-        // display successful message
-        System.out.println("Product Details: ");
-        System.out.println(products.get(index).toString());
     }
 
     // deletes a product from FoodMenu array
@@ -435,14 +454,15 @@ public class FoodMenu {
         // Print Header
         printHeader("PRODUCTS");
         printHeader("REPORT GENERATED ON: " + dateFormat.format(date));
+        printHeader("TAX AMOUNT: " + Product.getTax() * 100 + "%");
 
         // Format contents
         at.addRule();
-        at.addRow("Index", "ID", "TITLE", "DESC.", "PRICE");
+        at.addRow("Index", "ID", "TITLE", "DESC.", "PRICE (Exclude Tax)", "NETT (Include Tax)");
         at.addRule();
 
         for (Product p : products) {
-            at.addRow(index++, p.getId(), p.getTitle(), p.getDesc(), String.format("%.2f", p.getPrice()));
+            at.addRow(index++, p.getId(), p.getTitle(), p.getDesc(), String.format("%.2f", p.getPrice()), String.format("%.2f", p.getPrice() + p.getPrice() * Product.getTax()));
             at.addRule();
         }
 
