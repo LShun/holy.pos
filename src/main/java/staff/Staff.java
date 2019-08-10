@@ -31,16 +31,16 @@ public class Staff {
 
         //Display menu
         //header("Worker Information Module");
-        System.out.printf("%20s%s\n", " ", "Worker Information Module");
-        System.out.printf("%20s%s\n", " ", "1. Add Worker Record");
-        System.out.printf("%20s%s\n", " ", "2. Display Worker Record");
-        System.out.printf("%20s%s\n", " ", "3. Modify Worker Record");
-        System.out.printf("%20s%s\n", " ", "4. Search Worker Record");
-        System.out.printf("%20s%s\n", " ", "5. Exit");
+        System.out.printf("%s\n","Worker Information Module");
+        System.out.printf("%s\n","1. Add Worker Record");
+        System.out.printf("%s\n","2. Display Worker Record");
+        System.out.printf("%s\n","3. Modify Worker Record");
+        System.out.printf("%s\n","4. Search Worker Record");
+        System.out.printf("%s\n","5. Exit");
 
 
         //Input
-        System.out.printf("%20s%s", " ", "Enter your selection : ");
+        System.out.printf("%s","Enter your selection : ");
 
         return scan.nextInt();
     }
