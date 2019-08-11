@@ -4,6 +4,7 @@ import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
 
 import de.vandermeer.asciitable.CWC_FixedWidth;
+import de.vandermeer.asciitable.CWC_LongestLine;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import pub.VScan;
 import java.util.ArrayList;
@@ -24,46 +25,62 @@ public class Manager extends Worker {
         super(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
     }
 
+    //Add Staff Record
     public void addStaff(){
 
         String staffID, password, sName, designation;
         char gender;
+        char response;
         String[] dateOfEmployed;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Enter worker Id : ");
+        System.out.println("Enter worker Id (XXX to stop): ");
         staffID = scan.nextLine();
 
-        System.out.println("Enter worker password : ");
-        password = scan.nextLine();
+        while(staffID.equals("XXX")==false) {
+            System.out.println("Enter worker password : ");
+            password = scan.nextLine();
 
-        System.out.println("Enter worker name : ");
-        sName = scan.nextLine();
+            System.out.println("Enter worker name : ");
+            sName = scan.nextLine();
 
-        System.out.println("Enter worker gender : ");
-        gender = scan.nextLine().charAt(0);
+            System.out.println("Enter worker gender (M or F): ");
+            gender = scan.nextLine().charAt(0);
 
-        System.out.println("Enter worker designation : ");
-        designation = scan.nextLine();
+            System.out.println("Enter worker designation : ");
+            designation = scan.nextLine();
 
-        scan.nextLine();
-        System.out.println("Enter worker date of employed (dd-mm-yyyy): ");
-        dateOfEmployed = scan.nextLine().split("[-/]");
+            scan.nextLine();
+            System.out.println("Enter worker date of employed (dd-mm-yyyy): ");
+            dateOfEmployed = scan.nextLine().split("[-/]");
 
-        Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender,
-                designation,
-                Integer.parseInt(dateOfEmployed[2]),
-                Integer.parseInt(dateOfEmployed[1]),
-                Integer.parseInt(dateOfEmployed[0]),0,0)
-        );
+
+            Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender,
+                    designation,
+                    Integer.parseInt(dateOfEmployed[2]),
+                    Integer.parseInt(dateOfEmployed[1]),
+                    Integer.parseInt(dateOfEmployed[0]), 0, 0)
+            );
+
+            System.out.println("Staff Record Has Been Added Successfully!");
+            //System.out.printf("\nDo you want to continue?");
+
+            //if(char)
+            System.out.println("Enter worker Id (XXX to stop): ");
+            staffID = scan.nextLine();
+        }
     }
 
+    //Display Staff Record
     public void displayStaff(ArrayList<Worker> data) {
         AsciiTable at = new AsciiTable();
         at.addRule();
-        CWC_FixedWidth width = new CWC_FixedWidth();
+//        CWC_FixedWidth width = new CWC_FixedWidth();
+        CWC_LongestLine width = new CWC_LongestLine();
         at.getRenderer().setCWC(width);
-        width.add(8).add(16).add(3).add(25); //Specify the width of each column
+//        width.add(8).add(16).add(3).add(25); //Specify the width of each column
+        width.add(8,0).add(16,0).add(3,0).add(25,0); //Specify the width of each column
+
 
         //Display the heading
         AT_Row heading = at.addRow("STAFF ID", "STAFF NAME", "SEX", "DATE OF EMPLOYED");
@@ -81,6 +98,7 @@ public class Manager extends Worker {
         System.out.println(at.render());
     }
 
+    //Modify Staff Record
     public void modifyStaff(){
         ArrayList<Worker> data = searchStaff();
 
@@ -131,6 +149,7 @@ public class Manager extends Worker {
         }
     }
 
+    //Search Staff Record
     public ArrayList<Worker> searchStaff(){
         String searchInput;
         ArrayList<Worker> employeeList = Staff.getEmployeeList();
