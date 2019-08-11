@@ -2,9 +2,9 @@ package reporting;
 import order.Order;
 import order.Receipt;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -37,13 +37,14 @@ public TaxReport()
     for(int i = 0; i < receipt.size(); i++){
         int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
-        Object[] tax = new Object[6];
+        Object[] tax = new Object[4];
         tax[0] = receipt.get(i).getBillID();
         tax[1] = receipt.get(i).getTransactionTime().toString();
+        tax[2] = receipt.get(i).getTax();
+        tax[3] = receipt.get(i).getTotal();
 
-        for(int j = 0;j < sizeOfListOfItems ; j++){
+        /*for(int j = 0;j < sizeOfListOfItems ; j++){
 
-            tax[2] = receipt.get(i).getListOfItems().get(j).getQty();
             tax[3] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
             tax[4] = receipt.get(i).getSubTotal();
             tax[5] = "";
@@ -66,7 +67,7 @@ public TaxReport()
         rowData.add(tax);
 
         tax = new Object[6];
-        tax[0] = tax[5] = "";
+        tax[0] = tax[5] = "";*/
         rowData.add(tax);
 
     }
@@ -80,7 +81,7 @@ public TaxReport()
 
 
     // Column Names
-    String[] columnNames = { "Bill ID","Date","Quantity of products","Tax Amount(RM)", "Base Amount(RM)","References"};
+    String[] columnNames = { "Bill ID","Date","Tax Amount(RM)", "Base Amount(RM)"};
 
     // Initializing the JTable
     j = new JTable(realRowData, columnNames);
@@ -88,6 +89,14 @@ public TaxReport()
 
     // adding it to JScrollPane
     JScrollPane sp = new JScrollPane(j);
+
+    JLabel label = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\OOPT.jpeg"));
+    JPanel panel = new JPanel();
+    panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Tax Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
+    label.setBounds(0,0, 454,388);
+    panel.add(label);
+    f.add(panel, BorderLayout.NORTH);
+
     f.add(sp);
     // Frame Size
     f.setSize(500, 200);
