@@ -3,6 +3,7 @@ package reporting;
 import order.Order;
 import order.Receipt;
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,48 +34,40 @@ public class DailySalesReport {
         month=s.nextInt();
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
+        double sum=0,tax=0;
         for(int i = 0; i < receipt.size(); i++){
             if(day!=receipt.get(i).getTransactionTime().getDayOfMonth()||month!=receipt.get(i).getTransactionTime().getMonthValue())
                 continue;
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
-            Object[] temp = new Object[6];
+            Object[] temp = new Object[4];
             temp[0] = receipt.get(i).getTransactionTime().toString();
             temp[1] = receipt.get(i).getBillID();
+            temp[2] = receipt.get(i).getTax();
+            temp[3]=receipt.get(i).getTotal();
 
-            for(int j = 0;j < sizeOfListOfItems ; j++){
+            sum=sum+receipt.get(i).getTotal();
+            tax=tax+receipt.get(i).getTax();
 
-                temp[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
-                temp[3] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
-                temp[4] = receipt.get(i).getListOfItems().get(j).getQty();
-                //temp[5] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
-                temp[5] = receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
-                rowData.add(temp);
-
-                temp = new Object[6];
-                temp[0] = "";
-                temp[1] = "";
-            }
-
-            temp[0] = "";
-            temp[2] = temp[3] ="";
-            temp[4]= "Total Tax";
-            temp[5] = receipt.get(i).getTax();
-
-            //System.out.println(receipt.get(i).getTotal());
-            rowData.add(temp);
-
-            temp = new Object[6];
-            temp[0] = "";
-            temp[4] = "Total Amount";
-            temp[5] = receipt.get(i).getTotal();
-            rowData.add(temp);
-
-            temp = new Object[6];
-            temp[0] = temp[5] = "";
             rowData.add(temp);
         }
+
+
+
+        for(int i=0; i<1;i++){
+
+           Object[] total=new Object[4];
+
+            total[0]=total[1]="";
+            total[2]="Total Tax Amount : " +tax;
+            total[3]="Total Bill Amount : " +sum;
+            rowData.add(total);
+
+        }
+
+
+        //rowData.add();
 
         Object[][] realRowData = new Object[rowData.size()][];
         for(int i = 0; i < rowData.size(); i++){
@@ -84,7 +77,7 @@ public class DailySalesReport {
 
 
         // Column Names
-        String[] columnNames = { "Date", "Bill ID", "Product Name","Price(RM)","Quantity","Amount(RM)"};
+        String[] columnNames = { "Date", "Bill ID","Tax Amount","Bill Amount(RM)"};
 
         //addRowToJTable();
 
@@ -93,7 +86,15 @@ public class DailySalesReport {
         j.setBounds(30, 200, 200, 30);
 
         // adding it to JScrollPane
+
         JScrollPane sp = new JScrollPane(j);
+
+        JLabel label = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\OOPT.jpeg"));
+        JPanel panel = new JPanel();
+        label.setBounds(0,0, 454,388);
+        panel.add(label);
+        f.add(panel, BorderLayout.NORTH);
+
         f.add(sp);
         // Frame Size
         f.setSize(500, 200);
