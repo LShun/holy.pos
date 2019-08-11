@@ -1,8 +1,6 @@
 package reporting;
-
 import order.Order;
 import order.Receipt;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -105,21 +103,22 @@ public class MonthlySalesReport {
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);
 
-        JLabel label1 = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\OOPT.jpeg"));
-        JLabel label2 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
+        JLabel label1 = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg"));
+        label1.setPreferredSize(new Dimension(180,180));
+        JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
+        JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
 
         JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(), "Monthly Sales Report", TitledBorder.CENTER,
-                TitledBorder.BOTTOM));
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Monthly Sales Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
 
         JTextField textfield = new JTextField("Date Generated: ");
         textfield.setToolTipText("tooltip");
 
         label1.setBounds(0,0, 454,388);
-        label2.setBounds(100,100, 1054,688);
+        //label2;
         panel.add(label1);
         panel.add(label2);
+        panel.add(label3);
 
         f.add(panel, BorderLayout.NORTH);
 

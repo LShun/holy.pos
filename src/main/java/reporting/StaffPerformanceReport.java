@@ -4,6 +4,8 @@ import staff.Staff;
 import staff.Worker;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class StaffPerformanceReport {
@@ -60,6 +62,14 @@ public class StaffPerformanceReport {
 
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);
+
+        JLabel label = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\OOPT.jpeg"));
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Staff Performance Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
+        label.setBounds(0,0, 454,388);
+        panel.add(label);
+        f.add(panel, BorderLayout.NORTH);
+
         f.add(sp);
         // Frame Size
         f.setSize(500, 200);
