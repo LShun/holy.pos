@@ -49,14 +49,14 @@ public class Manager extends Worker {
             System.out.println("Enter worker gender (M or F) : ");
             gender = scan.nextLine().charAt(0);
 
-<<<<<<< HEAD
+
             while(gender!='M'&&gender!='F'){
                 System.out.println("Please enter a valid gender (M or F)!");
 
                 System.out.println("Enter worker gender (M or F): ");
                 gender = scan.nextLine().charAt(0);
             }
-=======
+
             System.out.println("Enter the worker phone number : ");
             phoneNumber = scan.nextLine();
 
