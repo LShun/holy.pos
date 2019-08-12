@@ -46,7 +46,7 @@ public TaxReport()
 
         rowData.add(tax);
 
-        sum+=receipt.get(i).getTax();
+        sum+=receipt.get(i).getTax().doubleValue();
 
     }
 
