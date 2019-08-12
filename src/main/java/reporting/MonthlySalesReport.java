@@ -51,40 +51,33 @@ public class MonthlySalesReport {
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
-
             Object[] temp = new Object[4];
             temp[0] = receipt.get(i).getTransactionTime().getYear()+" "+receipt.get(i).getTransactionTime().getMonthValue();
             temp[1] = receipt.get(i).getBillID();
             temp[2] = receipt.get(i).getTax();
             temp[3] = receipt.get(i).getTotal();
 
-            sum+=receipt.get(i).getTotal();
-            tax+=receipt.get(i).getTax();
+            sum+=receipt.get(i).getTotal().doubleValue();
+            tax+=receipt.get(i).getTax().doubleValue();
 
-            /*for(int j = 0;j < sizeOfListOfItems ; j++){
-
-                temp[1]=receipt.get(i).getListOfItems().get(j).getProduct().getId();
-                temp[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
-                temp[3] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
-                temp[4] = receipt.get(i).getListOfItems().get(j).getQty();
-                temp[5] = receipt.get(i).getTax();
-                temp[6] = receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
-                rowData.add(temp);
-
-                temp = new Object[7];
-                temp[0] = "";
-                //temp[1] = "";
-            }*/
             rowData.add(temp);
 
         }
 
         for(int i=0;i<1;i++){
+
+            Object[] title = new Object[4];
+            title[0] = "";
+            title[1] = "";
+            title[2]="Total Tax Amount:";
+            title[3]="Total Bill Amount:";
+            rowData.add(title);
+
             Object[] total=new Object[4];
 
             total[0]=total[1]="";
-            total[2]="Total Tax Amount : " +tax;
-            total[3]="Total Bill Amount : " +sum;
+            total[2]=tax;
+            total[3]=sum;
             rowData.add(total);
         }
 
@@ -104,7 +97,7 @@ public class MonthlySalesReport {
         JScrollPane sp = new JScrollPane(j);
 
         JLabel label1 = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg"));
-        label1.setPreferredSize(new Dimension(180,180));
+        label1.setPreferredSize(new Dimension(200,200));
         JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
         JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
 
@@ -114,13 +107,22 @@ public class MonthlySalesReport {
         JTextField textfield = new JTextField("Date Generated: ");
         textfield.setToolTipText("tooltip");
 
-        label1.setBounds(0,0, 454,388);
+        //label1.setHorizontalTextPosition(new Position(18, 12,14,24));
+        label2.setBounds(692,100, 180,180);
+        label3.setBounds(607,112, 400,180);
         //label2;
+        f.add(label2);
+        f.add(label3);
+
         panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
+        //panel.add(label2);
+        //panel.add(label3,BorderLayout.AFTER_LINE_ENDS);
+
+
+        //f.add(label1);
 
         f.add(panel, BorderLayout.NORTH);
+
 
         f.add(sp);
         // Frame Size

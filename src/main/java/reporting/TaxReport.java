@@ -34,6 +34,7 @@ public TaxReport()
     };*/
 
     ArrayList<Object[]> rowData = new ArrayList<Object[]>();
+    double sum=0;
     for(int i = 0; i < receipt.size(); i++){
         int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
@@ -43,34 +44,30 @@ public TaxReport()
         tax[2] = receipt.get(i).getTax();
         tax[3] = receipt.get(i).getTotal();
 
-        /*for(int j = 0;j < sizeOfListOfItems ; j++){
-
-            tax[3] = receipt.get(i).getListOfItems().get(j).getProduct().getTax();
-            tax[4] = receipt.get(i).getSubTotal();
-            tax[5] = "";
-
-            rowData.add(tax);
-
-            tax = new Object[7];
-            tax[0] = "";
-            tax[1] = "";
-            tax[2] = "";
-            tax[3] = receipt.get(i).getListOfItems().get(j).getProduct().getTax()*receipt.get(i).getListOfItems().get(j).getQty();
-
-        }
-        tax[0] = "Total Tax";
-
-
-        tax[4] = tax[5] = "";
-
-
         rowData.add(tax);
 
-        tax = new Object[6];
-        tax[0] = tax[5] = "";*/
-        rowData.add(tax);
+        sum+=receipt.get(i).getTax().doubleValue();
 
     }
+
+    for(int i=0; i<1;i++){
+
+        Object[] title = new Object[4];
+        title[0] = "";
+        title[1] = "";
+        title[2]="Total Tax Amount:";
+        title[3]="Total Bill Amount:";
+        rowData.add(title);
+
+        Object[] total=new Object[4];
+
+        total[0]=total[1]="";
+        total[2]=sum;
+        total[3]="";
+        rowData.add(total);
+
+    }
+
 
     Object[][] realRowData = new Object[rowData.size()][];
     for(int i = 0; i < rowData.size(); i++){

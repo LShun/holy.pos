@@ -48,8 +48,8 @@ public class DailySalesReport {
             temp[2] = receipt.get(i).getTax();
             temp[3]=receipt.get(i).getTotal();
 
-            sum=sum+receipt.get(i).getTotal();
-            tax=tax+receipt.get(i).getTax();
+            sum=sum+receipt.get(i).getTotal().doubleValue();
+            tax=tax+receipt.get(i).getTax().doubleValue();
 
             rowData.add(temp);
         }
@@ -58,11 +58,18 @@ public class DailySalesReport {
 
         for(int i=0; i<1;i++){
 
+            Object[] title = new Object[4];
+            title[0] = "";
+            title[1] = "";
+            title[2]="Total Tax Amount:";
+            title[3]="Total Bill Amount:";
+            rowData.add(title);
+
            Object[] total=new Object[4];
 
             total[0]=total[1]="";
-            total[2]="Total Tax Amount : " +tax;
-            total[3]="Total Bill Amount : " +sum;
+            total[2]=tax;
+            total[3]=sum;
             rowData.add(total);
 
         }

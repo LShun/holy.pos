@@ -14,23 +14,24 @@ public class Manager extends Worker {
 
     public Manager(){
 
-        super("","","",' ',"",2000,0,0,0,0);
+        super("","","",' ',"",0.0,"",2000,0,0,0,0);
 
     }
 
-    public Manager(String staffID, String password, String sName, char gender, String designation,
+    public Manager(String staffID, String password, String sName, char gender, String phoneNumber, double salary, String designation,
                  int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
-        super(staffID, password, sName, gender, designation, year, month, dayOfMonth, totalDurationWorked, salesReceived) ;
+        super(staffID, password, sName, gender, phoneNumber, salary, designation, year, month, dayOfMonth, totalDurationWorked, salesReceived) ;
     }
 
-    public Manager(String staffID, String password, String sName, char gender,String designation){
-        super(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
-    }
+//    public Manager(String staffID, String password, String sName, char gender,String designation){
+//        super(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
+//    }
 
     //Add Staff Record
     public void addStaff(){
 
-        String staffID, password, sName, designation;
+        String staffID, password, sName, designation, phoneNumber;
+        double salary;
         char gender;
         String[] dateOfEmployed;
         Scanner scan = new Scanner(System.in);
@@ -45,15 +46,23 @@ public class Manager extends Worker {
             System.out.println("Enter worker name : ");
             sName = scan.nextLine();
 
-            System.out.println("Enter worker gender (M or F): ");
+            System.out.println("Enter worker gender (M or F) : ");
             gender = scan.nextLine().charAt(0);
 
+<<<<<<< HEAD
             while(gender!='M'&&gender!='F'){
                 System.out.println("Please enter a valid gender (M or F)!");
 
                 System.out.println("Enter worker gender (M or F): ");
                 gender = scan.nextLine().charAt(0);
             }
+=======
+            System.out.println("Enter the worker phone number : ");
+            phoneNumber = scan.nextLine();
+
+            System.out.println("Enter the worker salary : ");
+            salary = scan.nextDouble();
+
 
             System.out.println("Enter worker designation : ");
             designation = scan.nextLine();
@@ -63,7 +72,7 @@ public class Manager extends Worker {
             dateOfEmployed = scan.nextLine().split("[-/]");
 
 
-            Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender,
+            Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender, phoneNumber, salary,
                     designation,
                     Integer.parseInt(dateOfEmployed[2]),
                     Integer.parseInt(dateOfEmployed[1]),
@@ -88,19 +97,22 @@ public class Manager extends Worker {
         CWC_LongestLine width = new CWC_LongestLine();
         at.getRenderer().setCWC(width);
 //        width.add(8).add(16).add(3).add(25); //Specify the width of each column
-        width.add(8,0).add(16,0).add(3,0).add(25,0); //Specify the width of each column
+        //width.add(3,0).add(8,0).add(16,0).add(3,0).add(12,0).add(10,0).add(20,0); //Specify the width of each column
 
 
         //Display the heading
-        AT_Row heading = at.addRow("STAFF ID", "STAFF NAME", "SEX", "DATE OF EMPLOYED");
+        AT_Row heading = at.addRow("NO.","STAFF ID", "STAFF NAME", "SEX", "PHONE NUMBER", "SALARY", "DATE OF EMPLOYED");
         heading.setTextAlignment(TextAlignment.CENTER);
         at.addRule();
 
         for(int i = 0; i< data.size(); i++){
             Worker temp = data.get(i);
-            AT_Row row = at.addRow(temp.getStaffID(), temp.getName(), temp.getGender(), temp.getDateOfEmployed().toString());
-            row.getCells().get(0).getContext().setTextAlignment(TextAlignment.RIGHT);
-            row.getCells().get(2).getContext().setTextAlignment(TextAlignment.CENTER);
+            AT_Row row = at.addRow(i+1, temp.getStaffID(), temp.getName(), temp.getGender(),
+                    temp.getPhoneNumber(), temp.getSalary(), temp.getDateOfEmployed().toString());
+            row.getCells().get(1).getContext().setTextAlignment(TextAlignment.RIGHT);
+            row.getCells().get(3).getContext().setTextAlignment(TextAlignment.CENTER);
+            row.getCells().get(5).getContext().setTextAlignment(TextAlignment.RIGHT);
+
             at.addRule();
         }
 
@@ -126,11 +138,19 @@ public class Manager extends Worker {
         System.out.println("1. Worker ID");
         System.out.println("2. Worker Name");
         System.out.println("3. Worker Gender");
-        System.out.println("4. Worker Designation");
-        System.out.print("Select which one to modify : ");
+
+
+
+        System.out.println("4. Worker Phone Number");
+        System.out.println("5. Worker Salary");
+        System.out.println("6. Worker Designation");
+        System.out.print("Select which one the modify : ");
+
         int choice = VScan.getInt();
+
         String inputString;
         char inputChar;
+        double inputDouble;
 
         switch(choice){
             case 1:
@@ -138,7 +158,6 @@ public class Manager extends Worker {
                 inputString = VScan.getString();
                 workerToBeModified.setStaffID(inputString);
                 break;
-
             case 2:
                 System.out.print("Enter the worker name : ");
                 inputString = VScan.getString();
@@ -148,7 +167,18 @@ public class Manager extends Worker {
                 System.out.print("Enter the worker gender : ");
                 inputChar = VScan.getChar();
                 workerToBeModified.setGender(inputChar);
+                break;
             case 4:
+                System.out.print("Enter the worker phone number : ");
+                inputString = VScan.getString();
+                workerToBeModified.setPhoneNumber(inputString);
+                break;
+            case 5:
+                System.out.print("Enter the worker salary : ");
+                inputDouble = VScan.getDouble();
+                workerToBeModified.setSalary(inputDouble);
+                break;
+            case 6:
                 System.out.print("Enter the worker designation : ");
                 inputString = VScan.getString();
                 workerToBeModified.setDesignation(inputString);
@@ -177,7 +207,7 @@ public class Manager extends Worker {
                 searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
-                    if (searchInput.equals(employeeList.get(i).getStaffID()))
+                    if (employeeList.get(i).getStaffID().contains(searchInput))
                         result.add(employeeList.get(i));
                 }
                 break;
@@ -186,7 +216,7 @@ public class Manager extends Worker {
                 searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
-                    if (searchInput.equals(employeeList.get(i).getName()))
+                    if (employeeList.get(i).getName().contains(searchInput))
                         result.add(employeeList.get(i));
                 }
                 break;
