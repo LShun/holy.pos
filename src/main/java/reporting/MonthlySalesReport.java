@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static pub.FormatPrint.printHeader;
+
 public class MonthlySalesReport {
 
     // frame
@@ -26,7 +28,8 @@ public class MonthlySalesReport {
         Scanner scanner=new Scanner(System.in);
         int month;
 
-        System.out.print("\n\n1.January\n"+
+        printHeader("MONTHLY SALES REPORT");
+        System.out.print("1.January\n"+
                 "2.February\n"+
                 "3.March\n"+
                 "4.April\n"+
@@ -91,6 +94,8 @@ public class MonthlySalesReport {
 
         // Initializing the JTable
         j = new JTable(realRowData, columnNames);
+        j.getTableHeader().setFont(new Font("Times New Roman",Font.BOLD, 14));
+        j.setFont(new Font("Times New Roman",Font.BOLD,12));
         j.setBounds(30, 200, 200, 30);
 
         // adding it to JScrollPane
@@ -104,22 +109,14 @@ public class MonthlySalesReport {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Monthly Sales Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
 
-        JTextField textfield = new JTextField("Date Generated: ");
-        textfield.setToolTipText("tooltip");
-
-        //label1.setHorizontalTextPosition(new Position(18, 12,14,24));
         label2.setBounds(692,100, 180,180);
         label3.setBounds(607,112, 400,180);
-        //label2;
+
         f.add(label2);
         f.add(label3);
 
         panel.add(label1);
-        //panel.add(label2);
-        //panel.add(label3,BorderLayout.AFTER_LINE_ENDS);
 
-
-        //f.add(label1);
 
         f.add(panel, BorderLayout.NORTH);
 
