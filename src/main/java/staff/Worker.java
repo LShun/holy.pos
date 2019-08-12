@@ -17,6 +17,7 @@ public class Worker {
     private int salesReceived;
 
     public Worker(){
+
         this("","","",' ',"",2000,0,0,0,0);
     }
 
@@ -36,22 +37,68 @@ public class Worker {
         this(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
     }
 
-    public String getStaffID() { return staffID; }
-    public void setStaffID(String staffID) { this.staffID = staffID; }
-    public String getName() { return sName; }
-    public void setName(String sName) { this.sName = sName; }
-    public char getGender() { return gender; }
-    public void setGender(char gender) { this.gender = gender; }
-    public String getDesignation() { return designation; }
-    public void setDesignation(String designation) { this.designation = designation; }
-    public LocalDate getDateOfEmployed() { return dateOfEmployed; }
-    public void setDateOfEmployed(LocalDate dateOfEmployed) { this.dateOfEmployed = dateOfEmployed; }
-    public String getPassword(){ return password; }
-    public void setPassword(String password){ this.password = password; }
-    public Duration getTotalDurationWorked() { return totalDurationWorked; }
-    public void setTotalDurationWorked(Duration totalDurationWorked) { this.totalDurationWorked = totalDurationWorked; }
-    public int getSalesReceived() { return salesReceived; }
-    public void setSalesReceived(int salesReceived) { this.salesReceived = salesReceived; }
+    public String getStaffID() {
+        return staffID;
+    }
+
+    public void setStaffID(String staffID) {
+        this.staffID = staffID;
+    }
+
+    public String getName() {
+        return sName;
+    }
+
+    public void setName(String sName) {
+        this.sName = sName;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public LocalDate getDateOfEmployed() {
+        return dateOfEmployed;
+    }
+
+    public void setDateOfEmployed(LocalDate dateOfEmployed) {
+        this.dateOfEmployed = dateOfEmployed;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public Duration getTotalDurationWorked() {
+        return totalDurationWorked;
+    }
+
+    public void setTotalDurationWorked(Duration totalDurationWorked) {
+        this.totalDurationWorked = totalDurationWorked;
+    }
+
+    public int getSalesReceived() {
+        return salesReceived;
+    }
+
+    public void setSalesReceived(int salesReceived) {
+        this.salesReceived = salesReceived;
+    }
 
     public void addStaff(){
         System.out.println("You have no permission to perform this action.");

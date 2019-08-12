@@ -1,6 +1,7 @@
 package staff;
 
 import auth.Auth;
+import auth.AuthV2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,11 +9,11 @@ import java.util.Scanner;
 
 public class Staff {
     private static ArrayList<Worker> employeeList = new ArrayList<Worker>(Arrays.asList(
-            new Manager("1000","123456","Mr. Manager",'M',"Holy Manager",1999,9,9,1000,1000),
-            new Worker("0001","123","Long Shun",'M',"Holy 1",2001,1,1,100,10),
-            new Worker("0002","456","Jun Rong",'M',"Holy 2",2000,2,2,200,20),
-            new Worker("0003","789","Shannen",'F',"Holy 3",2000,3,3,300,30),
-            new Worker("0004","000","Kim Chun",'M',"Holy 4",2000,4,4,400,40)
+            new Manager("1000","123456","Mr. Manager",'M',"Manager",1999,9,9,1000,1000),
+            new Worker("0001","123","Long Shun",'M',"Staff 1",2001,1,1,100,10),
+            new Worker("0002","456","Jun Rong",'M',"Staff 2",2000,2,2,200,20),
+            new Worker("0003","789","Shannen",'F',"Staff 3",2000,3,3,300,30),
+            new Worker("0004","000","Kim Chun",'M',"Staff 4",2000,4,4,400,40)
     ));
 
     public static void clearScreen() {
@@ -26,11 +27,7 @@ public class Staff {
         //Local Variables declaration
         int selection;
         Scanner scan = new Scanner(System.in);
-        //Display homescreen
-        // homescreen();
 
-        //Display menu
-        //header("Worker Information Module");
         System.out.printf("%s\n","Worker Information Module");
         System.out.printf("%s\n","1. Add Worker Record");
         System.out.printf("%s\n","2. Display Worker Record");
@@ -53,7 +50,7 @@ public class Staff {
         choice = mainMenu();
 
         //Find which worker or manager is performing action
-        Worker s = Auth.s;
+        Worker s = AuthV2.getSession();
         if(s==null) return;
 
         do
