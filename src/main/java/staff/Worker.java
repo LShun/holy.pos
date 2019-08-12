@@ -11,6 +11,8 @@ public class Worker {
     private String password;
     private String sName;
     private char gender;
+    private String phoneNumber;
+    private double salary;
     private String designation;
     private LocalDate dateOfEmployed;
     private Duration totalDurationWorked;
@@ -18,24 +20,26 @@ public class Worker {
 
     public Worker(){
 
-        this("","","",' ',"",2000,0,0,0,0);
+        this("","","",' ',"",0.0,"",2000,0,0,0,0);
     }
 
-    public Worker(String staffID, String password, String sName, char gender, String designation,
-                  int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
+    public Worker(String staffID, String password, String sName, char gender, String phoneNumber, double salary,
+                  String designation, int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
         this.setStaffID(staffID);
         this.setPassword(password);
         this.setName(sName);
         this.setGender(gender);
+        this.setPhoneNumber(phoneNumber);
+        this.setSalary(salary);
         this.setDesignation(designation);
         this.dateOfEmployed = LocalDate.of(year, month, dayOfMonth);
         this.setTotalDurationWorked(Duration.ofHours(totalDurationWorked));
         this.setSalesReceived(salesReceived);
     }
     
-    public Worker(String staffID, String password, String sName, char gender, String designation){
-        this(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
-    }
+//    public Worker(String staffID, String password, String sName, char gender, String designation){
+//        this(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
+//    }
 
     public String getStaffID() {
         return staffID;
@@ -60,6 +64,14 @@ public class Worker {
     public void setGender(char gender) {
         this.gender = gender;
     }
+
+    public String getPhoneNumber() { return phoneNumber; }
+
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public double getSalary() { return salary; }
+
+    public void setSalary(double salary) { this.salary = salary; }
 
     public String getDesignation() {
         return designation;
