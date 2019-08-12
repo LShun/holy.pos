@@ -127,13 +127,14 @@ public class Order {
         System.out.println("The total price is RM" + totalRounded);
         System.out.print("Amount Received is RM");
         double amountReceived = VScan.getDouble();
-        while(amountReceived < total) {
+
+        while(amountReceived < totalRounded.doubleValue()) {
             System.out.println("Not enough!");
             System.out.print("Amount Received is RM");
             amountReceived = VScan.getDouble();
         }
-        double change = amountReceived - total;
-        System.out.println("Change Amount is RM" + change);
+        double change = amountReceived - totalRounded.doubleValue();
+        System.out.println("Change Amount is RM" + new BigDecimal(change).setScale(2, RoundingMode.HALF_EVEN));
 
         Receipt r = new Receipt(c, amountReceived); //Create a Receipt obj
         c = new Cart();      // Delete the reference to the cart obj
