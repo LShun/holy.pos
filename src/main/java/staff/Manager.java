@@ -13,7 +13,9 @@ import java.util.Scanner;
 public class Manager extends Worker {
 
     public Manager(){
+
         super("","","",' ',"",2000,0,0,0,0);
+
     }
 
     public Manager(String staffID, String password, String sName, char gender, String designation,
@@ -30,7 +32,6 @@ public class Manager extends Worker {
 
         String staffID, password, sName, designation;
         char gender;
-        char response;
         String[] dateOfEmployed;
         Scanner scan = new Scanner(System.in);
 
@@ -47,11 +48,18 @@ public class Manager extends Worker {
             System.out.println("Enter worker gender (M or F): ");
             gender = scan.nextLine().charAt(0);
 
+            while(gender!='M'&&gender!='F'){
+                System.out.println("Please enter a valid gender (M or F)!");
+
+                System.out.println("Enter worker gender (M or F): ");
+                gender = scan.nextLine().charAt(0);
+            }
+
             System.out.println("Enter worker designation : ");
             designation = scan.nextLine();
 
-            scan.nextLine();
-            System.out.println("Enter worker date of employed (dd-mm-yyyy): ");
+
+            System.out.println("Enter date of employed (dd-mm-yyyy): ");
             dateOfEmployed = scan.nextLine().split("[-/]");
 
 
@@ -63,11 +71,12 @@ public class Manager extends Worker {
             );
 
             System.out.println("Staff Record Has Been Added Successfully!");
-            //System.out.printf("\nDo you want to continue?");
 
-            //if(char)
             System.out.println("Enter worker Id (XXX to stop): ");
             staffID = scan.nextLine();
+
+
+
         }
     }
 
@@ -118,7 +127,7 @@ public class Manager extends Worker {
         System.out.println("2. Worker Name");
         System.out.println("3. Worker Gender");
         System.out.println("4. Worker Designation");
-        System.out.print("Select which one the modify : ");
+        System.out.print("Select which one to modify : ");
         int choice = VScan.getInt();
         String inputString;
         char inputChar;
@@ -173,7 +182,7 @@ public class Manager extends Worker {
                 }
                 break;
             case 2:
-                System.out.print("Enter the worker name : ");
+                System.out.print("Enter the name : ");
                 searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
@@ -182,7 +191,7 @@ public class Manager extends Worker {
                 }
                 break;
             case 3:
-                System.out.print("Enter the worker gender : ");
+                System.out.print("Enter the gender : ");
                 searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
@@ -191,7 +200,7 @@ public class Manager extends Worker {
                 }
                 break;
             case 4:
-                System.out.print("Enter the worker designation : ");
+                System.out.print("Enter the designation : ");
                 searchInput = VScan.getString();
 
                 for (int i = 0; i < employeeList.size(); i++) {
