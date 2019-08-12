@@ -3,16 +3,11 @@ package order;
 import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.CWC_FixedWidth;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-
-import food_menu.Product;
-import staff.Worker;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import de.vandermeer.asciitable.AsciiTable;
 
+import food_menu.Product;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Receipt extends CartOrReceipt {
     final private double subTotal;
@@ -34,7 +29,6 @@ public class Receipt extends CartOrReceipt {
         System.out.println(subTotal);
         this.tax   = subTotal * Product.getTax();
         this.total = subTotal + tax;
-        System.out.println("TOtal - " + total);
         this.amountReceived  = amountReceived;
         super.transactionMade++;
     }
