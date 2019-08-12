@@ -60,8 +60,9 @@ public class MonthlySalesReport {
             temp[2] = receipt.get(i).getTax();
             temp[3] = receipt.get(i).getTotal();
 
-            sum+=receipt.get(i).getTotal();
-            tax+=receipt.get(i).getTax();
+            sum+=receipt.get(i).getTotal().doubleValue();
+            tax+=receipt.get(i).getTax().doubleValue();
+
             rowData.add(temp);
 
         }

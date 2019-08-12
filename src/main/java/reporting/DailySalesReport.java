@@ -51,8 +51,8 @@ public class DailySalesReport {
             temp[2] = receipt.get(i).getTax();
             temp[3]=receipt.get(i).getTotal();
 
-            sum=sum+receipt.get(i).getTotal();
-            tax=tax+receipt.get(i).getTax();
+            sum=sum+receipt.get(i).getTotal().doubleValue();
+            tax=tax+receipt.get(i).getTax().doubleValue();
 
             rowData.add(temp);
         }

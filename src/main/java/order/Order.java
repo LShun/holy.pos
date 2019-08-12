@@ -8,6 +8,7 @@ import staff.Worker;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,19 +117,24 @@ public class Order {
     }
 
     private static void proceed(Worker session, double total) {
-        BigDecimal totalRounded = new BigDecimal(total);
-        totalRounded.setScale(0, RoundingMode.HALF_UP);
+//        DecimalFormat formatter = new DecimalFormat("0.00");
+//        String totalRounded =  formatter.format(total);
+
+        BigDecimal totalRounded = new BigDecimal(total).setScale(2,RoundingMode.HALF_EVEN);
+        System.out.println("Unscaled - " + totalRounded);
+        System.out.println("Scaled - " + totalRounded);
 
         System.out.println("The total price is RM" + totalRounded);
         System.out.print("Amount Received is RM");
         double amountReceived = VScan.getDouble();
-        while(amountReceived < total) {
+
+        while(amountReceived < totalRounded.doubleValue()) {
             System.out.println("Not enough!");
             System.out.print("Amount Received is RM");
             amountReceived = VScan.getDouble();
         }
-        double change = amountReceived - total;
-        System.out.println("Change Amount is RM" + change);
+        double change = amountReceived - totalRounded.doubleValue();
+        System.out.println("Change Amount is RM" + new BigDecimal(change).setScale(2, RoundingMode.HALF_EVEN));
 
         Receipt r = new Receipt(c, amountReceived); //Create a Receipt obj
         c = new Cart();      // Delete the reference to the cart obj
