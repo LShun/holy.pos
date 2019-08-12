@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
+import static pub.FormatPrint.printHeader;
+
 
 public class ProductPerformanceReport {
 
@@ -36,6 +38,7 @@ public class ProductPerformanceReport {
         Scanner scanner=new Scanner(System.in);
         int month;
 
+        printHeader("PRODUCT PERFORMANCE REPORT");
         System.out.print("\n\n1.January\n"+
                 "2.February\n"+
                 "3.March\n"+
@@ -110,14 +113,23 @@ public class ProductPerformanceReport {
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);
 
-        JLabel label = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\OOPT.jpeg"));
+        JLabel label1 = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg"));
+        label1.setPreferredSize(new Dimension(200,200));
+        JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
+        JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
+
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Performance Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
-        //panel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        //label.setBounds(0,0, 454,388);
 
-        panel.add(label);
+        label2.setBounds(692,100, 180,180);
+        label3.setBounds(607,112, 400,180);
+
+        f.add(label2);
+        f.add(label3);
+
+        panel.add(label1);
+
         f.add(panel, BorderLayout.NORTH);
 
         f.add(sp);
