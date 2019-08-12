@@ -7,6 +7,7 @@ import order.Order;
 import order.Receipt;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -55,24 +56,6 @@ public class ProductPerformanceReport {
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
 
-        //String[] name={"Beefburger","Cheeseburger","Double cheeseburger","Chicken burger","Sausage Deluxe Breakfast","Burger Set Lunch"};
-
-        /*ArrayList<Product> food=FoodMenu.getProducts();
-        for(int i=0;i<food.size();i++){
-            double[] total=new double[10];
-
-            //int size = receipt.get(i).getListOfItems().size();
-
-            for(int j=0;j<receipt.get(i).getListOfItems().size();j++)
-            if(!(food.get(i).getId() == receipt.get(i).getListOfItems().get(j).getProduct().getId())){
-                total[i]=receipt.get(i).getListOfItems().get(j).getQty()*receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
-
-            }
-
-            System.out.println(food.get(i).getId()+"="+total[i]);
-
-        }*/
-
         ArrayList<Product> p = FoodMenu.getProducts();
         ArrayList<Item> item = new ArrayList<Item>();
         for(int i = 0;i < p.size(); i++){
@@ -86,19 +69,6 @@ public class ProductPerformanceReport {
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
             for(int j = 0;j < sizeOfListOfItems ; j++){
-//                Object[] product = new Object[6];
-//
-//                product[0]  = receipt.get(i).getTransactionTime().toString();
-//                product[1] = receipt.get(i).getListOfItems().get(j).getProduct().getId();
-//                //product[1] = products.get(i).getId();
-//                product[2] = receipt.get(i).getListOfItems().get(j).getProduct().getTitle();
-//                //product[2] = products.get(i).getTitle();
-//                product[3] = receipt.get(i).getListOfItems().get(j).getQty();
-//                product[4] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice();
-//                product[5] = receipt.get(i).getListOfItems().get(j).getProduct().getPrice()*receipt.get(i).getListOfItems().get(j).getQty();
-//                //product[6] = receipt.get(i).getSubTotal();
-//
-//                rowData.add(product);
 
                 Item itemInReceipt = receipt.get(i).getListOfItems().get(j); //Get the product object from the receipt
                 int index = item.indexOf(itemInReceipt); //Find the position of the item
@@ -106,27 +76,6 @@ public class ProductPerformanceReport {
                 itemInFoodGroup.increment(receipt.get(i).getListOfItems().get(j).getQty()); //Increase the amount
             }
         }
-
-        /*for(int i=0;i<products.size();i++){
-            int sizeOfListOfItems=products.size();
-
-            for(int j=0;j<sizeOfListOfItems;i++){
-                Object[] product=new Object[3];
-
-                product[0]=products.get(i).getTitle();
-                product[1]=products.get(i).getId();
-                product[2]=products.get(i).getPrice();
-                //product[3]=receipt.get(i).getListOfItems().get(j).getProduct().getPrice()*receipt.get(i).getListOfItems().get(j).getQty();
-
-                rowData.add(product);
-            }
-        }*/
-
-//        Object[][] realRowData = new Object[rowData.size()][];
-//        for(int i = 0; i < rowData.size(); i++){
-//            realRowData[i] = rowData.get(i);
-//        }
-
 
         // Column Names
 //        String[] columnNames = { "Date(month)", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
@@ -154,6 +103,8 @@ public class ProductPerformanceReport {
         // Initializing the JTable
         //j = new JTable(realRowData, columnNames);
         j = new JTable(allRowData, columnNames);
+        j.getTableHeader().setFont(new Font("Times New Roman",Font.BOLD, 14));
+        j.setFont(new Font("Times New Roman",Font.BOLD,12));
         j.setBounds(30, 200, 200, 30);
 
         // adding it to JScrollPane
@@ -162,7 +113,10 @@ public class ProductPerformanceReport {
         JLabel label = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\OOPT.jpeg"));
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Performance Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
-        label.setBounds(0,0, 454,388);
+        //panel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        //label.setBounds(0,0, 454,388);
+
         panel.add(label);
         f.add(panel, BorderLayout.NORTH);
 
