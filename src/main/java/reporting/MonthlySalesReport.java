@@ -4,6 +4,7 @@ import order.Receipt;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,6 +28,7 @@ public class MonthlySalesReport {
 
         Scanner scanner=new Scanner(System.in);
         int month;
+
 
         printHeader("MONTHLY SALES REPORT");
         System.out.print("1.January\n"+
@@ -101,22 +103,27 @@ public class MonthlySalesReport {
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);
 
-        JLabel label1 = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg"));
-        label1.setPreferredSize(new Dimension(200,200));
+        JLabel label = new JLabel() ;
+
+        label.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg").getImage().getScaledInstance(110, 110, Image.SCALE_AREA_AVERAGING)));
+
         JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
         JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
+        JLabel label4 = new JLabel("Date Generated: " + LocalDate.now());
 
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Monthly Sales Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
+        panel.setPreferredSize(new Dimension(215,215));
 
-        label2.setBounds(692,100, 180,180);
-        label3.setBounds(607,112, 400,180);
+        label2.setBounds(688,45, 180,180);
+        label3.setBounds(607,60, 400,180);
+        label4.setBounds(1375,100,300,180);
 
         f.add(label2);
         f.add(label3);
+        f.add(label4);
 
-        panel.add(label1);
-
+        panel.add(label);
 
         f.add(panel, BorderLayout.NORTH);
 
