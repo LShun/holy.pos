@@ -1,6 +1,5 @@
 package staff;
 
-import auth.Auth;
 import auth.AuthV2;
 
 import java.util.ArrayList;

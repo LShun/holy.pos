@@ -19,12 +19,11 @@ public class Worker {
     private int salesReceived;
 
     public Worker(){
-
         this("","","",' ',"",0.0,"",2000,0,0,0,0);
     }
 
     public Worker(String staffID, String password, String sName, char gender, String phoneNumber, double salary,
-                  String designation, int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
+                  String designation, LocalDate dateOfEmployed, int totalDurationWorked, int salesReceived){
         this.setStaffID(staffID);
         this.setPassword(password);
         this.setName(sName);
@@ -32,9 +31,14 @@ public class Worker {
         this.setPhoneNumber(phoneNumber);
         this.setSalary(salary);
         this.setDesignation(designation);
-        this.dateOfEmployed = LocalDate.of(year, month, dayOfMonth);
+        this.dateOfEmployed = dateOfEmployed;
         this.setTotalDurationWorked(Duration.ofHours(totalDurationWorked));
         this.setSalesReceived(salesReceived);
+    }
+
+    public Worker(String staffID, String password, String sName, char gender, String phoneNumber, double salary,
+                  String designation, int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
+        this(staffID, password,sName,gender,phoneNumber,salary,designation,LocalDate.of(year,month,dayOfMonth),totalDurationWorked,salesReceived);
     }
     
 //    public Worker(String staffID, String password, String sName, char gender, String designation){
@@ -62,7 +66,14 @@ public class Worker {
     }
 
     public void setGender(char gender) {
-        this.gender = gender;
+        gender = Character.toUpperCase(gender);
+
+        //Validation of gender
+        if(gender!= 'M' && gender !='F') {
+            System.out.println("Failed to set the gender.\nGender is neither 'M' or 'F'!");
+        }else{
+            this.gender = gender;
+        }
     }
 
     public String getPhoneNumber() { return phoneNumber; }
@@ -92,6 +103,7 @@ public class Worker {
     public String getPassword(){
         return password;
     }
+
     public void setPassword(String password){
         this.password = password;
     }

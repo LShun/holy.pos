@@ -2,11 +2,13 @@ package staff;
 
 import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
-
-import de.vandermeer.asciitable.CWC_FixedWidth;
 import de.vandermeer.asciitable.CWC_LongestLine;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import pub.VScan;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +35,9 @@ public class Manager extends Worker {
         String staffID, password, sName, designation, phoneNumber;
         double salary;
         char gender;
-        String[] dateOfEmployed;
+        String inputDateOfEmployed;
+        boolean repeat = true;
+        LocalDate dateOfEmployed;
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Enter worker Id (XXX to stop): ");
@@ -49,13 +53,12 @@ public class Manager extends Worker {
             System.out.println("Enter worker gender (M or F) : ");
             gender = scan.nextLine().charAt(0);
 
-
-            while(gender!='M'&&gender!='F'){
-                System.out.println("Please enter a valid gender (M or F)!");
-
-                System.out.println("Enter worker gender (M or F): ");
-                gender = scan.nextLine().charAt(0);
-            }
+//            while(gender!='M'&&gender!='F'){
+//                System.out.println("Please enter a valid gender (M or F)!");
+//
+//                System.out.println("Enter worker gender (M or F): ");
+//                gender = scan.nextLine().charAt(0);
+//            }
 
             System.out.println("Enter the worker phone number : ");
             phoneNumber = scan.nextLine();
@@ -63,42 +66,39 @@ public class Manager extends Worker {
             System.out.println("Enter the worker salary : ");
             salary = scan.nextDouble();
 
-
             System.out.println("Enter worker designation : ");
             designation = scan.nextLine();
 
-
-            System.out.println("Enter date of employed (dd-mm-yyyy): ");
-            dateOfEmployed = scan.nextLine().split("[-/]");
-
+            do {
+                dateOfEmployed = LocalDate.parse("1970-01-01"); //To get rid of compiler error
+                System.out.println("Enter date of employed (dd-mm-yyyy): ");
+                inputDateOfEmployed = scan.nextLine();
+                try {
+                    dateOfEmployed = LocalDate.parse(inputDateOfEmployed, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    repeat = false;
+                } catch (DateTimeParseException e) {
+                    System.out.println(inputDateOfEmployed + " is not following the pattern dd-mm-yyyy\nPlease try to enter again");
+                }
+            }while(repeat);
 
             Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender, phoneNumber, salary,
-                    designation,
-                    Integer.parseInt(dateOfEmployed[2]),
-                    Integer.parseInt(dateOfEmployed[1]),
-                    Integer.parseInt(dateOfEmployed[0]), 0, 0)
-            );
+                    designation, dateOfEmployed, 0, 0));
 
             System.out.println("Staff Record Has Been Added Successfully!");
 
             System.out.println("Enter worker Id (XXX to stop): ");
             staffID = scan.nextLine();
-
-
-
         }
     }
 
     //Display Staff Record
     public void displayStaff(ArrayList<Worker> data) {
         AsciiTable at = new AsciiTable();
-        at.addRule();
-//        CWC_FixedWidth width = new CWC_FixedWidth();
         CWC_LongestLine width = new CWC_LongestLine();
         at.getRenderer().setCWC(width);
-//        width.add(8).add(16).add(3).add(25); //Specify the width of each column
         //width.add(3,0).add(8,0).add(16,0).add(3,0).add(12,0).add(10,0).add(20,0); //Specify the width of each column
 
+        at.addRule();
 
         //Display the heading
         AT_Row heading = at.addRow("NO.","STAFF ID", "STAFF NAME", "SEX", "PHONE NUMBER", "SALARY", "DATE OF EMPLOYED");
@@ -121,7 +121,7 @@ public class Manager extends Worker {
 
     //Modify Staff Record
     public void modifyStaff(){
-        ArrayList<Worker> data = searchStaff();
+        ArrayList<Worker> data = searchStaff(); //Call search() to find the list of staff match the criteria
 
         Worker workerToBeModified;
 
@@ -138,9 +138,6 @@ public class Manager extends Worker {
         System.out.println("1. Worker ID");
         System.out.println("2. Worker Name");
         System.out.println("3. Worker Gender");
-
-
-
         System.out.println("4. Worker Phone Number");
         System.out.println("5. Worker Salary");
         System.out.println("6. Worker Designation");
@@ -243,5 +240,4 @@ public class Manager extends Worker {
         }
         return result;
     }
-
 }
