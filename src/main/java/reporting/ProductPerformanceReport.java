@@ -77,7 +77,7 @@ public class ProductPerformanceReport {
                 Item itemInReceipt = receipt.get(i).getListOfItems().get(j); //Get the product object from the receipt
                 int index = item.indexOf(itemInReceipt); //Find the position of the item
                 Item itemInFoodGroup = item.get(index);  //Get the product from the item ArrayList
-                itemInFoodGroup.increment(receipt.get(i).getListOfItems().get(j).getQty()); //Increase the amount
+                itemInFoodGroup.changeQtyTo(receipt.get(i).getListOfItems().get(j).getQty()); //Increase the amount
             }
         }
 
