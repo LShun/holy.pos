@@ -1,10 +1,10 @@
 package reporting;
 import order.Order;
 import order.Receipt;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -25,13 +25,6 @@ public TaxReport()
 
     // Frame Title
     f.setTitle("Tax Report");
-
-    // Data to be displayed in the JTable
-    /*String[][] data = {
-            { "INV001", "0.60", "10","14 July 2019","" },
-            { "INV002", "0.90", "15","14 July 2019","" },
-            {"Total Tax","","","","1.50"}
-    };*/
 
     ArrayList<Object[]> rowData = new ArrayList<Object[]>();
     double sum=0;
@@ -65,17 +58,12 @@ public TaxReport()
         total[2]=sum;
         total[3]="";
         rowData.add(total);
-
     }
-
 
     Object[][] realRowData = new Object[rowData.size()][];
     for(int i = 0; i < rowData.size(); i++){
         realRowData[i] = rowData.get(i);
     }
-
-
-
 
     // Column Names
     String[] columnNames = { "Bill ID","Date","Tax Amount(RM)", "Base Amount(RM)"};
@@ -89,21 +77,27 @@ public TaxReport()
     // adding it to JScrollPane
     JScrollPane sp = new JScrollPane(j);
 
-    JLabel label1 = new JLabel(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg"));
-    label1.setPreferredSize(new Dimension(200,200));
+    JLabel label = new JLabel() ;
+
+    label.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg").getImage().getScaledInstance(110, 110, Image.SCALE_AREA_AVERAGING)));
+
     JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
     JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
+    JLabel label4 = new JLabel("Date Generated: " +LocalDate.now());
 
     JPanel panel = new JPanel();
     panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Tax Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
+    panel.setPreferredSize(new Dimension(215,215));
 
-    label2.setBounds(692,100, 180,180);
-    label3.setBounds(607,112, 400,180);
+    label2.setBounds(688,45, 180,180);
+    label3.setBounds(607,60, 400,180);
+    label4.setBounds(1375,100,300,180);
 
     f.add(label2);
     f.add(label3);
+    f.add(label4);
 
-    panel.add(label1);
+    panel.add(label);
 
     f.add(panel, BorderLayout.NORTH);
     
