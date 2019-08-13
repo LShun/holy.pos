@@ -8,7 +8,6 @@ import staff.Worker;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,12 +61,27 @@ public class Order {
             return;
         }
 
+        //If There is transaction undone, the user is the same with the one quit order module last time
         if(c != null && c.getWorker().equals(session)){
-            System.out.println("There is still transaction undone last time.");
+            System.out.println("There is still transaction undone last time."); //Prompt use if wan to continue the transaction or not
             System.out.println("Do you want to continue the transaction ?");
             System.out.println("Y - Yes | N- No");
-            if(VScan.getChar() == 'N')
+            char action = VScan.getChar();
+            while(action!='N' && action !='Y'){
+                System.out.println("Invalid Options!\nPlease reenter.");
+                System.out.println("There is still transaction undone last time.");
+                System.out.println("Do you want to continue the transaction ?");
+                System.out.println("Y - Yes | N- No");
+                action = VScan.getChar();
+            }
+            if(action == 'N')
                 c = new Cart();
+//            else {
+//                boolean hasBeenChange = c.getListOfItems().retainAll(Item.productAvailable());  //Delete the item from the cart tht is not available due to the deleted product
+//                if(hasBeenChange)
+//                    System.out.println("Some items have been remove due to unavailable product in the cart.\nPlease check the cart");
+//            }
+
         }else {
             c = new Cart();
         }
@@ -117,9 +131,6 @@ public class Order {
     }
 
     private static void proceed(Worker session, double total) {
-//        DecimalFormat formatter = new DecimalFormat("0.00");
-//        String totalRounded =  formatter.format(total);
-
         BigDecimal totalRounded = new BigDecimal(total).setScale(2,RoundingMode.HALF_EVEN);
         System.out.println("Unscaled - " + totalRounded);
         System.out.println("Scaled - " + totalRounded);
@@ -206,10 +217,7 @@ public class Order {
         }
     }
 
-    /*
-    * For Reporting
-    */
-
+    //For Reporting
     public static ArrayList<Receipt> getReceiptList(){
         return receiptList;
     }
