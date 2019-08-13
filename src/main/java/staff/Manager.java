@@ -101,14 +101,15 @@ public class Manager extends Worker {
         at.addRule();
 
         //Display the heading
-        AT_Row heading = at.addRow("NO.","STAFF ID", "STAFF NAME", "SEX", "PHONE NUMBER", "SALARY", "DATE OF EMPLOYED");
+        AT_Row heading = at.addRow("NO.","STAFF ID", "STAFF NAME", "SEX", "PHONE NUMBER", "SALARY", "DESIGNATION", "DATE OF EMPLOYED");
         heading.setTextAlignment(TextAlignment.CENTER);
         at.addRule();
 
         for(int i = 0; i< data.size(); i++){
             Worker temp = data.get(i);
             AT_Row row = at.addRow(i+1, temp.getStaffID(), temp.getName(), temp.getGender(),
-                    temp.getPhoneNumber(), temp.getSalary(), temp.getDateOfEmployed().toString());
+                    temp.getPhoneNumber(), String.format("%.2f",temp.getSalary()), temp.getDesignation(), temp.getDateOfEmployed().toString());
+            row.setPaddingLeftRight(1);
             row.getCells().get(1).getContext().setTextAlignment(TextAlignment.RIGHT);
             row.getCells().get(3).getContext().setTextAlignment(TextAlignment.CENTER);
             row.getCells().get(5).getContext().setTextAlignment(TextAlignment.RIGHT);

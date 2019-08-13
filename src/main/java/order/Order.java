@@ -1,7 +1,7 @@
 package order;
 
 import auth.AuthV2;
-import pub.VScan;
+import pub.*;
 import food_menu.*;
 import staff.Staff;
 import staff.Worker;
@@ -61,6 +61,8 @@ public class Order {
             return;
         }
 
+        FormatPrint.printHeader("ORDER");
+
         //If There is transaction undone, the user is the same with the one quit order module last time
         if(c != null && c.getWorker().equals(session)){
             System.out.println("There is still transaction undone last time."); //Prompt use if wan to continue the transaction or not
@@ -97,21 +99,26 @@ public class Order {
         while(action != 6) {
             switch (action) {
                 case 1:
+                    FormatPrint.printHeader("ADD OR MINUS PRODUCT");
                     addOrMinusProduct();
                     break;
                 case 2:
+                    FormatPrint.printHeader("DISPLAYING PRODUCT");
                     c.display();
                     break;
                 case 3:
+                    FormatPrint.printHeader("DELETE PRODUCT");
                     delete();
                     break;
                 case 4:
+                    FormatPrint.printHeader("CLEARING CART");
                     c.clearCart();
                     break;
                 case 5:
                     if (c.getListOfItems().isEmpty()) {
                         System.out.println("The cart is empty!");
                     }else {
+                        FormatPrint.printHeader("PROCEED");
                         double total = c.getSubTotal() * (1 + Product.getTax());
                         proceed(session, total);
                     }
@@ -131,6 +138,7 @@ public class Order {
     }
 
     private static void proceed(Worker session, double total) {
+
         BigDecimal totalRounded = new BigDecimal(total).setScale(2,RoundingMode.HALF_EVEN);
         System.out.println("Unscaled - " + totalRounded);
         System.out.println("Scaled - " + totalRounded);
@@ -169,14 +177,14 @@ public class Order {
         String code;//Declaration
         Item item;
 
-        System.out.print("Enter the product code > ");
+        System.out.print("Enter the product code : ");
         code = VScan.getString();
 
         item = new Item(FoodMenu.getProductByID(code), 0);
         if(c.del(item))
             System.out.println("The item has been delete successfully!");
         else
-            System.out.println("The item has not been delete successfully!");
+            System.out.println("Failed to delete the item!");
     }
 
     private static void addOrMinusProduct(){

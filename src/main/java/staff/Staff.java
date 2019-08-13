@@ -1,6 +1,7 @@
 package staff;
 
 import auth.AuthV2;
+import pub.FormatPrint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,14 +21,15 @@ public class Staff {
         System.out.flush();
     }
 
-
     public static int mainMenu() //To allow the user to perform any of the task
     {
         //Local Variables declaration
         int selection;
         Scanner scan = new Scanner(System.in);
 
-        System.out.printf("%s\n","Worker Information Module");
+        FormatPrint.printHeader("STAFF");
+
+//        System.out.printf("%s\n","Worker Information Module");
         System.out.printf("%s\n","1. Add Worker Record");
         System.out.printf("%s\n","2. Display Worker Record");
         System.out.printf("%s\n","3. Modify Worker Record");
@@ -60,21 +62,22 @@ public class Staff {
             {
                 case 1:
                     //System.out.println("Add Worker Record");
+                    FormatPrint.printHeader("ADDING STAFF RECORD");
                     s.addStaff();
                     break;
 
                 case 2:
-                    System.out.println("Display Worker Record");
+                    FormatPrint.printHeader("DISPLAYING STAFF RECORD");
                     s.displayStaff(getEmployeeList());
                     break;
 
                 case 3:
-                    System.out.println("Modify Worker");
+                    FormatPrint.printHeader("MODIFYING STAFF RECORD");
                     s.modifyStaff();
                     break;
 
                 case 4:
-                    System.out.println("Search Worker");
+                    FormatPrint.printHeader("SEARCHING STAFF RECORD");
                     ArrayList<Worker> result_Search = s.searchStaff();
                     s.displayStaff(result_Search);
                     break;
