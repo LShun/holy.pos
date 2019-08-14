@@ -32,18 +32,29 @@ public class Manager extends Worker {
     //Add Staff Record
     public void addStaff(){
 
-        String staffID, password, sName, designation, phoneNumber;
+        String staffID, password, sName, designation, phoneNumber, inputDateOfEmployed;
         double salary;
         char gender;
-        String inputDateOfEmployed;
-        boolean repeat = true;
+        boolean repeat;
         LocalDate dateOfEmployed;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Enter worker Id (XXX to stop): ");
-        staffID = scan.nextLine();
+        do {
+            repeat = false;
+            System.out.println("Enter worker Id (XXX to stop): ");
+            staffID = scan.nextLine();
+            ArrayList<Worker> employeeList = Staff.getEmployeeList();
+            int n = employeeList.size();
+            for(int i = 0; i< n; i++){
+                if(employeeList.get(i).getStaffID().equals(staffID)){
+                    System.out.println("The Staff ID is already used. Please enter a new one.");
+                    repeat = true;
+                    break;
+                }
+            }
+        }while(repeat);
 
-        while(staffID.equals("XXX")==false) {
+        while(!staffID.equals("XXX")) {
             System.out.println("Enter worker password : ");
             password = scan.nextLine();
 
@@ -53,12 +64,12 @@ public class Manager extends Worker {
             System.out.println("Enter worker gender (M or F) : ");
             gender = scan.nextLine().charAt(0);
 
-//            while(gender!='M'&&gender!='F'){
-//                System.out.println("Please enter a valid gender (M or F)!");
-//
-//                System.out.println("Enter worker gender (M or F): ");
-//                gender = scan.nextLine().charAt(0);
-//            }
+            while(gender!='M'&&gender!='F'){
+                System.out.println("Please enter a valid gender (M or F)!");
+
+                System.out.println("Enter worker gender (M or F): ");
+                gender = scan.nextLine().charAt(0);
+            }
 
             System.out.println("Enter the worker phone number : ");
             phoneNumber = scan.nextLine();
@@ -70,6 +81,7 @@ public class Manager extends Worker {
             designation = scan.nextLine();
 
             do {
+                repeat = true;
                 dateOfEmployed = LocalDate.parse("1970-01-01"); //To get rid of compiler error
                 System.out.println("Enter date of employed (dd-mm-yyyy): ");
                 inputDateOfEmployed = scan.nextLine();
@@ -96,7 +108,6 @@ public class Manager extends Worker {
         AsciiTable at = new AsciiTable();
         CWC_LongestLine width = new CWC_LongestLine();
         at.getRenderer().setCWC(width);
-        //width.add(3,0).add(8,0).add(16,0).add(3,0).add(12,0).add(10,0).add(20,0); //Specify the width of each column
 
         at.addRule();
 

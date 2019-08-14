@@ -66,14 +66,7 @@ public class Worker {
     }
 
     public void setGender(char gender) {
-        gender = Character.toUpperCase(gender);
-
-        //Validation of gender
-        if(gender!= 'M' && gender !='F') {
-            System.out.println("Failed to set the gender.\nGender is neither 'M' or 'F'!");
-        }else{
-            this.gender = gender;
-        }
+        this.gender = gender;
     }
 
     public String getPhoneNumber() { return phoneNumber; }
