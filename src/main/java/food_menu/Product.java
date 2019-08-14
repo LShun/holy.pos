@@ -149,7 +149,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.title);
+        return Objects.hash(this.id, this.title, this.price);
     }
 
     @Override
