@@ -1,4 +1,4 @@
-package food_menu;
+package menu;
 
 import auth.AuthV2;
 import de.vandermeer.asciitable.AsciiTable;
@@ -12,7 +12,7 @@ import java.util.Date;
 import static pub.FormatPrint.printHeader;
 import static pub.VScan.*;
 
-public class FoodMenu {
+public class Menu {
     private static final int ID_FIELD = 1;
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
@@ -115,46 +115,6 @@ public class FoodMenu {
         // print successful message
         printHeader("Product addition successful!");
         System.out.println(temp.toString());
-
-        // commented out...not using database
-//        try {
-//            // create a database connection
-//            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\user300\\repo\\holy.pos\\src\\main\\holyPos.db");
-//            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO menu(id,title, desc, gross_price, tax) VALUES(?,?,?,?,?)");
-//            pstmt.setString(1, id);
-//            pstmt.setString(2, title);
-//            pstmt.setString(3, description);
-//            pstmt.setDouble(4, price);
-//            pstmt.setDouble(5, tax);
-//            pstmt.executeUpdate();
-////            ResultSet rs = pstmt.executeQuery("select * from menu");
-////            while(rs.next())
-////            {
-////
-////                // output message, along with input data from the database to verify
-////                System.out.println("ADD PRODUCT SUCCESS!");
-////                System.out.println("New product information: ");
-////
-////                // read the result set
-////                System.out.println("id = " + rs.getTable("id"));
-////                System.out.println("title = " + rs.getInt("title"));
-////                System.out.println("description = " + rs.getInt("description"));
-////                System.out.println("price = " + rs.getInt("price"));
-////                System.out.println("tax = " + rs.getInt("tax"));
-////            }
-//        } catch (SQLException e) {
-//            // if the error message is "out of memory",
-//            // it probably means no database file is found
-//            System.err.println(e.getMessage());
-//        } finally {
-//            try {
-//                if (connection != null)
-//                    connection.close();
-//            } catch (SQLException e) {
-//                // connection close failed.
-//                System.err.println(e.getMessage());
-//            }
-//        }
     }
 
     // user can call this module to modify a product's details.
