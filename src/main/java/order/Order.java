@@ -52,7 +52,7 @@ public class Order {
                     new Item(Menu.getProductByID("BCH"),2)
                     ))), 40, LocalDateTime.of(2019,8,14,16,40,57))
 
-    );
+    ));
 
     public static void order() {
 
