@@ -129,27 +129,8 @@ public class Worker {
     }
 
     public void modifyStaff(){
-        System.out.println("1. Worker Name");
-        System.out.println("2. Worker Gender");
-        System.out.print("Select which one the modify : ");
-        int choice = VScan.getInt();
-        String inputString;
-        char inputChar;
-
-        switch(choice){
-            case 1:
-                System.out.print("Enter the worker name : ");
-                inputString = VScan.getString();
-                this.setName(inputString);
-                break;
-            case 2:
-                System.out.print("Enter the worker gender : ");
-                inputChar = VScan.getChar();
-                this.setGender(inputChar);
-                break;
-            default:
-                System.out.println("Invalid value!");
-        }
+        System.out.println("You have no permission to perform this action.");
+        return;
     }
 
     public ArrayList<Worker> searchStaff(){

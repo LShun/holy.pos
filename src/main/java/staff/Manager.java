@@ -41,12 +41,11 @@ public class Manager extends Worker {
 
         do {
             repeat = false;
-            System.out.println("Enter worker Id (XXX to stop): ");
+            System.out.print("Enter worker Id (XXX to stop): ");
             staffID = scan.nextLine();
             ArrayList<Worker> employeeList = Staff.getEmployeeList();
-            int n = employeeList.size();
-            for(int i = 0; i< n; i++){
-                if(employeeList.get(i).getStaffID().equals(staffID)){
+            for (Worker worker : employeeList) {
+                if (worker.getStaffID().equals(staffID)) {
                     System.out.println("The Staff ID is already used. Please enter a new one.");
                     repeat = true;
                     break;
@@ -55,37 +54,38 @@ public class Manager extends Worker {
         }while(repeat);
 
         while(!staffID.equals("XXX")) {
-            System.out.println("Enter worker password : ");
+            System.out.print("Enter worker password : ");
             password = scan.nextLine();
 
-            System.out.println("Enter worker name : ");
+            System.out.print("Enter worker name : ");
             sName = scan.nextLine();
 
-            System.out.println("Enter worker gender (M or F) : ");
+            System.out.print("Enter worker gender (M or F) : ");
             gender = scan.nextLine().charAt(0);
 
             while(gender!='M'&&gender!='F'){
                 System.out.println("Please enter a valid gender (M or F)!");
 
-                System.out.println("Enter worker gender (M or F): ");
+                System.out.print("Enter worker gender (M or F): ");
                 gender = scan.nextLine().charAt(0);
             }
 
             do {
-                System.out.println("Enter the worker phone number : ");
+                System.out.print("Enter the worker phone number : ");
                 phoneNumber = scan.nextLine();
             }while(!phoneNumber.matches("\\d{3}-\\d{7,}"));
 
-            System.out.println("Enter the worker salary : ");
+            System.out.print("Enter the worker salary : ");
             salary = scan.nextDouble();
+            scan.nextLine(); //Eat the \n
 
-            System.out.println("Enter worker designation : ");
+            System.out.print("Enter worker designation : ");
             designation = scan.nextLine();
 
             do {
                 repeat = true;
                 dateOfEmployed = LocalDate.parse("1970-01-01"); //To get rid of compiler error
-                System.out.println("Enter date of employed (dd-mm-yyyy): ");
+                System.out.print("Enter date of employed (dd-mm-yyyy): ");
                 inputDateOfEmployed = scan.nextLine();
                 try {
                     dateOfEmployed = LocalDate.parse(inputDateOfEmployed, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
@@ -236,36 +236,36 @@ public class Manager extends Worker {
                 System.out.print("Enter the worker Id : ");
                 searchInput = VScan.getString();
 
-                for (int i = 0; i < employeeList.size(); i++) {
-                    if (employeeList.get(i).getStaffID().contains(searchInput))
-                        result.add(employeeList.get(i));
+                for (Worker worker : employeeList) {
+                    if (worker.getStaffID().contains(searchInput))
+                        result.add(worker);
                 }
                 break;
             case 2:
                 System.out.print("Enter the name : ");
                 searchInput = VScan.getString();
 
-                for (int i = 0; i < employeeList.size(); i++) {
-                    if (employeeList.get(i).getName().contains(searchInput))
-                        result.add(employeeList.get(i));
+                for (Worker worker : employeeList) {
+                    if (worker.getName().contains(searchInput))
+                        result.add(worker);
                 }
                 break;
             case 3:
                 System.out.print("Enter the gender : ");
                 searchInput = VScan.getString();
 
-                for (int i = 0; i < employeeList.size(); i++) {
-                    if (searchInput.equals(employeeList.get(i).getGender()))
-                        result.add(employeeList.get(i));
+                for (Worker worker : employeeList) {
+                    if (searchInput.equals(String.valueOf(worker.getGender())))
+                        result.add(worker);
                 }
                 break;
             case 4:
                 System.out.print("Enter the designation : ");
                 searchInput = VScan.getString();
 
-                for (int i = 0; i < employeeList.size(); i++) {
-                    if (searchInput.equals(employeeList.get(i).getDesignation()))
-                        result.add(employeeList.get(i));
+                for (Worker worker : employeeList) {
+                    if (searchInput.equals(worker.getDesignation()))
+                        result.add(worker);
                 }
                 break;
             default:
