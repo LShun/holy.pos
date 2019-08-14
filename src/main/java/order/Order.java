@@ -40,16 +40,17 @@ public class Order {
                     new Item(FoodMenu.getProductByID("BCH"),1)
                     ))), 40, LocalDateTime.of(2019,7,29,14,50,57)),
             new Receipt(new Cart("1906270007", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
-                    new Item(FoodMenu.getProductByID("COLAS"),6),
-                    new Item(FoodMenu.getProductByID("BRSD"),4),
-                    new Item(FoodMenu.getProductByID("BCH"),2)
-                    ))), 40, LocalDateTime.of(2019,8,14,16,40,57)),
-            new Receipt(new Cart("1906270008", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("BC"),6),
                     new Item(FoodMenu.getProductByID("COLAL"),4),
                     new Item(FoodMenu.getProductByID("BCH"),1),
                     new Item(FoodMenu.getProductByID("LUBS"),1)
-            ))), 40, LocalDateTime.of(2019,8,14,15,32,29))
+            ))), 40, LocalDateTime.of(2019,8,14,15,32,29)),
+            new Receipt(new Cart("1906270008", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
+                    new Item(FoodMenu.getProductByID("COLAS"),6),
+                    new Item(FoodMenu.getProductByID("BRSD"),4),
+                    new Item(FoodMenu.getProductByID("BCH"),2)
+                    ))), 40, LocalDateTime.of(2019,8,14,16,40,57))
+
             )
     );
 

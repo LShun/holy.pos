@@ -71,7 +71,6 @@ public class ProductPerformanceReport {
         for(int i = 0;i < item.size(); i++){
             Vector<Object> temp = new Vector<Object>();
 
-            //temp.add(month);
             temp.add(item.get(i).getProduct().getId());
             temp.add(item.get(i).getProduct().getTitle());
             temp.add(item.get(i).getQty());

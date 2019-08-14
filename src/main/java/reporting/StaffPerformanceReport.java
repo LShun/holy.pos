@@ -48,7 +48,7 @@ public class StaffPerformanceReport {
         }
 
         // Column Names
-        String[] columnNames = { "Date", "Staff ID", "Staff Name","Working hours","Total Sales Received(RM)"};
+        String[] columnNames = { "Date", "Staff ID", "Staff Name","Working hours(Hours)","Total Sales Received(RM)"};
 
         // Initializing the JTable
         j = new JTable(realRowData, columnNames);
