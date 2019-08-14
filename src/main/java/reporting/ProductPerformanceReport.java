@@ -57,7 +57,7 @@ public class ProductPerformanceReport {
                 itemInFoodGroup.changeQtyBy(receipt.get(i).getListOfItems().get(j).getQty()); //Increase the amount
             }
         }
-        
+
         Vector<String> columnNames = new Vector<String>();
 
         //columnNames.add("Month");
