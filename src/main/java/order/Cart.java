@@ -10,6 +10,7 @@ import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_FixedWidth;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+import menu.Product;
 import staff.Worker;
 
 public class Cart extends CartOrReceipt{
@@ -28,6 +29,10 @@ public class Cart extends CartOrReceipt{
 
     public Cart(String billID, Worker worker, ArrayList<Item> item){
         this(billID, worker);
+        for(Item i : item){
+            Product tempProduct = i.getProduct();
+            i.setProduct(new Product(tempProduct.getId(), tempProduct.getTitle(), tempProduct.getDesc(), tempProduct.getPrice()));
+        }
         this.listOfItems = item;
     }
 
@@ -36,8 +41,7 @@ public class Cart extends CartOrReceipt{
         int qtyInParam  = item.getQty();
 
         if(index != -1) {
-            int qtyInList = listOfItems.get(index).getQty();
-            listOfItems.get(index).setQty(qtyInParam + qtyInList);
+            listOfItems.get(index).changeQtyBy(qtyInParam);
         }else if(qtyInParam > 0) {
             listOfItems.add(item);
         }else{

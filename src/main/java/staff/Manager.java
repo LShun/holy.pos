@@ -71,8 +71,10 @@ public class Manager extends Worker {
                 gender = scan.nextLine().charAt(0);
             }
 
-            System.out.println("Enter the worker phone number : ");
-            phoneNumber = scan.nextLine();
+            do {
+                System.out.println("Enter the worker phone number : ");
+                phoneNumber = scan.nextLine();
+            }while(!phoneNumber.matches("\\d{3}-\\d{7,}"));
 
             System.out.println("Enter the worker salary : ");
             salary = scan.nextDouble();
@@ -165,7 +167,17 @@ public class Manager extends Worker {
             case 1:
                 System.out.print("Enter the worker Id : ");
                 inputString = VScan.getString();
-                workerToBeModified.setStaffID(inputString);
+                boolean repeated = false;
+                ArrayList<Worker> employeeList = Staff.getEmployeeList();
+                for (Worker worker : employeeList) {
+                    if (worker.getStaffID().equals(inputString)) {
+                        System.out.println("The Staff ID is already used. Please enter a new one.");
+                        repeated = true;
+                        break;
+                    }
+                }
+                if(!repeated)
+                    workerToBeModified.setStaffID(inputString);
                 break;
             case 2:
                 System.out.print("Enter the worker name : ");
@@ -175,17 +187,26 @@ public class Manager extends Worker {
             case 3:
                 System.out.print("Enter the worker gender : ");
                 inputChar = VScan.getChar();
-                workerToBeModified.setGender(inputChar);
+                if(inputChar!='M' && inputChar !='F')
+                    System.out.println("Invalid Gender!");
+                else
+                    workerToBeModified.setGender(inputChar);
                 break;
             case 4:
                 System.out.print("Enter the worker phone number : ");
                 inputString = VScan.getString();
-                workerToBeModified.setPhoneNumber(inputString);
+                if(!inputString.matches("\\d{3}-\\d{7,}"))
+                    System.out.println("Invalid phone number format!(xxx-xxxxxxx)");
+                else
+                    workerToBeModified.setPhoneNumber(inputString);
                 break;
             case 5:
                 System.out.print("Enter the worker salary : ");
                 inputDouble = VScan.getDouble();
-                workerToBeModified.setSalary(inputDouble);
+                if(inputDouble < 0)
+                    System.out.println("Invalid salary!");
+                else
+                    workerToBeModified.setSalary(inputDouble);
                 break;
             case 6:
                 System.out.print("Enter the worker designation : ");

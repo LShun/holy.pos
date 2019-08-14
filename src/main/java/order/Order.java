@@ -2,7 +2,7 @@ package order;
 
 import auth.AuthV2;
 import pub.*;
-import food_menu.*;
+import menu.*;
 import staff.Staff;
 import staff.Worker;
 
@@ -16,29 +16,30 @@ public class Order {
     private static Cart c = null;
     private static ArrayList<Receipt> receiptList = new ArrayList<Receipt>(Arrays.asList(
             new Receipt(new Cart("1906270001", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
-                    new Item(FoodMenu.getProductByID("LUBS"),2),
-                    new Item(FoodMenu.getProductByID("BC"),2)
+                    new Item(Menu.getProductByID("LUBS"),2),
+                    new Item(Menu.getProductByID("BC"),2)
                     ))),50.00, LocalDateTime.of(2019,6,27,8,30,30)),
             new Receipt(new Cart("1906270002", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
-                    new Item(FoodMenu.getProductByID("BDC"),2),
-                    new Item(FoodMenu.getProductByID("BCH"),3)
+                    new Item(Menu.getProductByID("BDC"),2),
+                    new Item(Menu.getProductByID("BCH"),3)
                     ))),20, LocalDateTime.of(2019,6,27,10,00,25)),
             new Receipt(new Cart("1906270003", Staff.getEmployeeList().get(1), new ArrayList<Item>(Arrays.asList(
-                    new Item(FoodMenu.getProductByID("LUBS"),3),
-                    new Item(FoodMenu.getProductByID("BRSD"),1)
+                    new Item(Menu.getProductByID("LUBS"),3),
+                    new Item(Menu.getProductByID("BRSD"),1)
                     ))),36, LocalDateTime.of(2019,6,27,10,20,35)),
             new Receipt(new Cart("1906270004", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
-                    new Item(FoodMenu.getProductByID("LUBS"),4)
+                    new Item(Menu.getProductByID("LUBS"),4)
                     ))),40, LocalDateTime.of(2019,6,27,10,50,57)),
-            new Receipt(new Cart("1906270005", Staff.getEmployeeList().get(3), new ArrayList<Item>(Arrays.asList(
-                    new Item(FoodMenu.getProductByID("LUBS"),4),
-                    new Item(FoodMenu.getProductByID("BRSD"),10)
+            new Receipt(new Cart("1907280005", Staff.getEmployeeList().get(3), new ArrayList<Item>(Arrays.asList(
+                    new Item(Menu.getProductByID("LUBS"),4),
+                    new Item(Menu.getProductByID("BRSD"),10)
                     ))),150, LocalDateTime.of(2019,7,28,11,50,57)),
-            new Receipt(new Cart("1906270006", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
-                    new Item(FoodMenu.getProductByID("BDC"),2),
-                    new Item(FoodMenu.getProductByID("LUBS"),4),
-                    new Item(FoodMenu.getProductByID("BCH"),1)
+            new Receipt(new Cart("1907290006", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
+                    new Item(Menu.getProductByID("BDC"),2),
+                    new Item(Menu.getProductByID("LUBS"),4),
+                    new Item(Menu.getProductByID("BCH"),1)
                     ))), 40, LocalDateTime.of(2019,7,29,14,50,57)),
+
             new Receipt(new Cart("1906270007", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
                     new Item(FoodMenu.getProductByID("BC"),6),
                     new Item(FoodMenu.getProductByID("COLAL"),4),
@@ -51,7 +52,6 @@ public class Order {
                     new Item(FoodMenu.getProductByID("BCH"),2)
                     ))), 40, LocalDateTime.of(2019,8,14,16,40,57))
 
-            )
     );
 
     public static void order() {
@@ -79,12 +79,11 @@ public class Order {
             }
             if(action == 'N')
                 c = new Cart();
-//            else {
-//                boolean hasBeenChange = c.getListOfItems().retainAll(Item.productAvailable());  //Delete the item from the cart tht is not available due to the deleted product
-//                if(hasBeenChange)
-//                    System.out.println("Some items have been remove due to unavailable product in the cart.\nPlease check the cart");
-//            }
-
+            else {
+                boolean hasBeenChange = c.getListOfItems().retainAll(Item.productAvailable());  //Delete the item from the cart tht is not available due to the deleted product
+                if(hasBeenChange)
+                    System.out.println("Some items have been remove due to unavailable product in the cart.\nPlease check the cart");
+            }
         }else {
             c = new Cart();
         }
@@ -181,7 +180,7 @@ public class Order {
         System.out.print("Enter the product code : ");
         code = VScan.getString();
 
-        item = new Item(FoodMenu.getProductByID(code), 0);
+        item = new Item(Menu.getProductByID(code), 0);
         if(c.del(item))
             System.out.println("The item has been delete successfully!");
         else
@@ -190,13 +189,13 @@ public class Order {
 
     private static void addOrMinusProduct(){
         //Declaration
-        Item item = null;
+        Item item;
         Product product;
         String code;
         int qty;
 
         //Show Menu
-        FoodMenu.showProducts();
+        Menu.showProducts();
 
         //Prompt input message for the product ID
         System.out.print("Enter the product code or -1 to quit : ");
@@ -204,17 +203,23 @@ public class Order {
 
         //When the input is not '-1', get into the loop
         while (!code.equalsIgnoreCase("-1")) {
-            product = FoodMenu.getProductByID(code);
+            product = Menu.getProductByID(code);
 
             //When the product exists in the menu
-            if (product.getId() != "") {
-                //And already exists in the cart
-                if (c.getListOfItems().contains(new Item(product, 0))) {
+            if (!product.getId().equals("")) {
+                //Instantiate a product that is independent from the one in the FoodMenu
+                Product tempProduct = new Product(product.getId(),product.getTitle(),product.getDesc(),product.getPrice());
+
+                //Check if the item is already existed in the cart
+                item = new Item(tempProduct, 0);
+                if (c.getListOfItems().contains(item)) {
+                    int index = c.getListOfItems().indexOf(item);
                     System.out.println("The item has already existed in the cart.");
+                    System.out.println("Current quantity - " + c.getListOfItems().get(index).getQty());
                 }
                 System.out.print("How many you want to add ? : ");
-                qty = VScan.getInt();
-                item = new Item(product, qty);
+                qty  = VScan.getInt();
+                item = new Item(tempProduct, qty);
 
                 c.addOrMinus(item);
             } else {
