@@ -34,13 +34,13 @@ public class Item {
             System.out.println("Invalid input quantity!");
     }
 
-    public void changeQtyTo(int qty){
+    public void changeQtyBy(int qty){
         this.setQty(this.qty + qty);
     }
 
     //Convert the Products into Items
     public static ArrayList<Item> productAvailable(){
-        ArrayList<Item> temp = new ArrayList<Item>();
+        ArrayList<Item> temp    = new ArrayList<Item>();
         ArrayList<Product> prod = FoodMenu.getProducts();
 
         for(Product x : prod)

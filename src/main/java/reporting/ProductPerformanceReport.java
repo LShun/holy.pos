@@ -7,14 +7,10 @@ import order.Order;
 import order.Receipt;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Vector;
-
-import static pub.FormatPrint.printHeader;
 
 
 public class ProductPerformanceReport {
@@ -40,28 +36,31 @@ public class ProductPerformanceReport {
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
 
-        ArrayList<Product> p = FoodMenu.getProducts();
+//        ArrayList<Product> p = FoodMenu.getProducts();
         ArrayList<Item> item = new ArrayList<Item>();
-        for(int i = 0;i < p.size(); i++){
-            item.add(new Item(p.get(i),0));
-        }
+//        for(int i = 0;i < p.size(); i++){
+//            item.add(new Item(p.get(i),0));
+//        }
 
         for(int i = 0; i < receipt.size(); i++){
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
             for(int j = 0;j < sizeOfListOfItems ; j++){
-
                 Item itemInReceipt = receipt.get(i).getListOfItems().get(j); //Get the product object from the receipt
                 int index = item.indexOf(itemInReceipt); //Find the position of the item
+                if(index == -1){
+                    item.add(new Item(itemInReceipt.getProduct(),0));
+                    index = item.indexOf(itemInReceipt); //Find the position of the item
+                }
                 Item itemInFoodGroup = item.get(index);  //Get the product from the item ArrayList
-                itemInFoodGroup.changeQtyTo(receipt.get(i).getListOfItems().get(j).getQty()); //Increase the amount
+                itemInFoodGroup.changeQtyBy(receipt.get(i).getListOfItems().get(j).getQty()); //Increase the amount
             }
         }
 
         // Column Names
 //        String[] columnNames = { "Date(month)", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
-        Vector columnNames = new Vector();
+        Vector<String> columnNames = new Vector<String>();
         //columnNames.add("Month");
         columnNames.add("Product ID");
         columnNames.add("Product Name");
@@ -71,7 +70,7 @@ public class ProductPerformanceReport {
 
         Vector<Vector> allRowData = new Vector<Vector>();
         for(int i = 0;i < item.size(); i++){
-            Vector temp = new Vector<Vector>();
+            Vector<Object> temp = new Vector<Object>();
 
             //temp.add(month);
             temp.add(item.get(i).getProduct().getId());
