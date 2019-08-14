@@ -52,6 +52,9 @@ public TaxReport()
 
                 "Please enter month of report for viewing: ");
         month = scanner.nextInt();
+
+        if(month<1||month>12)
+            System.out.println("Invalid month entered! Please enter again!");
     }while(month<1||month>12);
 
     day=daysOfMonth[month-1];
