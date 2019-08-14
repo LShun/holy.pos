@@ -93,7 +93,7 @@ public class Manager extends Worker {
                 } catch (DateTimeParseException e) {
                     System.out.println(inputDateOfEmployed + " is not following the pattern dd-mm-yyyy\nPlease try to enter again");
                 }
-            }while(repeat);
+            }while(repeat || dateOfEmployed.isAfter(LocalDate.now()));
 
             Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender, phoneNumber, salary,
                     designation, dateOfEmployed, 0, 0));
