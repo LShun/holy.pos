@@ -59,8 +59,7 @@ public class ProductPerformanceReport {
             }
         }
 
-        // Column Names
-//        String[] columnNames = { "Date(month)", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
+
         Vector columnNames = new Vector();
         //columnNames.add("Month");
         columnNames.add("Product ID");
