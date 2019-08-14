@@ -1,6 +1,5 @@
-import auth.Auth;
 import auth.AuthV2;
-import food_menu.FoodMenu;
+import menu.Menu;
 import order.Order;
 import reporting.Reporting;
 import staff.Staff;
@@ -9,15 +8,6 @@ import static pub.VScan.*;
 import static pub.FormatPrint.*;
 
 public class Main {
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
 
     public static void main(String[] args) {
         int choice;
@@ -45,7 +35,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // put food_menu classes under here
-                    FoodMenu.foodMenu();
+                    Menu.foodMenu();
                     break;
                 case 2:
                     // put order classes under here
@@ -65,12 +55,12 @@ public class Main {
         }
     }
         private static void showLogo() {
-            System.out.println(ANSI_YELLOW + "\n" +
+            System.out.println("\n" +
                     "______  ________________  __     _______________________\n" +
                     "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
                     "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
                     "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
                     "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
-                    "                                                        \n" + ANSI_RESET);
+                    "                                                        \n");
         }
 }
