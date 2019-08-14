@@ -154,7 +154,7 @@ public class Manager extends Worker {
         System.out.println("3. Worker Phone Number");
         System.out.println("4. Worker Salary");
         System.out.println("5. Worker Designation");
-        System.out.print("Select which one the modify : ");
+        System.out.print("Select which one to modify : ");
 
         int choice = VScan.getInt();
 
@@ -164,7 +164,7 @@ public class Manager extends Worker {
 
         switch(choice){
             case 1:
-                System.out.print("Enter the worker Id : ");
+                System.out.print("Enter the new worker Id : ");
                 inputString = VScan.getString();
                 boolean repeated = false;
                 ArrayList<Worker> employeeList = Staff.getEmployeeList();
@@ -179,12 +179,12 @@ public class Manager extends Worker {
                     workerToBeModified.setStaffID(inputString);
                 break;
             case 2:
-                System.out.print("Enter the worker name : ");
+                System.out.print("Enter the new worker name : ");
                 inputString = VScan.getString();
                 workerToBeModified.setName(inputString);
                 break;
             case 3:
-                System.out.print("Enter the worker phone number : ");
+                System.out.print("Enter the new worker phone number : ");
                 inputString = VScan.getString();
                 if(!inputString.matches("\\d{3}-\\d{7,}"))
                     System.out.println("Invalid phone number format!(xxx-xxxxxxx)");
@@ -192,7 +192,7 @@ public class Manager extends Worker {
                     workerToBeModified.setPhoneNumber(inputString);
                 break;
             case 4:
-                System.out.print("Enter the worker salary : ");
+                System.out.print("Enter the new worker salary : ");
                 inputDouble = VScan.getDouble();
                 if(inputDouble < 0)
                     System.out.println("Invalid salary!");
@@ -200,7 +200,7 @@ public class Manager extends Worker {
                     workerToBeModified.setSalary(inputDouble);
                 break;
             case 5:
-                System.out.print("Enter the worker designation : ");
+                System.out.print("Enter the new worker designation : ");
                 inputString = VScan.getString();
                 workerToBeModified.setDesignation(inputString);
                 break;
@@ -242,7 +242,7 @@ public class Manager extends Worker {
                 }
                 break;
             case 3:
-                System.out.print("Enter the gender : ");
+                System.out.print("Enter the gender (M or F): ");
                 searchInput = VScan.getString();
 
                 for (Worker worker : employeeList) {
