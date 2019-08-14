@@ -89,27 +89,11 @@ public class Receipt extends CartOrReceipt {
 //        System.out.println("\u2514" + String.valueOf(horizontal) + "\u2518");
 
         AsciiTable at = new AsciiTable();
+        AT_Row row;
         CWC_FixedWidth width = new CWC_FixedWidth();
         at.getRenderer().setCWC(width);
         width.add(4).add(6).add(25).add(3).add(7).add(8); //Specify the width of each column
-        at.addRule();
-        AT_Row row = at.addRow(null,null,null,null,null,
-                "______  ________________  __     _______________________<br/>" +
-                "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/<br/>" +
-                "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ <br/>" +
-                "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / <br/>" +
-                "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  <br/>" +
-                "                                                        <br/>");
-        //        at.addRow(null,null,null,null,null,);
-//        AT_Row row = at.addRow(null,null,null,null,null,"______  ________________  __     _______________________<br/>");
-//        at.addRow(null,null,null,null,null,"___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/<br/>");
-//        at.addRow(null,null,null,null,null,"__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ <br/>");
-//        at.addRow(null,null,null,null,null,"_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / <br/>");
-//        at.addRow(null,null,null,null,null,"/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  <br/>");
 
-
-        row.getCells().get(5).getContext().setTextAlignment(TextAlignment.JUSTIFIED);
-//        row.getCells().get(5).getContext().setPaddingLeftRight(31);
         at.addRule();
 
         at.addRow(null, null, "Transaction Time", null, null, transactionTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss")));

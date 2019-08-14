@@ -107,7 +107,7 @@ public class Order {
                     c.display();
                     break;
                 case 3:
-                    FormatPrint.printHeader("DELETE PRODUCT");
+                    FormatPrint.printHeader("CANCEL PRODUCT");
                     delete();
                     break;
                 case 4:
@@ -140,9 +140,6 @@ public class Order {
     private static void proceed(Worker session, double total) {
 
         BigDecimal totalRounded = new BigDecimal(total).setScale(2,RoundingMode.HALF_EVEN);
-        System.out.println("Unscaled - " + totalRounded);
-        System.out.println("Scaled - " + totalRounded);
-
         System.out.println("The total price is RM" + totalRounded);
         System.out.print("Amount Received is RM");
         double amountReceived = VScan.getDouble();
@@ -167,7 +164,7 @@ public class Order {
     private static void orderMenu() {
         System.out.println("1. Add Or Minus Products");
         System.out.println("2. Display Added Products");
-        System.out.println("3. Delete Products");
+        System.out.println("3. Cancel Products");
         System.out.println("4. Clear Cart");
         System.out.println("5. Proceed");
         System.out.println("6. Quit");
