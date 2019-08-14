@@ -34,8 +34,9 @@ public TaxReport()
         Object[] tax = new Object[4];
         tax[0] = receipt.get(i).getBillID();
         tax[1] = receipt.get(i).getTransactionTime().toString();
-        tax[2] = receipt.get(i).getTax();
-        tax[3] = receipt.get(i).getTotal();
+        tax[2] = receipt.get(i).getTotal();
+        tax[3] = receipt.get(i).getTax();
+
 
         rowData.add(tax);
 
@@ -48,15 +49,15 @@ public TaxReport()
         Object[] title = new Object[4];
         title[0] = "";
         title[1] = "";
-        title[2]="Total Tax Amount:";
-        title[3]="Total Bill Amount:";
+        title[2]="Total Bill Amount:";
+        title[3]="Total Tax Amount:";
         rowData.add(title);
 
         Object[] total=new Object[4];
 
         total[0]=total[1]="";
-        total[2]=sum;
-        total[3]="";
+        total[2]="";
+        total[3]=sum;
         rowData.add(total);
     }
 
@@ -66,7 +67,7 @@ public TaxReport()
     }
 
     // Column Names
-    String[] columnNames = { "Bill ID","Date","Tax Amount(RM)", "Base Amount(RM)"};
+    String[] columnNames = { "Bill ID","Date","Bill Amount(RM)", "Tax Amount(RM)"};
 
     // Initializing the JTable
     j = new JTable(realRowData, columnNames);

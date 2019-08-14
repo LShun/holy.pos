@@ -36,26 +36,6 @@ public class ProductPerformanceReport {
         // Frame Title
         f.setTitle("Product Performance Report");
 
-        Scanner scanner=new Scanner(System.in);
-        int month;
-
-        printHeader("PRODUCT PERFORMANCE REPORT");
-        System.out.print("\n\n1.January\n"+
-                "2.February\n"+
-                "3.March\n"+
-                "4.April\n"+
-                "5.May\n"+
-                "6.June\n"+
-                "7.July\n"+
-                "8.August\n"+
-                "9.September\n"+
-                "10.October\n"+
-                "11.November\n"+
-                "12.December\n\n"+
-
-                "Please enter month of report for viewing: ");
-        month=scanner.nextInt();
-
         // Data to be displayed in the JTable
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
@@ -67,8 +47,6 @@ public class ProductPerformanceReport {
         }
 
         for(int i = 0; i < receipt.size(); i++){
-            if(month != receipt.get(i).getTransactionTime().getMonthValue())
-                continue;
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
@@ -84,7 +62,7 @@ public class ProductPerformanceReport {
         // Column Names
 //        String[] columnNames = { "Date(month)", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
         Vector columnNames = new Vector();
-        columnNames.add("Month");
+        //columnNames.add("Month");
         columnNames.add("Product ID");
         columnNames.add("Product Name");
         columnNames.add("Quantity");
@@ -95,7 +73,7 @@ public class ProductPerformanceReport {
         for(int i = 0;i < item.size(); i++){
             Vector temp = new Vector<Vector>();
 
-            temp.add(month);
+            //temp.add(month);
             temp.add(item.get(i).getProduct().getId());
             temp.add(item.get(i).getProduct().getTitle());
             temp.add(item.get(i).getQty());
