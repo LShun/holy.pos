@@ -77,7 +77,7 @@ public class Manager extends Worker {
 
             System.out.print("Enter the worker salary : ");
             salary = scan.nextDouble();
-            scan.nextLine(); //Eat the \n
+            scan.nextLine(); //Eat the \n-Clear the buffer
 
             System.out.print("Enter worker designation : ");
             designation = scan.nextLine();
@@ -207,6 +207,8 @@ public class Manager extends Worker {
             default:
                 System.out.println("Invalid value!");
         }
+
+        System.out.printf("\nDone Modifying!!!");
     }
 
     //Search Staff Record
