@@ -26,6 +26,9 @@ public class MonthlySalesReport {
         // Frame Title
         f.setTitle("Monthly Sales Report");
 
+        int[] daysOfMonth={31,28,31,30,31,30,31,31,30,31,30,31};
+        int day = 0;
+
         Scanner scanner=new Scanner(System.in);
         int month;
 
@@ -44,11 +47,16 @@ public class MonthlySalesReport {
                     "11.November\n" +
                     "12.December\n\n" +
 
-                    "Please enter month of report for viewing: ");
+                    "Please enter month of report for viewing(MM): ");
             month = scanner.nextInt();
         }while(month<1||month>12);
 
 
+            day=daysOfMonth[month-1];
+
+
+        
+        System.out.println(day);
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         double sum=0, tax=0;
@@ -59,7 +67,7 @@ public class MonthlySalesReport {
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
             Object[] temp = new Object[4];
-            temp[0] = receipt.get(i).getTransactionTime().getYear()+" "+receipt.get(i).getTransactionTime().getMonthValue();
+            temp[0] = receipt.get(i).getTransactionTime().getYear()+"-"+receipt.get(i).getTransactionTime().getMonthValue();
             temp[1] = receipt.get(i).getBillID();
             temp[2] = receipt.get(i).getTax();
             temp[3] = receipt.get(i).getTotal();
@@ -111,7 +119,7 @@ public class MonthlySalesReport {
 
         JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
         JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
-        JLabel label4 = new JLabel("Date Generated: " + LocalDate.now());
+        JLabel label4 = new JLabel("Date Generated: " +day+"-"+month+"-"+receipt.get(1).getTransactionTime().getYear());
 
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Monthly Sales Report", TitledBorder.CENTER, TitledBorder.BOTTOM));

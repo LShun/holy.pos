@@ -109,7 +109,7 @@ public class DailySalesReport {
 
         JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
         JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
-        JLabel label4 = new JLabel("Date Generated: " + LocalDate.now());
+        JLabel label4 = new JLabel("Date Generated: " +day+"-"+month+"-"+receipt.get(1).getTransactionTime().getYear());
 
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Daily Sales Report", TitledBorder.CENTER, TitledBorder.BOTTOM));

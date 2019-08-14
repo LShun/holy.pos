@@ -57,10 +57,9 @@ public class ProductPerformanceReport {
                 itemInFoodGroup.changeQtyBy(receipt.get(i).getListOfItems().get(j).getQty()); //Increase the amount
             }
         }
-
-        // Column Names
-//        String[] columnNames = { "Date(month)", "Product ID", "Product Name","Quantity","Price(RM)","Total Sales(RM)"};
+        
         Vector<String> columnNames = new Vector<String>();
+
         //columnNames.add("Month");
         columnNames.add("Product ID");
         columnNames.add("Product Name");

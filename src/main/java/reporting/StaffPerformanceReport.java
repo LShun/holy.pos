@@ -25,13 +25,6 @@ public class StaffPerformanceReport {
         // Frame Title
         f.setTitle("Staff Performance Report");
 
-        // Data to be displayed in the JTable
-       /* String[][] data = {
-                { "14 July 2019", "A001", "Fried Chicken","5","10","50" },
-                { "14 July 2019", "A002", "French Fries","5","10","50" },
-                {"Total","","","10","20","100"}
-        };*/
-
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         for(int i = 0; i < workers.size(); i++){
             //int sizeOfListOfItems = workers.get(i)
@@ -41,7 +34,7 @@ public class StaffPerformanceReport {
                 emp[0] = workers.get(i).getDateOfEmployed();
                 emp[1] = workers.get(i).getStaffID();
                 emp[2] = workers.get(i).getName();
-                emp[3] = workers.get(i).getTotalDurationWorked();
+                emp[3] = workers.get(i).getTotalDurationWorked().toHours();
                 emp[4] = workers.get(i).getSalesReceived();
 
                 rowData.add(emp);
@@ -60,9 +53,9 @@ public class StaffPerformanceReport {
         // Initializing the JTable
         j = new JTable(realRowData, columnNames);
         j.getTableHeader().setFont(new Font("Times New Roman",Font.BOLD, 14));
+
         j.setFont(new Font("Times New Roman",Font.BOLD,12));
         j.setBounds(30, 300, 300, 30);
-
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);
 

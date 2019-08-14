@@ -6,6 +6,9 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import static pub.FormatPrint.printHeader;
 
 
 public class TaxReport {
@@ -26,9 +29,39 @@ public TaxReport()
     // Frame Title
     f.setTitle("Tax Report");
 
+    int[] daysOfMonth={31,28,31,30,31,30,31,31,30,31,30,31};
+    int day = 0;
+
+    Scanner scanner=new Scanner(System.in);
+    int month;
+
+    do {
+        printHeader("TAX REPORT");
+        System.out.print("1.January\n" +
+                "2.February\n" +
+                "3.March\n" +
+                "4.April\n" +
+                "5.May\n" +
+                "6.June\n" +
+                "7.July\n" +
+                "8.August\n" +
+                "9.September\n" +
+                "10.October\n" +
+                "11.November\n" +
+                "12.December\n\n" +
+
+                "Please enter month of report for viewing: ");
+        month = scanner.nextInt();
+    }while(month<1||month>12);
+
+    day=daysOfMonth[month-1];
+
     ArrayList<Object[]> rowData = new ArrayList<Object[]>();
     double sum=0;
     for(int i = 0; i < receipt.size(); i++){
+        if(month!=receipt.get(i).getTransactionTime().getMonthValue())
+            continue;
+
         int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
         Object[] tax = new Object[4];
@@ -49,8 +82,8 @@ public TaxReport()
         Object[] title = new Object[4];
         title[0] = "";
         title[1] = "";
-        title[2]="Total Bill Amount:";
-        title[3]="Total Tax Amount:";
+        title[2] = "";
+        title[3] = "Total Tax Amount:";
         rowData.add(title);
 
         Object[] total=new Object[4];
@@ -84,7 +117,7 @@ public TaxReport()
 
     JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
     JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
-    JLabel label4 = new JLabel("Date Generated: " +LocalDate.now());
+    JLabel label4 = new JLabel("Date Generated: " +day+"-"+month+"-"+receipt.get(1).getTransactionTime().getYear());
 
     JPanel panel = new JPanel();
     panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Tax Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
