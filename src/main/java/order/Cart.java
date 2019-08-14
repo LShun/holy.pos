@@ -10,7 +10,7 @@ import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_FixedWidth;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-import food_menu.Product;
+import menu.Product;
 import staff.Worker;
 
 public class Cart extends CartOrReceipt{
