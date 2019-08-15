@@ -42,7 +42,7 @@ public class Manager extends Worker {
         do {
             repeat = false;
             System.out.print("Enter worker Id (XXX to stop): ");
-            staffID = scan.nextLine();
+            staffID = VScan.getString();
             ArrayList<Worker> employeeList = Staff.getEmployeeList();
             for (Worker worker : employeeList) {
                 if (worker.getStaffID().equals(staffID)) {
@@ -55,43 +55,43 @@ public class Manager extends Worker {
 
         while(!staffID.equals("XXX")) {
             System.out.print("Enter worker password : ");
-            password = scan.nextLine();
+            password = VScan.getString();
 
             System.out.print("Enter worker name : ");
-            sName = scan.nextLine();
+            sName = VScan.getString();
 
             System.out.print("Enter worker gender (M or F) : ");
-            gender = scan.nextLine().charAt(0);
+            gender = VScan.getChar();
 
-            while(gender!='M'&&gender!='F'){
-                System.out.println("Please enter a valid gender (M or F)!");
+            while(gender!='M' && gender!='F'){
+                System.out.println("Please enter a valid gender!");
+                gender = VScan.getChar();
+                //System.out.print("Enter worker gender (M or F): ");
 
-                System.out.print("Enter worker gender (M or F): ");
-                gender = scan.nextLine().charAt(0);
             }
 
             do {
-                System.out.print("Enter the worker phone number : ");
-                phoneNumber = scan.nextLine();
+                System.out.print("Enter the worker phone number (XXX-XXXXXXX): ");
+                phoneNumber = VScan.getString();
+
             }while(!phoneNumber.matches("\\d{3}-\\d{7,}"));
 
             System.out.print("Enter the worker salary : ");
-            salary = scan.nextDouble();
-            scan.nextLine(); //Eat the \n-Clear the buffer
+            salary = VScan.getDouble();
 
             System.out.print("Enter worker designation : ");
-            designation = scan.nextLine();
+            designation = VScan.getString();
 
             do {
                 repeat = true;
                 dateOfEmployed = LocalDate.parse("1970-01-01"); //To get rid of compiler error
                 System.out.print("Enter date of employed (dd-mm-yyyy): ");
-                inputDateOfEmployed = scan.nextLine();
+                inputDateOfEmployed = VScan.getString();
                 try {
                     dateOfEmployed = LocalDate.parse(inputDateOfEmployed, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                     repeat = false;
                 } catch (DateTimeParseException e) {
-                    System.out.println(inputDateOfEmployed + " is not following the pattern dd-mm-yyyy\nPlease try to enter again");
+                    System.out.println(inputDateOfEmployed + " is invalid\nPlease enter a valid date");
                 }
             }while(repeat || dateOfEmployed.isAfter(LocalDate.now()));
 
@@ -101,7 +101,7 @@ public class Manager extends Worker {
             System.out.println("Staff Record Has Been Added Successfully!");
 
             System.out.print("Enter worker Id (XXX to stop): ");
-            staffID = scan.nextLine();
+            staffID = VScan.getString();
         }
     }
 
@@ -139,7 +139,11 @@ public class Manager extends Worker {
 
         Worker workerToBeModified;
 
-        if(data.size() == 0) return; //Worker does not exists
+        if(data.size() == 0) {
+           System.out.println("No Record Found!!!");
+            return; //Worker does not exists
+
+        }
         else if(data.size() > 1){    //If more than one worker, user have to select which one to modify
             displayStaff(data);
             System.out.print("Enter the index : ");
@@ -257,7 +261,7 @@ public class Manager extends Worker {
                 searchInput = VScan.getString();
 
                 for (Worker worker : employeeList) {
-                    if (searchInput.equals(worker.getDesignation()))
+                    if (worker.getDesignation().contains(searchInput))
                         result.add(worker);
                 }
                 break;
