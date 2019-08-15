@@ -4,7 +4,6 @@ import order.Receipt;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -139,7 +138,7 @@ public class MonthlySalesReport {
 
         f.add(sp);
         // Frame Size
-        f.setSize(500, 200);
+        f.setSize(800, 300);
         // Frame Visible = true
         f.setVisible(true);
     }

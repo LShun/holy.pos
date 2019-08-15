@@ -117,7 +117,7 @@ public class ProductPerformanceReport {
 
         f.add(sp);
         // Frame Size
-        f.setSize(500, 200);
+        f.setSize(800, 300);
         // Frame Visible = true
         f.setVisible(true);
     }
