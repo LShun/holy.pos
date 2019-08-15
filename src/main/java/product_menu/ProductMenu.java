@@ -93,24 +93,24 @@ public class ProductMenu {
         printHeader("ADD PRODUCTS");
 
         do {
-            temp.inputId();
+            inputId(temp);
             if (temp.getId().equals("-1")) {
                 return;
             }
         }
         while (!validateId(temp));
 
-        temp.inputTitle();
+        inputTitle(temp);
         if (temp.getTitle().equals("-1")) {
             return;
         }
 
-        temp.inputDesc();
+        inputDesc(temp);
         if (temp.getDesc().equals("-1")) {
             return;
         }
 
-        temp.inputPrice();
+        inputPrice(temp);
         if (temp.getPrice() == -1) {
             return;
         }
@@ -366,17 +366,17 @@ public class ProductMenu {
             switch (choice) {
                 case 1: // ID
                     do {
-                        temp.inputId();
+                        inputId(temp);
                     } while (!validateId(temp));
                     break;
                 case 2: // TITLE
-                    temp.inputTitle();
+                    inputTitle(temp);
                     break;
                 case 3: // DESC
-                    temp.inputDesc();
+                    inputDesc(temp);
                     break;
                 case 4: // PRICE
-                    temp.inputPrice();
+                    inputPrice(temp);
                     break;
             }
         }
@@ -398,9 +398,39 @@ public class ProductMenu {
         return true;
     }
 
-    // =======================
-    // EXTERNAL & INTERNAL USE
-    // =======================
+    public static void inputId(Product p) {
+        String id;
+        System.out.print("Product ID (Eg: FRENCHFRIES) or -1 to cancel: ");
+        id = getString();
+        p.setId(id);
+    }
+
+    public static void inputTitle(Product p) {
+        String title;
+        System.out.print("Enter product title (Eg: French Fries) or -1 to cancel: ");
+        title = getString();
+        p.setTitle(title);
+    }
+
+    public static void inputDesc(Product p) {
+        String desc;
+        System.out.print("Enter product desc (Eg: Salted French Fries) or -1 to cancel: ");
+        desc = getString();
+        p.setDesc(desc);
+    }
+
+    public static void inputPrice(Product p) {
+        double price;
+        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
+        price = getDouble();
+
+        while (price < 0) {
+            System.out.print("Negative price invalid, retry: ");
+            price = getDouble();
+        }
+
+        p.setPrice(price);
+    }
 
     // show the products inside the array in a consistent format
     public static void showProducts(ArrayList<Product> products) {
