@@ -1,6 +1,6 @@
-package menu;
+package product_menu;
 
-import auth.AuthV2;
+import auth.Auth;
 import de.vandermeer.asciitable.AsciiTable;
 
 import java.text.DateFormat;
@@ -12,7 +12,7 @@ import java.util.Date;
 import static pub.FormatPrint.printHeader;
 import static pub.VScan.*;
 
-public class Menu {
+public class ProductMenu {
     private static final int ID_FIELD = 1;
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
@@ -30,7 +30,7 @@ public class Menu {
             ));
 
     // =======================
-    // FOODMENU USE ONLY
+    // PRODUCTMENU USE ONLY
     // =======================
 
     // menu for manipulating the food menu
@@ -41,9 +41,9 @@ public class Menu {
         // show user possible actions & accept choice
         while (true) {
             // show user possible actions
-            printHeader("FOOD MENU");
+            printHeader("PRODUCT MENU");
             System.out.println("1.      Search Product");
-            if (AuthV2.isManager()) {
+            if (Auth.isManager()) {
                 System.out.println("2.      New Product");
                 System.out.println("3.      Modify Product");
                 System.out.println("4.      Delete Product");
@@ -54,8 +54,11 @@ public class Menu {
             // accept choice
             choice = getInt();
 
-            if (AuthV2.isManager()) {
+            if (Auth.isManager()) {
                 switch (choice) {
+                    case 1:
+                        search();
+                        break;
                     case 2:
                         add();
                         break;
@@ -65,16 +68,19 @@ public class Menu {
                     case 4:
                         delete();
                         break;
+                    default:
+                        printHeader("EXITED MODULE");
+                        return;
                 }
             }
-
-            switch (choice) {
-                case 1:
+            else {
+                if (choice == 1) {
                     search();
-                    break;
-                default:
+                }
+                else {
                     printHeader("EXITED MODULE");
                     return;
+                }
             }
         }
     }
@@ -87,24 +93,24 @@ public class Menu {
         printHeader("ADD PRODUCTS");
 
         do {
-            temp.inputId();
+            inputId(temp);
             if (temp.getId().equals("-1")) {
                 return;
             }
         }
-        while (!validateID(temp));
+        while (!validateId(temp));
 
-        temp.inputTitle();
+        inputTitle(temp);
         if (temp.getTitle().equals("-1")) {
             return;
         }
 
-        temp.inputDesc();
+        inputDesc(temp);
         if (temp.getDesc().equals("-1")) {
             return;
         }
 
-        temp.inputPrice();
+        inputPrice(temp);
         if (temp.getPrice() == -1) {
             return;
         }
@@ -180,7 +186,7 @@ public class Menu {
         }
     }
 
-    // deletes a product from FoodMenu array
+    // deletes a product from ProductMenu array
     private static void delete() {
         int index;
         Product temp;
@@ -212,7 +218,7 @@ public class Menu {
         }
     }
 
-    // searches products inside FoodMenu array
+    // searches products inside ProductMenu array
     private static void search() {
         int basis;
         Product found;
@@ -360,17 +366,17 @@ public class Menu {
             switch (choice) {
                 case 1: // ID
                     do {
-                        temp.inputId();
-                    } while (!validateID(temp));
+                        inputId(temp);
+                    } while (!validateId(temp));
                     break;
                 case 2: // TITLE
-                    temp.inputTitle();
+                    inputTitle(temp);
                     break;
                 case 3: // DESC
-                    temp.inputDesc();
+                    inputDesc(temp);
                     break;
                 case 4: // PRICE
-                    temp.inputPrice();
+                    inputPrice(temp);
                     break;
             }
         }
@@ -379,10 +385,12 @@ public class Menu {
     }
 
     // helper function -- add, modify -- validates the product ID to ensure no repetition before adding
-    private static boolean validateID(Product temp) {
+    private static boolean validateId(Product temp) {
         // get new ID
         for (Product p : products) {
             if (temp.getId().equals(p.getId())) {
+                System.out.println("Duplicate product found\n");
+                System.out.println(p.toString());
                 System.out.println("Duplicate product ID is not allowed.\n");
                 return false;
             }
@@ -390,9 +398,39 @@ public class Menu {
         return true;
     }
 
-    // =======================
-    // EXTERNAL & INTERNAL USE
-    // =======================
+    public static void inputId(Product p) {
+        String id;
+        System.out.print("Product ID (Eg: FRENCHFRIES) or -1 to cancel: ");
+        id = getString();
+        p.setId(id);
+    }
+
+    public static void inputTitle(Product p) {
+        String title;
+        System.out.print("Enter product title (Eg: French Fries) or -1 to cancel: ");
+        title = getString();
+        p.setTitle(title);
+    }
+
+    public static void inputDesc(Product p) {
+        String desc;
+        System.out.print("Enter product desc (Eg: Salted French Fries) or -1 to cancel: ");
+        desc = getString();
+        p.setDesc(desc);
+    }
+
+    public static void inputPrice(Product p) {
+        double price;
+        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
+        price = getDouble();
+
+        while (price < 0) {
+            System.out.print("Negative price invalid, retry: ");
+            price = getDouble();
+        }
+
+        p.setPrice(price);
+    }
 
     // show the products inside the array in a consistent format
     public static void showProducts(ArrayList<Product> products) {
@@ -437,7 +475,7 @@ public class Menu {
     }
 
     // String -> Product
-    // get a single product from the FoodMenu by ID
+    // get a single product from the ProductMenu by ID
     // IF no such product is found, then return an "empty" product
     // with all String fields set to "" and all numeric fields set to 0 (or 0.0)
     public static Product getProductByID(String term) {

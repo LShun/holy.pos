@@ -5,7 +5,7 @@ import de.vandermeer.asciitable.CWC_FixedWidth;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import de.vandermeer.asciitable.AsciiTable;
 
-import menu.Product;
+import product_menu.Product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

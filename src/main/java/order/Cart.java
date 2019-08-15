@@ -1,16 +1,15 @@
 package order;
 
-import java.math.BigDecimal;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import auth.AuthV2;
+import auth.Auth;
 import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_FixedWidth;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-import menu.Product;
+import product_menu.Product;
 import staff.Worker;
 
 public class Cart extends CartOrReceipt{
@@ -19,7 +18,7 @@ public class Cart extends CartOrReceipt{
 
     public Cart() {
         this.billID = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd")) + String.format("%04d", super.transactionMade);
-        this.worker = AuthV2.getSession();
+        this.worker = Auth.getSession();
     }
 
     public Cart(String billID, Worker worker){

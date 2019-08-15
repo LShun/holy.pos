@@ -1,6 +1,6 @@
 package staff;
 
-import auth.AuthV2;
+import auth.Auth;
 import pub.FormatPrint;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class Staff {
         choice = mainMenu();
 
         //Find which worker or manager is performing action
-        Worker s = AuthV2.getSession();
+        Worker s = Auth.getSession();
         if(s==null) return;
 
         do

@@ -1,7 +1,7 @@
 package order;
 
-import menu.Menu;
-import menu.Product;
+import product_menu.ProductMenu;
+import product_menu.Product;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -41,7 +41,7 @@ public class Item {
     //Convert the Products into Items
     public static ArrayList<Item> productAvailable(){
         ArrayList<Item> temp    = new ArrayList<Item>();
-        ArrayList<Product> prod = Menu.getProducts();
+        ArrayList<Product> prod = ProductMenu.getProducts();
 
         for(Product x : prod)
             temp.add(new Item(x,0));

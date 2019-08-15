@@ -1,5 +1,5 @@
-import auth.AuthV2;
-import menu.Menu;
+import auth.Auth;
+import product_menu.ProductMenu;
 import order.Order;
 import reporting.Reporting;
 import staff.Staff;
@@ -16,13 +16,13 @@ public class Main {
 
         while (true) {
             showLogo();
-            if (AuthV2.getSession() == null) {
-                AuthV2.auth();
+            if (Auth.getSession() == null) {
+                Auth.auth();
             }
 
             printHeader("MAIN MENU");
             System.out.print(
-                    "1. Food Menu\n" +
+                    "1. Product Menu\n" +
                     "2. Order\n" +
                     "3. Staff\n" +
                     "4. Reporting\n" +
@@ -35,7 +35,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // put food_menu classes under here
-                    Menu.foodMenu();
+                    ProductMenu.foodMenu();
                     break;
                 case 2:
                     // put order classes under here
@@ -50,7 +50,7 @@ public class Main {
                     Reporting.reporting();
                     break;
                 default:
-                    AuthV2.endSession();
+                    Auth.endSession();
             }
         }
     }

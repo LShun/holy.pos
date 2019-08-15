@@ -1,8 +1,8 @@
 package order;
 
-import auth.AuthV2;
+import auth.Auth;
 import pub.*;
-import menu.*;
+import product_menu.*;
 import staff.Staff;
 import staff.Worker;
 
@@ -16,47 +16,47 @@ public class Order {
     private static Cart c = null;
     private static ArrayList<Receipt> receiptList = new ArrayList<Receipt>(Arrays.asList(
             new Receipt(new Cart("1906270001", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("LUBS"),2),
-                    new Item(Menu.getProductByID("BC"),2)
+                    new Item(ProductMenu.getProductByID("LUBS"),2),
+                    new Item(ProductMenu.getProductByID("BC"),2)
                     ))),50.00, LocalDateTime.of(2019,6,27,8,30,30)),
             new Receipt(new Cart("1906270002", Staff.getEmployeeList().get(0), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("BDC"),2),
-                    new Item(Menu.getProductByID("BCH"),3)
+                    new Item(ProductMenu.getProductByID("BDC"),2),
+                    new Item(ProductMenu.getProductByID("BCH"),3)
                     ))),20, LocalDateTime.of(2019,6,27,10,00,25)),
             new Receipt(new Cart("1906270003", Staff.getEmployeeList().get(1), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("LUBS"),3),
-                    new Item(Menu.getProductByID("BRSD"),1)
+                    new Item(ProductMenu.getProductByID("LUBS"),3),
+                    new Item(ProductMenu.getProductByID("BRSD"),1)
                     ))),36, LocalDateTime.of(2019,6,27,10,20,35)),
             new Receipt(new Cart("1906270004", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("LUBS"),4)
+                    new Item(ProductMenu.getProductByID("LUBS"),4)
                     ))),40, LocalDateTime.of(2019,6,27,10,50,57)),
             new Receipt(new Cart("1907280005", Staff.getEmployeeList().get(3), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("LUBS"),4),
-                    new Item(Menu.getProductByID("BRSD"),10)
+                    new Item(ProductMenu.getProductByID("LUBS"),4),
+                    new Item(ProductMenu.getProductByID("BRSD"),10)
                     ))),150, LocalDateTime.of(2019,7,28,11,50,57)),
             new Receipt(new Cart("1907290006", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("BDC"),2),
-                    new Item(Menu.getProductByID("LUBS"),4),
-                    new Item(Menu.getProductByID("BCH"),1)
+                    new Item(ProductMenu.getProductByID("BDC"),2),
+                    new Item(ProductMenu.getProductByID("LUBS"),4),
+                    new Item(ProductMenu.getProductByID("BCH"),1)
                     ))), 40, LocalDateTime.of(2019,7,29,14,50,57)),
 
             new Receipt(new Cart("1906270007", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("BC"),6),
-                    new Item(Menu.getProductByID("COLAL"),4),
-                    new Item(Menu.getProductByID("BCH"),1),
-                    new Item(Menu.getProductByID("LUBS"),1)
+                    new Item(ProductMenu.getProductByID("BC"),6),
+                    new Item(ProductMenu.getProductByID("COLAL"),4),
+                    new Item(ProductMenu.getProductByID("BCH"),1),
+                    new Item(ProductMenu.getProductByID("LUBS"),1)
             ))), 40, LocalDateTime.of(2019,8,14,15,32,29)),
             new Receipt(new Cart("1906270008", Staff.getEmployeeList().get(2), new ArrayList<Item>(Arrays.asList(
-                    new Item(Menu.getProductByID("COLAS"),6),
-                    new Item(Menu.getProductByID("BRSD"),4),
-                    new Item(Menu.getProductByID("BCH"),2)
+                    new Item(ProductMenu.getProductByID("COLAS"),6),
+                    new Item(ProductMenu.getProductByID("BRSD"),4),
+                    new Item(ProductMenu.getProductByID("BCH"),2)
                     ))), 40, LocalDateTime.of(2019,8,14,16,40,57))
 
     ));
 
     public static void order() {
 
-        Worker session = AuthV2.getSession();
+        Worker session = Auth.getSession();
         if(session == null){
             System.out.println("You have not log in.\nPlease log in to continue.");
             return;
@@ -177,7 +177,7 @@ public class Order {
         System.out.print("Enter the product code : ");
         code = VScan.getString();
 
-        item = new Item(Menu.getProductByID(code), 0);
+        item = new Item(ProductMenu.getProductByID(code), 0);
         if(c.del(item))
             System.out.println("The item has been delete successfully!");
         else
@@ -192,7 +192,7 @@ public class Order {
         int qty;
 
         //Show Menu
-        Menu.showProducts();
+        ProductMenu.showProducts();
 
         //Prompt input message for the product ID
         System.out.print("Enter the product code or -1 to quit : ");
@@ -200,7 +200,7 @@ public class Order {
 
         //When the input is not '-1', get into the loop
         while (!code.equalsIgnoreCase("-1")) {
-            product = Menu.getProductByID(code);
+            product = ProductMenu.getProductByID(code);
 
             //When the product exists in the menu
             if (!product.getId().equals("")) {

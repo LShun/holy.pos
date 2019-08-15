@@ -1,4 +1,4 @@
-package menu;
+package product_menu;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -74,64 +74,15 @@ public class Product {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = id.toUpperCase();
     }
 
     /*
         Accepts fields to be passed to setters from the user.
      */
 
-    public void inputId() {
-        Scanner in = new Scanner(System.in);
-        String id;
-
-        System.out.print("Product ID [Max: 10 characters] or -1 to cancel: ");
-        id = getString();
-
-        while (id.length() > 10) {
-            System.out.print("ID Length > 10, Reenter: ");
-            id = getString();
-        }
-
-        setId(id);
-    }
-
-    public void inputTitle() {
-        Scanner in = new Scanner(System.in);
-        String title;
-
-        System.out.print("Enter product title or -1 to cancel: ");
-        title = getString();
-
-        setTitle(title);
-    }
-
-    public void inputDesc() {
-        Scanner in = new Scanner(System.in);
-        String desc;
-
-        System.out.print("Enter product description or -1 to cancel: ");
-        desc = getString();
-
-        setDesc(desc);
-    }
-
-    public void inputPrice() {
-        Scanner in = new Scanner(System.in);
-        double price;
-
-        System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
-        price = getDouble();
-
-        while (price < 0) {
-            System.out.print("Negative price invalid, retry: ");
-            price = getDouble();
-        }
-        setPrice(price);
-    }
-
     public double getNetPrice() {
-        return this.price * this.tax;
+        return this.price + this.price * this.tax;
     }
 
     /*
@@ -144,7 +95,7 @@ public class Product {
                         "TITLE                : " + this.title + "\n" +
                         "DESC                 : " + this.desc + "\n" +
                         "PRICE (Exclude tax)  : " + this.price + "\n" +
-                        "NETT (Include tax)   : " + this.getNetPrice() + "\n");
+                        "NETT (Include tax)   : " + String.format("%.2f", this.getNetPrice()) + "\n");
     }
 
     @Override

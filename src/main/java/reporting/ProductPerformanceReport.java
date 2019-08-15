@@ -1,7 +1,7 @@
 package reporting;
 
-import menu.Menu;
-import menu.Product;
+import product_menu.ProductMenu;
+import product_menu.Product;
 import order.Item;
 import order.Order;
 import order.Receipt;
@@ -23,7 +23,9 @@ public class ProductPerformanceReport {
     // Constructor
     public ProductPerformanceReport()
     {
-        //ArrayList<Product> products= Menu.getProducts();
+
+        ArrayList<Product> products= ProductMenu.getProducts();
+
         ArrayList<Receipt> receipt = Order.getReceiptList();
 
         // Frame initiallization
