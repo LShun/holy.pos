@@ -144,7 +144,7 @@ public class Product {
                         "TITLE                : " + this.title + "\n" +
                         "DESC                 : " + this.desc + "\n" +
                         "PRICE (Exclude tax)  : " + this.price + "\n" +
-                        "NETT (Include tax)   : " + this.getNetPrice() + "\n");
+                        "NETT (Include tax)   : " + String.format("%.2f", this.getNetPrice()) + "\n");
     }
 
     @Override
