@@ -98,7 +98,7 @@ public class ProductMenu {
                 return;
             }
         }
-        while (!validateID(temp));
+        while (!validateId(temp));
 
         temp.inputTitle();
         if (temp.getTitle().equals("-1")) {
@@ -367,7 +367,7 @@ public class ProductMenu {
                 case 1: // ID
                     do {
                         temp.inputId();
-                    } while (!validateID(temp));
+                    } while (!validateId(temp));
                     break;
                 case 2: // TITLE
                     temp.inputTitle();
@@ -385,10 +385,12 @@ public class ProductMenu {
     }
 
     // helper function -- add, modify -- validates the product ID to ensure no repetition before adding
-    private static boolean validateID(Product temp) {
+    private static boolean validateId(Product temp) {
         // get new ID
         for (Product p : products) {
             if (temp.getId().equals(p.getId())) {
+                System.out.println("Duplicate product found\n");
+                System.out.println(p.toString());
                 System.out.println("Duplicate product ID is not allowed.\n");
                 return false;
             }
