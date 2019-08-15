@@ -73,10 +73,6 @@ public class Product {
         this.id = id.toUpperCase();
     }
 
-    /*
-        Accepts fields to be passed to setters from the user.
-     */
-
     public double getNetPrice() {
         return this.price + this.price * this.tax;
     }
