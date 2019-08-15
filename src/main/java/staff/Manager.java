@@ -62,7 +62,7 @@ public class Manager extends Worker {
             while(gender!='M' && gender!='F'){
                 System.out.println("Please enter a valid gender!");
                 gender = VScan.getChar();
-             
+
             }
 
             do {
