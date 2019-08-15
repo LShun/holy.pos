@@ -17,7 +17,7 @@ public class ProductMenu {
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
 
-    // array storing all the food being sold in fast food restaurant
+    // array storing all the products being sold in fast food restaurant
     private static ArrayList<Product> products = new ArrayList<>(Arrays.asList
             (new Product("BBEEF", "Beefburger", "Beefburger", 5.99),
                     new Product("BC", "Cheeseburger", "Cheeseburger", 5.99),
@@ -33,8 +33,8 @@ public class ProductMenu {
     // PRODUCTMENU USE ONLY
     // =======================
 
-    // menu for manipulating the food menu
-    public static void foodMenu() {
+    // menu for manipulating the products menu
+    public static void productMenu() {
         // variables
         int choice;
 
