@@ -33,6 +33,17 @@ public class DailySalesReport {
         int day,month;
 
         printHeader("DAILY SALES REPORT");
+
+        System.out.println("Daily Sales Report Date List");
+        System.out.println("----------------------------");
+        LocalDate current = null;
+        for(int i=0; i<receipt.size();i++){
+            if(receipt.get(i).getTransactionTime().toLocalDate().equals(current))
+                continue;
+            current = receipt.get(i).getTransactionTime().toLocalDate();
+            System.out.println(receipt.get(i).getTransactionTime().toLocalDate());
+        }
+
         System.out.print("Please enter the day of report for viewing(DD): ");
         day=s.nextInt();
         System.out.print("Please enter the month of report for viewing(MM): ");
@@ -58,8 +69,6 @@ public class DailySalesReport {
             rowData.add(temp);
         }
 
-
-
         for(int i=0; i<1;i++){
 
             Object[] title = new Object[4];
@@ -78,15 +87,10 @@ public class DailySalesReport {
 
         }
 
-
-        //rowData.add();
-
         Object[][] realRowData = new Object[rowData.size()][];
         for(int i = 0; i < rowData.size(); i++){
             realRowData[i] = rowData.get(i);
         }
-
-
 
         // Column Names
         String[] columnNames = { "Date", "Bill ID","Tax Amount","Bill Amount(RM)"};
@@ -129,7 +133,7 @@ public class DailySalesReport {
 
         f.add(sp);
         // Frame Size
-        f.setSize(500, 200);
+        f.setSize(800, 300);
         // Frame Visible = true
         f.setVisible(true);
     }

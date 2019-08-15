@@ -23,7 +23,9 @@ public class ProductPerformanceReport {
     // Constructor
     public ProductPerformanceReport()
     {
+
         ArrayList<Product> products= ProductMenu.getProducts();
+
         ArrayList<Receipt> receipt = Order.getReceiptList();
 
         // Frame initiallization
@@ -115,7 +117,7 @@ public class ProductPerformanceReport {
 
         f.add(sp);
         // Frame Size
-        f.setSize(500, 200);
+        f.setSize(800, 300);
         // Frame Visible = true
         f.setVisible(true);
     }

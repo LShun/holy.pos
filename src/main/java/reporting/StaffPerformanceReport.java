@@ -2,7 +2,6 @@ package reporting;
 
 import staff.Staff;
 import staff.Worker;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -85,7 +84,7 @@ public class StaffPerformanceReport {
 
         f.add(sp);
         // Frame Size
-        f.setSize(500, 200);
+        f.setSize(800, 300);
         // Frame Visible = true
         f.setVisible(true);
     }
