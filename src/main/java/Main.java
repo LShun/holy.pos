@@ -22,7 +22,7 @@ public class Main {
 
             printHeader("MAIN MENU");
             System.out.print(
-                    "1. Food Menu\n" +
+                    "1. Product Menu\n" +
                     "2. Order\n" +
                     "3. Staff\n" +
                     "4. Reporting\n" +
