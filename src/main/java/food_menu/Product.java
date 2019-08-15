@@ -1,4 +1,4 @@
-package menu;
+package food_menu;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -131,7 +131,7 @@ public class Product {
     }
 
     public double getNetPrice() {
-        return this.price * this.tax;
+        return this.price + this.price * this.tax;
     }
 
     /*

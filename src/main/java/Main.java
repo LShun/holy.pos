@@ -1,5 +1,5 @@
 import auth.AuthV2;
-import menu.Menu;
+import food_menu.FoodMenu;
 import order.Order;
 import reporting.Reporting;
 import staff.Staff;
@@ -35,7 +35,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // put food_menu classes under here
-                    Menu.foodMenu();
+                    FoodMenu.foodMenu();
                     break;
                 case 2:
                     // put order classes under here

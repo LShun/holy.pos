@@ -1,4 +1,4 @@
-package menu;
+package food_menu;
 
 import auth.AuthV2;
 import de.vandermeer.asciitable.AsciiTable;
@@ -12,7 +12,7 @@ import java.util.Date;
 import static pub.FormatPrint.printHeader;
 import static pub.VScan.*;
 
-public class Menu {
+public class FoodMenu {
     private static final int ID_FIELD = 1;
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
@@ -56,6 +56,9 @@ public class Menu {
 
             if (AuthV2.isManager()) {
                 switch (choice) {
+                    case 1:
+                        search();
+                        break;
                     case 2:
                         add();
                         break;
@@ -65,16 +68,19 @@ public class Menu {
                     case 4:
                         delete();
                         break;
+                    default:
+                        printHeader("EXITED MODULE");
+                        return;
                 }
             }
-
-            switch (choice) {
-                case 1:
+            else {
+                if (choice == 1) {
                     search();
-                    break;
-                default:
+                }
+                else {
                     printHeader("EXITED MODULE");
                     return;
+                }
             }
         }
     }
