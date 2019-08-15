@@ -62,8 +62,7 @@ public class Manager extends Worker {
             while(gender!='M' && gender!='F'){
                 System.out.println("Please enter a valid gender!");
                 gender = VScan.getChar();
-                //System.out.print("Enter worker gender (M or F): ");
-
+             
             }
 
             do {
@@ -94,7 +93,7 @@ public class Manager extends Worker {
             Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender, phoneNumber, salary,
                     designation, dateOfEmployed, 0, 0));
 
-            System.out.println("Staff Record Has Been Added Successfully!");
+            System.out.println("Staff Record Has Been Added Successfully!\n");
 
             System.out.print("Enter worker Id (XXX to stop): ");
             staffID = VScan.getString();
