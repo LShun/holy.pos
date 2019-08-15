@@ -17,7 +17,7 @@ public class ProductMenu {
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
 
-    // array storing all the food being sold in fast food restaurant
+    // array storing all the products being sold in fast food restaurant
     private static ArrayList<Product> products = new ArrayList<>(Arrays.asList
             (new Product("BBEEF", "Beefburger", "Beefburger", 5.99),
                     new Product("BC", "Cheeseburger", "Cheeseburger", 5.99),
@@ -33,8 +33,8 @@ public class ProductMenu {
     // PRODUCTMENU USE ONLY
     // =======================
 
-    // menu for manipulating the food menu
-    public static void foodMenu() {
+    // menu for manipulating the products menu
+    public static void productMenu() {
         // variables
         int choice;
 
@@ -398,28 +398,28 @@ public class ProductMenu {
         return true;
     }
 
-    public static void inputId(Product p) {
+    private static void inputId(Product p) {
         String id;
         System.out.print("Product ID (Eg: FRENCHFRIES) or -1 to cancel: ");
         id = getString();
         p.setId(id);
     }
 
-    public static void inputTitle(Product p) {
+    private static void inputTitle(Product p) {
         String title;
         System.out.print("Enter product title (Eg: French Fries) or -1 to cancel: ");
         title = getString();
         p.setTitle(title);
     }
 
-    public static void inputDesc(Product p) {
+    private static void inputDesc(Product p) {
         String desc;
         System.out.print("Enter product desc (Eg: Salted French Fries) or -1 to cancel: ");
         desc = getString();
         p.setDesc(desc);
     }
 
-    public static void inputPrice(Product p) {
+    private static void inputPrice(Product p) {
         double price;
         System.out.print("Enter product price (ex: 12.00) or -1 to cancel: ");
         price = getDouble();
@@ -433,7 +433,7 @@ public class ProductMenu {
     }
 
     // show the products inside the array in a consistent format
-    public static void showProducts(ArrayList<Product> products) {
+    private static void showProducts(ArrayList<Product> products) {
         String rend = getTable(products);
         System.out.println(rend);
     }

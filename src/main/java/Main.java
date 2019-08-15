@@ -35,7 +35,7 @@ public class Main {
             switch (choice) {
                 case 1:
                     // put food_menu classes under here
-                    ProductMenu.foodMenu();
+                    ProductMenu.productMenu();
                     break;
                 case 2:
                     // put order classes under here
