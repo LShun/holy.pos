@@ -1,4 +1,4 @@
-package food_menu;
+package product_menu;
 
 import java.util.Objects;
 import java.util.Scanner;

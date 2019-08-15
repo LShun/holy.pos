@@ -1,4 +1,4 @@
-package food_menu;
+package product_menu;
 
 import org.junit.After;
 import org.junit.Before;

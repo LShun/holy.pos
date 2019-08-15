@@ -1,4 +1,4 @@
-package food_menu;
+package product_menu;
 
 import auth.AuthV2;
 import de.vandermeer.asciitable.AsciiTable;
@@ -12,7 +12,7 @@ import java.util.Date;
 import static pub.FormatPrint.printHeader;
 import static pub.VScan.*;
 
-public class FoodMenu {
+public class ProductMenu {
     private static final int ID_FIELD = 1;
     private static final int TITLE_FIELD = 2;
     private static final int DESC_FIELD = 3;
@@ -30,7 +30,7 @@ public class FoodMenu {
             ));
 
     // =======================
-    // FOODMENU USE ONLY
+    // PRODUCTMENU USE ONLY
     // =======================
 
     // menu for manipulating the food menu
@@ -41,7 +41,7 @@ public class FoodMenu {
         // show user possible actions & accept choice
         while (true) {
             // show user possible actions
-            printHeader("FOOD MENU");
+            printHeader("PRODUCT MENU");
             System.out.println("1.      Search Product");
             if (AuthV2.isManager()) {
                 System.out.println("2.      New Product");
@@ -186,7 +186,7 @@ public class FoodMenu {
         }
     }
 
-    // deletes a product from FoodMenu array
+    // deletes a product from ProductMenu array
     private static void delete() {
         int index;
         Product temp;
@@ -218,7 +218,7 @@ public class FoodMenu {
         }
     }
 
-    // searches products inside FoodMenu array
+    // searches products inside ProductMenu array
     private static void search() {
         int basis;
         Product found;
@@ -443,7 +443,7 @@ public class FoodMenu {
     }
 
     // String -> Product
-    // get a single product from the FoodMenu by ID
+    // get a single product from the ProductMenu by ID
     // IF no such product is found, then return an "empty" product
     // with all String fields set to "" and all numeric fields set to 0 (or 0.0)
     public static Product getProductByID(String term) {
