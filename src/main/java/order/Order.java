@@ -165,8 +165,8 @@ public class Order {
         System.out.println("1. Add Or Minus Products");
         System.out.println("2. Display Added Products");
         System.out.println("3. Cancel Products");
-        System.out.println("4. Clear Cart");
-        System.out.println("5. Proceed");
+        System.out.println("4. Clear All Products");
+        System.out.println("5. Proceed To Payment");
         System.out.println("6. Quit");
     }
 
