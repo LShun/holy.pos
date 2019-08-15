@@ -1,4 +1,4 @@
-import auth.AuthV2;
+import auth.Auth;
 import product_menu.ProductMenu;
 import order.Order;
 import reporting.Reporting;
@@ -16,8 +16,8 @@ public class Main {
 
         while (true) {
             showLogo();
-            if (AuthV2.getSession() == null) {
-                AuthV2.auth();
+            if (Auth.getSession() == null) {
+                Auth.auth();
             }
 
             printHeader("MAIN MENU");
@@ -50,7 +50,7 @@ public class Main {
                     Reporting.reporting();
                     break;
                 default:
-                    AuthV2.endSession();
+                    Auth.endSession();
             }
         }
     }

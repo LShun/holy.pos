@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 
-public class AuthV2 {
+public class Auth {
     private static Worker session = Staff.getEmployeeList().get(0);
     private static LocalDateTime clockInTime = LocalDateTime.now();
     private static LocalDateTime clockOutTime;

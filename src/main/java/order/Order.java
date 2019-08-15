@@ -1,6 +1,6 @@
 package order;
 
-import auth.AuthV2;
+import auth.Auth;
 import pub.*;
 import product_menu.*;
 import staff.Staff;
@@ -56,7 +56,7 @@ public class Order {
 
     public static void order() {
 
-        Worker session = AuthV2.getSession();
+        Worker session = Auth.getSession();
         if(session == null){
             System.out.println("You have not log in.\nPlease log in to continue.");
             return;

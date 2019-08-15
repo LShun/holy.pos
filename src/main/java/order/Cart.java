@@ -4,7 +4,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import auth.AuthV2;
+import auth.Auth;
 import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_FixedWidth;
@@ -18,7 +18,7 @@ public class Cart extends CartOrReceipt{
 
     public Cart() {
         this.billID = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd")) + String.format("%04d", super.transactionMade);
-        this.worker = AuthV2.getSession();
+        this.worker = Auth.getSession();
     }
 
     public Cart(String billID, Worker worker){

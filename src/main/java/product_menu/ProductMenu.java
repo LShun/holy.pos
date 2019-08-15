@@ -1,6 +1,6 @@
 package product_menu;
 
-import auth.AuthV2;
+import auth.Auth;
 import de.vandermeer.asciitable.AsciiTable;
 
 import java.text.DateFormat;
@@ -43,7 +43,7 @@ public class ProductMenu {
             // show user possible actions
             printHeader("PRODUCT MENU");
             System.out.println("1.      Search Product");
-            if (AuthV2.isManager()) {
+            if (Auth.isManager()) {
                 System.out.println("2.      New Product");
                 System.out.println("3.      Modify Product");
                 System.out.println("4.      Delete Product");
@@ -54,7 +54,7 @@ public class ProductMenu {
             // accept choice
             choice = getInt();
 
-            if (AuthV2.isManager()) {
+            if (Auth.isManager()) {
                 switch (choice) {
                     case 1:
                         search();
