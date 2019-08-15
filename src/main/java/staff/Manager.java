@@ -25,10 +25,6 @@ public class Manager extends Worker {
         super(staffID, password, sName, gender, phoneNumber, salary, designation, year, month, dayOfMonth, totalDurationWorked, salesReceived) ;
     }
 
-//    public Manager(String staffID, String password, String sName, char gender,String designation){
-//        super(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
-//    }
-
     //Add Staff Record
     public void addStaff(){
 

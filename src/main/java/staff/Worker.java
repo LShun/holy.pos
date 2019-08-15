@@ -41,10 +41,6 @@ public class Worker {
                   String designation, int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
         this(staffID, password,sName,gender,phoneNumber,salary,designation,LocalDate.of(year,month,dayOfMonth),totalDurationWorked,salesReceived);
     }
-    
-//    public Worker(String staffID, String password, String sName, char gender, String designation){
-//        this(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
-//    }
 
     public String getStaffID() {
         return staffID;
@@ -70,13 +66,21 @@ public class Worker {
         this.gender = gender;
     }
 
-    public String getPhoneNumber() { return phoneNumber; }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-    public double getSalary() { return salary; }
+    public double getSalary() {
+        return salary;
+    }
 
-    public void setSalary(double salary) { this.salary = salary; }
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
 
     public String getDesignation() {
         return designation;

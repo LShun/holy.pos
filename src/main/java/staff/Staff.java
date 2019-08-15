@@ -10,11 +10,12 @@ import java.util.Scanner;
 public class Staff {
     private static ArrayList<Worker> employeeList = new ArrayList<Worker>(Arrays.asList(
             new Manager("1000","123456","Mr. Manager",'M',"011-3456789",10000,"Manager",1999,9,9,1000,1000),
-            new Worker("0001","123","Long Shun",'M',"011-27313088",3000,"Staff 1",2001,1,1,100,10),
-            new Worker("0002","456","Jun Rong",'M',"011-23177422",4000,"Staff 2",2000,2,2,200,20),
-            new Worker("0003","789","Shannen",'F',"011-39873922",5000,"Staff 3",2000,3,3,300,30),
-            new Worker("0004","000","Kim Chun",'M',"016-2949819",6000,"Staff 4",2000,4,4,400,40)
-    ));
+            new Worker("0001","123","Long Shun",'M',"011-27313088",3000,"Cashier",2001,1,1,100,10),
+            new Worker("0002","456","Jun Rong",'M',"011-23177422",4000,"Cashier",2000,2,2,200,20),
+            new Worker("0003","789","Shannen",'F',"011-39873922",5000,"Cashier",2000,3,3,300,30),
+            new Worker("0004","000","Kim Chun",'M',"016-2949819",6000,"Cashier",2000,4,4,400,40)
+    )
+    );
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
