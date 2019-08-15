@@ -23,7 +23,7 @@ public class ProductPerformanceReport {
     // Constructor
     public ProductPerformanceReport()
     {
-        ArrayList<Product> products= Menu.getProducts();
+        //ArrayList<Product> products= Menu.getProducts();
         ArrayList<Receipt> receipt = Order.getReceiptList();
 
         // Frame initiallization

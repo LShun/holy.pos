@@ -58,8 +58,6 @@ public class DailySalesReport {
             rowData.add(temp);
         }
 
-
-
         for(int i=0; i<1;i++){
 
             Object[] title = new Object[4];
@@ -78,15 +76,10 @@ public class DailySalesReport {
 
         }
 
-
-        //rowData.add();
-
         Object[][] realRowData = new Object[rowData.size()][];
         for(int i = 0; i < rowData.size(); i++){
             realRowData[i] = rowData.get(i);
         }
-
-
 
         // Column Names
         String[] columnNames = { "Date", "Bill ID","Tax Amount","Bill Amount(RM)"};
