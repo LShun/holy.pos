@@ -1,10 +1,6 @@
 package product_menu;
 
 import java.util.Objects;
-import java.util.Scanner;
-
-import static pub.VScan.getDouble;
-import static pub.VScan.getString;
 
 public class Product {
     private static double tax = 0.16;
