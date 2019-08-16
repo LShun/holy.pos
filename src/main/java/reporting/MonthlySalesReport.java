@@ -21,7 +21,7 @@ public class MonthlySalesReport {
     // Constructor
     public MonthlySalesReport() {
         ArrayList<Receipt> receipt = Order.getReceiptList();
-        // Frame initiallization
+        // Frame initialization
         f = new JFrame();
 
         // Frame Title
