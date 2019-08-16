@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 public class Auth {
-    private static Worker session = Staff.getEmployeeList().get(0);
+    private static Worker session;
     private static LocalDateTime clockInTime = LocalDateTime.now();
     private static LocalDateTime clockOutTime;
 
