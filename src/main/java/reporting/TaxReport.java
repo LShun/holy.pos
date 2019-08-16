@@ -130,6 +130,9 @@ public class TaxReport {
         label3.setBounds(807, 60, 400, 180);
         label4.setBounds(1760, 100, 300, 180);
 
+        f.add(label2);
+        f.add(label3);
+        f.add(label4);
 
         panel.add(label);
 
