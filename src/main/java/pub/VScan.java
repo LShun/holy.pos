@@ -8,7 +8,7 @@ public class VScan {
     public static int getInt() {
         int i;
 
-        while(!in.hasNextInt()) {
+        while (!in.hasNextInt()) {
             System.out.print("Enter a number: ");
             in.next();
         }
@@ -20,7 +20,7 @@ public class VScan {
     public static double getDouble() {
         double d;
 
-        while(!in.hasNextDouble()) {
+        while (!in.hasNextDouble()) {
             System.out.print("Enter a number: ");
             in.next();
         }
@@ -34,7 +34,7 @@ public class VScan {
 
         s = in.nextLine();
 
-        while(s.length() <= 0) {
+        while (s.length() <= 0) {
             System.out.print("Enter a string: ");
             s = in.nextLine();
         }
@@ -45,7 +45,7 @@ public class VScan {
 
         char c = in.nextLine().charAt(0);
 
-        while(c == ' ' || c == '\n') {
+        while (c == ' ' || c == '\n') {
             System.out.print("Enter a character: ");
             c = in.nextLine().charAt(0);
         }

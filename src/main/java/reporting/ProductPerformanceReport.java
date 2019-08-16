@@ -1,10 +1,11 @@
 package reporting;
 
-import product_menu.ProductMenu;
-import product_menu.Product;
 import order.Item;
 import order.Order;
 import order.Receipt;
+import product_menu.Product;
+import product_menu.ProductMenu;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -21,10 +22,9 @@ public class ProductPerformanceReport {
     JTable j;
 
     // Constructor
-    public ProductPerformanceReport()
-    {
+    public ProductPerformanceReport() {
 
-        ArrayList<Product> products= ProductMenu.getProducts();
+        ArrayList<Product> products = ProductMenu.getProducts();
 
         ArrayList<Receipt> receipt = Order.getReceiptList();
 
@@ -44,15 +44,15 @@ public class ProductPerformanceReport {
 //            item.add(new Item(p.get(i),0));
 //        }
 
-        for(int i = 0; i < receipt.size(); i++){
+        for (int i = 0; i < receipt.size(); i++) {
 
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
-            for(int j = 0;j < sizeOfListOfItems ; j++){
+            for (int j = 0; j < sizeOfListOfItems; j++) {
                 Item itemInReceipt = receipt.get(i).getListOfItems().get(j); //Get the product object from the receipt
                 int index = item.indexOf(itemInReceipt); //Find the position of the item
-                if(index == -1){
-                    item.add(new Item(itemInReceipt.getProduct(),0));
+                if (index == -1) {
+                    item.add(new Item(itemInReceipt.getProduct(), 0));
                     index = item.indexOf(itemInReceipt); //Find the position of the item
                 }
                 Item itemInFoodGroup = item.get(index);  //Get the product from the item ArrayList
@@ -70,28 +70,28 @@ public class ProductPerformanceReport {
         columnNames.add("Total Sales(RM)");
 
         Vector<Vector> allRowData = new Vector<Vector>();
-        for(int i = 0;i < item.size(); i++){
+        for (int i = 0; i < item.size(); i++) {
             Vector<Object> temp = new Vector<Object>();
 
             temp.add(item.get(i).getProduct().getId());
             temp.add(item.get(i).getProduct().getTitle());
             temp.add(item.get(i).getQty());
             temp.add(item.get(i).getProduct().getPrice());
-            temp.add(String.format("%.2f",item.get(i).getProduct().getPrice() * item.get(i).getQty()));
+            temp.add(String.format("%.2f", item.get(i).getProduct().getPrice() * item.get(i).getQty()));
 
             allRowData.add(temp);
         }
         // Initializing the JTable
         //j = new JTable(realRowData, columnNames);
         j = new JTable(allRowData, columnNames);
-        j.getTableHeader().setFont(new Font("Times New Roman",Font.BOLD, 14));
-        j.setFont(new Font("Times New Roman",Font.BOLD,12));
+        j.getTableHeader().setFont(new Font("Times New Roman", Font.BOLD, 14));
+        j.setFont(new Font("Times New Roman", Font.BOLD, 12));
         j.setBounds(30, 200, 200, 30);
 
         // adding it to JScrollPane
         JScrollPane sp = new JScrollPane(j);
 
-        JLabel label = new JLabel() ;
+        JLabel label = new JLabel();
 
         label.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg").getImage().getScaledInstance(110, 110, Image.SCALE_AREA_AVERAGING)));
 
@@ -101,11 +101,11 @@ public class ProductPerformanceReport {
 
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Product Performance Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
-        panel.setPreferredSize(new Dimension(215,215));
+        panel.setPreferredSize(new Dimension(215, 215));
 
-        label2.setBounds(688,45, 180,180);
-        label3.setBounds(607,60, 400,180);
-        label4.setBounds(1375,100,300,180);
+        label2.setBounds(688, 45, 180, 180);
+        label3.setBounds(607, 60, 400, 180);
+        label4.setBounds(1375, 100, 300, 180);
 
         f.add(label2);
         f.add(label3);
