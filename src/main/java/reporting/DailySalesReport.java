@@ -16,9 +16,9 @@ public class DailySalesReport {
 
 
     // frame
-    JFrame f;
+    private JFrame f;
     // Table
-    JTable j;
+    private JTable j;
 
     // Constructor
     public DailySalesReport() {

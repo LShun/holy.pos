@@ -17,9 +17,9 @@ import java.util.Vector;
 public class ProductPerformanceReport {
 
     // frame
-    JFrame f;
+    private JFrame f;
     // Table
-    JTable j;
+    private JTable j;
 
     // Constructor
     public ProductPerformanceReport() {

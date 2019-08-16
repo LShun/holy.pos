@@ -14,9 +14,9 @@ import static pub.FormatPrint.printHeader;
 public class MonthlySalesReport {
 
     // frame
-    JFrame f;
+    private JFrame f;
     // Table
-    JTable j;
+    private JTable j;
 
     // Constructor
     public MonthlySalesReport() {

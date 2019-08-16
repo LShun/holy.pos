@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class StaffPerformanceReport {
 
     // frame
-    JFrame f;
+    private JFrame f;
     // Table
-    JTable j;
+    private JTable j;
 
     public StaffPerformanceReport() {
         ArrayList<Worker> workers = Staff.getEmployeeList();
