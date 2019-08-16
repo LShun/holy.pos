@@ -70,9 +70,9 @@ public class StaffPerformanceReport {
         panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Staff Performance Report", TitledBorder.CENTER, TitledBorder.BOTTOM));
         panel.setPreferredSize(new Dimension(215,215));
 
-        label2.setBounds(688,45, 180,180);
-        label3.setBounds(607,60, 400,180);
-        label4.setBounds(1375,100,300,180);
+        label2.setBounds(888, 45, 180, 180);
+        label3.setBounds(807, 60, 400, 180);
+        label4.setBounds(1760, 100, 300, 180);
 
         f.add(label2);
         f.add(label3);
