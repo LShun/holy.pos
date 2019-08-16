@@ -138,6 +138,32 @@ public class Worker {
         System.out.println("You have no permission to perform this action.");
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                "staffID='" + staffID + '\'' +
+                ", password='" + password + '\'' +
+                ", sName='" + sName + '\'' +
+                ", gender=" + gender +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", salary=" + salary +
+                ", designation='" + designation + '\'' +
+                ", dateOfEmployed=" + dateOfEmployed +
+                ", totalDurationWorked=" + totalDurationWorked +
+                ", salesReceived=" + salesReceived +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Worker worker = (Worker) o;
+
+        return getStaffID().equals(worker.getStaffID());
+    }
 }
 
 

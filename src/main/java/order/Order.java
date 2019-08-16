@@ -234,6 +234,4 @@ public class Order {
     public static ArrayList<Receipt> getReceiptList() {
         return receiptList;
     }
-
-
 }
