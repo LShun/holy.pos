@@ -105,4 +105,11 @@ public class Cart extends CartOrReceipt {
     public double getSubTotal() {
         return subTotal;
     }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "subTotal=" + subTotal +
+                "} " + super.toString();
+    }
 }

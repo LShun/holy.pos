@@ -101,4 +101,15 @@ public class Receipt extends CartOrReceipt {
     public BigDecimal getTotal() {
         return total;
     }
+
+    @Override
+    public String toString() {
+        return "Receipt{" +
+                "subTotal=" + subTotal +
+                ", tax=" + tax +
+                ", total=" + total +
+                ", amountReceived=" + amountReceived +
+                ", transactionTime=" + transactionTime +
+                "} " + super.toString();
+    }
 }

@@ -24,4 +24,12 @@ public abstract class CartOrReceipt {
 
     abstract public void display();
 
+    @Override
+    public String toString() {
+        return "CartOrReceipt{" +
+                "billID='" + billID + '\'' +
+                ", worker=" + worker +
+                ", listOfItems=" + listOfItems +
+                '}';
+    }
 }
