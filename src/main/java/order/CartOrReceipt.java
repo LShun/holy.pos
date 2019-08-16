@@ -32,4 +32,14 @@ public abstract class CartOrReceipt {
                 ", listOfItems=" + listOfItems +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CartOrReceipt that = (CartOrReceipt) o;
+
+        return getBillID().equals(that.getBillID());
+    }
 }
