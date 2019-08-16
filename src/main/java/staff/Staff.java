@@ -18,7 +18,6 @@ public class Staff {
     );
 
     public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
@@ -83,6 +82,7 @@ public class Staff {
 
                 case 5:
                     return;
+
 
                 default:
                     System.out.println("Please enter a valid number");
