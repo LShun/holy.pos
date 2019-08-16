@@ -110,7 +110,7 @@ public class DailySalesReport {
 
         JLabel label = new JLabel();
 
-        label.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\User\\Desktop\\HOLY.jpeg").getImage().getScaledInstance(110, 110, Image.SCALE_AREA_AVERAGING)));
+        label.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\User\\Desktop\\holy.pos\\src\\main\\java\\HOLY.jpeg").getImage().getScaledInstance(110, 110, Image.SCALE_AREA_AVERAGING)));
 
         JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
         JLabel label3 = new JLabel("No. 1 & 2 Jalan 54, Desa Jaya, 52100, Kepong, Selangor, Malaysia");
