@@ -85,7 +85,7 @@ public class Auth {
     }
 
     public static boolean isManager() {
-        if (session.getDesignation().equals("Manager") || session.getDesignation().equals("Holy Manager")) {
+        if (session.getDesignation().toLowerCase().contains("manager")) {
             return true;
         } else {
             return false;
