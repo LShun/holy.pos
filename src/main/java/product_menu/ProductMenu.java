@@ -72,12 +72,10 @@ public class ProductMenu {
                         printHeader("EXITED MODULE");
                         return;
                 }
-            }
-            else {
+            } else {
                 if (choice == 1) {
                     search();
-                }
-                else {
+                } else {
                     printHeader("EXITED MODULE");
                     return;
                 }

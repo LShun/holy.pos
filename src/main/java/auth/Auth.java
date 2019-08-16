@@ -1,8 +1,9 @@
 package auth;
 
+import pub.FormatPrint;
+import pub.VScan;
 import staff.Staff;
 import staff.Worker;
-import pub.*;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 
 public class Auth {
-    private static Worker session = Staff.getEmployeeList().get(0);
+    private static Worker session;
     private static LocalDateTime clockInTime = LocalDateTime.now();
     private static LocalDateTime clockOutTime;
 
@@ -26,10 +27,10 @@ public class Auth {
         LocalDateTime tempDateTime = LocalDateTime.from(clockInTime);
 
         long hrs = tempDateTime.until(clockOutTime, ChronoUnit.HOURS);
-        tempDateTime = tempDateTime.plusHours( hrs );
+        tempDateTime = tempDateTime.plusHours(hrs);
 
         long min = tempDateTime.until(clockOutTime, ChronoUnit.MINUTES);
-        tempDateTime = tempDateTime.plusMinutes( min );
+        tempDateTime = tempDateTime.plusMinutes(min);
 
         long secs = tempDateTime.until(clockOutTime, ChronoUnit.SECONDS);
 
@@ -62,8 +63,7 @@ public class Auth {
 
         if (error >= TRIES) {
             System.out.println("Wrong information entered for 3 times, sending back to Main Menu.\n");
-        }
-        else {
+        } else {
             startSession(attempt);
         }
     }
@@ -85,10 +85,9 @@ public class Auth {
     }
 
     public static boolean isManager() {
-        if (session.getDesignation().equals("Manager") || session.getDesignation().equals("Holy Manager")) {
+        if (session.getDesignation().toLowerCase().contains("manager")) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

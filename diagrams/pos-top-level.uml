@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="962.0">com</node>
+    <node x="724.0" y="962.0">de</node>
+    <node x="551.0" y="808.0">netscape</node>
+    <node x="362.11278735632175" y="92.0">auth</node>
+    <node x="691.0" y="695.0">toolbarButtonGraphics</node>
+    <node x="181.0" y="962.0">sun</node>
+    <node x="0.0" y="808.0">groovyjarjarasm</node>
+    <node x="382.0" y="695.0">MainTest</node>
+    <node x="814.0" y="885.0">java</node>
+    <node x="416.0" y="885.0">javax</node>
+    <node x="61.5" y="174.0">product_menu</node>
+    <node x="206.9087643678161" y="448.0">reporting</node>
+    <node x="233.6587643678161" y="316.0">order</node>
+    <node x="0.0" y="885.0">images</node>
+    <node x="615.0" y="885.0">junit</node>
+    <node x="362.0" y="962.0">org</node>
+    <node x="398.6986350574712" y="174.0">staff</node>
+    <node x="289.0" y="808.0">dependencies</node>
+    <node x="543.0" y="962.0">jdk</node>
+    <node x="777.0" y="808.0">META-INF</node>
+    <node x="208.0" y="885.0">groovy</node>
+    <node x="30.0" y="695.0">groovyjarjarcommonscli</node>
+    <node x="315.19612068965506" y="0.0">pub</node>
+    <node x="676.4903017241379" y="15.367838541666664">groovyjarjarantlr</node>
+    <node x="373.01041666666663" y="560.0">Main</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="reporting" target="staff">
+      <point x="76.0" y="-16.0" />
+      <point x="377.9087643678161" y="428.0" />
+      <point x="527.9486350574712" y="428.0" />
+      <point x="527.9486350574712" y="296.0" />
+      <point x="523.8236350574712" y="296.0" />
+      <point x="48.124999999999986" y="16.0" />
+    </edge>
+    <edge source="order" target="pub">
+      <point x="0.0" y="-16.0" />
+      <point x="310.6587643678161" y="72.0" />
+      <point x="371.86278735632175" y="72.0" />
+      <point x="-11.333333333333314" y="16.0" />
+    </edge>
+    <edge source="staff" target="pub">
+      <point x="57.749999999999986" y="-16.0" />
+      <point x="533.4486350574712" y="154.0" />
+      <point x="517.6127873563217" y="154.0" />
+      <point x="517.6127873563217" y="62.0" />
+      <point x="417.19612068965506" y="62.0" />
+      <point x="34.0" y="16.0" />
+    </edge>
+    <edge source="Main" target="staff">
+      <point x="15.666666666666686" y="-45.0" />
+      <point x="482.6770833333333" y="520.0" />
+      <point x="543.9461206896551" y="520.0" />
+      <point x="67.37499999999999" y="16.0" />
+    </edge>
+    <edge source="Main" target="product_menu">
+      <point x="-78.33333333333326" y="-45.0" />
+      <point x="388.67708333333337" y="540.0" />
+      <point x="0.0" y="540.0" />
+      <point x="0.0" y="286.0" />
+      <point x="156.4375" y="286.0" />
+      <point x="-13.5625" y="16.0" />
+    </edge>
+    <edge source="order" target="auth">
+      <point x="22.0" y="-16.0" />
+      <point x="332.6587643678161" y="296.0" />
+      <point x="338.1986350574712" y="296.0" />
+      <point x="338.1986350574712" y="154.0" />
+      <point x="398.36278735632175" y="154.0" />
+      <point x="-36.25" y="16.0" />
+    </edge>
+    <edge source="product_menu" target="product_menu">
+      <point x="-67.8125" y="16.0" />
+      <point x="102.1875" y="236.0" />
+      <point x="31.5" y="236.0" />
+      <point x="31.5" y="190.0" />
+      <point x="-108.5" y="-0.0" />
+    </edge>
+    <edge source="reporting" target="reporting">
+      <point x="-47.5" y="16.0" />
+      <point x="254.4087643678161" y="500.0" />
+      <point x="186.9087643678161" y="500.0" />
+      <point x="186.9087643678161" y="464.0" />
+      <point x="-95.0" y="-0.0" />
+    </edge>
+    <edge source="staff" target="staff">
+      <point x="-67.375" y="16.0" />
+      <point x="408.3236350574712" y="226.0" />
+      <point x="378.6986350574712" y="226.0" />
+      <point x="378.6986350574712" y="202.0" />
+      <point x="-77.0" y="12.0" />
+    </edge>
+    <edge source="reporting" target="order">
+      <point x="0.0" y="-16.0" />
+      <point x="301.9087643678161" y="428.0" />
+      <point x="332.6587643678161" y="428.0" />
+      <point x="22.0" y="16.0" />
+    </edge>
+    <edge source="groovyjarjarcommonscli" target="groovyjarjarcommonscli">
+      <point x="76.75" y="16.0" />
+      <point x="260.25" y="757.0" />
+      <point x="0.0" y="757.0" />
+      <point x="0.0" y="703.0" />
+      <point x="-153.5" y="-8.0" />
+    </edge>
+    <edge source="auth" target="pub">
+      <point x="0.0" y="-16.0" />
+      <point x="434.61278735632175" y="72.0" />
+      <point x="394.52945402298843" y="72.0" />
+      <point x="11.333333333333371" y="16.0" />
+    </edge>
+    <edge source="reporting" target="product_menu">
+      <point x="-38.0" y="-16.0" />
+      <point x="263.9087643678161" y="418.0" />
+      <point x="157.34841954022988" y="418.0" />
+      <point x="157.34841954022988" y="296.0" />
+      <point x="183.5625" y="296.0" />
+      <point x="13.5625" y="16.0" />
+    </edge>
+    <edge source="auth" target="staff">
+      <point x="12.083333333333343" y="16.0" />
+      <point x="446.6961206896551" y="154.0" />
+      <point x="456.4486350574712" y="154.0" />
+      <point x="-19.25" y="-16.0" />
+    </edge>
+    <edge source="reporting" target="pub">
+      <point x="-76.0" y="-16.0" />
+      <point x="225.9087643678161" y="428.0" />
+      <point x="11.0" y="428.0" />
+      <point x="11.0" y="52.0" />
+      <point x="326.5294540229884" y="52.0" />
+      <point x="-56.666666666666686" y="16.0" />
+    </edge>
+    <edge source="groovyjarjarantlr" target="groovyjarjarantlr">
+      <point x="0.0" y="16.0" />
+      <point x="807.4903017241379" y="77.36783854166666" />
+      <point x="646.4903017241379" y="77.36783854166666" />
+      <point x="646.4903017241379" y="31.367838541666664" />
+      <point x="-131.0" y="-0.0" />
+    </edge>
+    <edge source="Main" target="pub">
+      <point x="78.33333333333331" y="-45.0" />
+      <point x="545.34375" y="540.0" />
+      <point x="585.4903017241379" y="540.0" />
+      <point x="585.4903017241379" y="52.0" />
+      <point x="439.86278735632175" y="52.0" />
+      <point x="56.666666666666686" y="16.0" />
+    </edge>
+    <edge source="Main" target="order">
+      <point x="-15.666666666666629" y="-45.0" />
+      <point x="451.34375" y="520.0" />
+      <point x="407.4087643678161" y="520.0" />
+      <point x="407.4087643678161" y="418.0" />
+      <point x="376.6587643678161" y="418.0" />
+      <point x="66.0" y="16.0" />
+    </edge>
+    <edge source="product_menu" target="pub">
+      <point x="-54.25" y="-16.0" />
+      <point x="115.74999999999997" y="62.0" />
+      <point x="349.19612068965506" y="62.0" />
+      <point x="-34.0" y="16.0" />
+    </edge>
+    <edge source="Main" target="reporting">
+      <point x="-47.0" y="-45.0" />
+      <point x="420.01041666666663" y="530.0" />
+      <point x="349.4087643678161" y="530.0" />
+      <point x="47.5" y="16.0" />
+    </edge>
+    <edge source="order" target="order">
+      <point x="-44.0" y="16.0" />
+      <point x="266.6587643678161" y="378.0" />
+      <point x="203.6587643678161" y="378.0" />
+      <point x="203.6587643678161" y="336.0" />
+      <point x="-77.0" y="4.0" />
+    </edge>
+    <edge source="staff" target="auth">
+      <point x="-57.75" y="-16.0" />
+      <point x="417.9486350574712" y="154.0" />
+      <point x="422.52945402298843" y="154.0" />
+      <point x="-12.083333333333314" y="16.0" />
+    </edge>
+    <edge source="order" target="product_menu">
+      <point x="-22.0" y="-16.0" />
+      <point x="288.6587643678161" y="276.0" />
+      <point x="264.9375" y="276.0" />
+      <point x="94.9375" y="16.0" />
+    </edge>
+    <edge source="product_menu" target="auth">
+      <point x="54.25" y="-16.0" />
+      <point x="224.25" y="144.0" />
+      <point x="374.19612068965506" y="144.0" />
+      <point x="-60.416666666666686" y="16.0" />
+    </edge>
+    <edge source="Main" target="auth">
+      <point x="47.0" y="-45.0" />
+      <point x="514.0104166666666" y="530.0" />
+      <point x="563.6336206896551" y="530.0" />
+      <point x="563.6336206896551" y="144.0" />
+      <point x="495.02945402298843" y="144.0" />
+      <point x="60.416666666666686" y="16.0" />
+    </edge>
+    <edge source="order" target="staff">
+      <point x="44.0" y="-16.0" />
+      <point x="354.6587643678161" y="286.0" />
+      <point x="485.3236350574712" y="286.0" />
+      <point x="9.625" y="16.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8053892215568861" x="391.49861086524646" y="334.0000000000001" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

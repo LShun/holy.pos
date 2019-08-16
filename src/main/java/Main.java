@@ -1,15 +1,16 @@
 import auth.Auth;
-import product_menu.ProductMenu;
 import order.Order;
+import product_menu.ProductMenu;
 import reporting.Reporting;
 import staff.Staff;
 
-import static pub.VScan.*;
-import static pub.FormatPrint.*;
+import static pub.FormatPrint.printHeader;
+import static pub.VScan.getInt;
 
 public class Main {
 
     public static void main(String[] args) {
+        new Order(); //Initialization
         int choice;
 
         // Authenticate
@@ -23,12 +24,12 @@ public class Main {
             printHeader("MAIN MENU");
             System.out.print(
                     "1. Product Menu\n" +
-                    "2. Order\n" +
-                    "3. Staff\n" +
-                    "4. Reporting\n" +
-                    "Enter any other number to exit/logout.\n\n" +
+                            "2. Order\n" +
+                            "3. Staff\n" +
+                            "4. Reporting\n" +
+                            "Enter any other number to exit/logout.\n\n" +
 
-                    "Please select your module: ");
+                            "Please select your module: ");
 
             choice = getInt();
 
@@ -54,13 +55,14 @@ public class Main {
             }
         }
     }
-        private static void showLogo() {
-            System.out.println("\n" +
-                    "______  ________________  __     _______________________\n" +
-                    "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
-                    "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
-                    "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
-                    "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
-                    "                                                        \n");
-        }
+
+    private static void showLogo() {
+        System.out.println("\n" +
+                "______  ________________  __     _______________________\n" +
+                "___/ / / /_  __ \\__  /_ \\/ /     ___  __ \\_  __ \\_  ___/\n" +
+                "__/ /_/ /_  / / /_  / __  /________  /_/ /  / / /____ \\ \n" +
+                "_/ __  / / /_/ /_  /___  /_/_____/  ____// /_/ /____/ / \n" +
+                "/_/ /_/  \\____/ /_____/_/        /_/     \\____/ /____/  \n" +
+                "                                                        \n");
+    }
 }

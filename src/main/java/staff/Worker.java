@@ -1,11 +1,8 @@
 package staff;
 
-import pub.VScan;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Worker {
     private String staffID;
@@ -19,12 +16,12 @@ public class Worker {
     private Duration totalDurationWorked;
     private int salesReceived;
 
-    public Worker(){
-        this("","","",' ',"",0.0,"",2000,0,0,0,0);
+    public Worker() {
+        this("", "", "", ' ', "", 0.0, "", 2000, 0, 0, 0, 0);
     }
 
     public Worker(String staffID, String password, String sName, char gender, String phoneNumber, double salary,
-                  String designation, LocalDate dateOfEmployed, int totalDurationWorked, int salesReceived){
+                  String designation, LocalDate dateOfEmployed, int totalDurationWorked, int salesReceived) {
         this.setStaffID(staffID);
         this.setPassword(password);
         this.setName(sName);
@@ -38,8 +35,8 @@ public class Worker {
     }
 
     public Worker(String staffID, String password, String sName, char gender, String phoneNumber, double salary,
-                  String designation, int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived){
-        this(staffID, password,sName,gender,phoneNumber,salary,designation,LocalDate.of(year,month,dayOfMonth),totalDurationWorked,salesReceived);
+                  String designation, int year, int month, int dayOfMonth, int totalDurationWorked, int salesReceived) {
+        this(staffID, password, sName, gender, phoneNumber, salary, designation, LocalDate.of(year, month, dayOfMonth), totalDurationWorked, salesReceived);
     }
 
     public String getStaffID() {
@@ -98,11 +95,11 @@ public class Worker {
         this.dateOfEmployed = dateOfEmployed;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -122,7 +119,7 @@ public class Worker {
         this.salesReceived = salesReceived;
     }
 
-    public void addStaff(){
+    public void addStaff() {
         System.out.println("You have no permission to perform this action.");
         return;
     }
@@ -132,12 +129,12 @@ public class Worker {
         return;
     }
 
-    public void modifyStaff(){
+    public void modifyStaff() {
         System.out.println("You have no permission to perform this action.");
         return;
     }
 
-    public ArrayList<Worker> searchStaff(){
+    public ArrayList<Worker> searchStaff() {
         System.out.println("You have no permission to perform this action.");
         return null;
     }
