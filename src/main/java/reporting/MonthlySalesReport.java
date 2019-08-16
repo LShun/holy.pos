@@ -67,7 +67,7 @@ public class MonthlySalesReport {
             int sizeOfListOfItems = receipt.get(i).getListOfItems().size();
 
             Object[] temp = new Object[4];
-            temp[0] = receipt.get(i).getTransactionTime().getYear() + "-" + receipt.get(i).getTransactionTime().getMonthValue();
+            temp[0] = receipt.get(i).getTransactionTime().toLocalDate();
             temp[1] = receipt.get(i).getBillID();
             temp[2] = receipt.get(i).getTax();
             temp[3] = receipt.get(i).getTotal();

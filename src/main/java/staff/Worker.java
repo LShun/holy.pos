@@ -39,10 +39,6 @@ public class Worker {
         this(staffID, password, sName, gender, phoneNumber, salary, designation, LocalDate.of(year, month, dayOfMonth), totalDurationWorked, salesReceived);
     }
 
-//    public Worker(String staffID, String password, String sName, char gender, String designation){
-//        this(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
-//    }
-
     public String getStaffID() {
         return staffID;
     }

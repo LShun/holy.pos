@@ -25,10 +25,6 @@ public class Manager extends Worker {
         super(staffID, password, sName, gender, phoneNumber, salary, designation, year, month, dayOfMonth, totalDurationWorked, salesReceived);
     }
 
-//    public Manager(String staffID, String password, String sName, char gender,String designation){
-//        super(staffID, password, sName, gender, designation,  2019, 1, 1, 0, 0);
-//    }
-
     //Add Staff Record
     public void addStaff() {
 
@@ -66,7 +62,6 @@ public class Manager extends Worker {
             while (gender != 'M' && gender != 'F') {
                 System.out.println("Please enter a valid gender!");
                 gender = VScan.getChar();
-                //System.out.print("Enter worker gender (M or F): ");
 
             }
 
@@ -98,7 +93,7 @@ public class Manager extends Worker {
             Staff.getEmployeeList().add(new Worker(staffID, password, sName, gender, phoneNumber, salary,
                     designation, dateOfEmployed, 0, 0));
 
-            System.out.println("Staff Record Has Been Added Successfully!");
+            System.out.println("Staff Record Has Been Added Successfully!\n");
 
             System.out.print("Enter worker Id (XXX to stop): ");
             staffID = VScan.getString();

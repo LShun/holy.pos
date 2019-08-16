@@ -10,6 +10,7 @@ import static pub.VScan.getInt;
 public class Main {
 
     public static void main(String[] args) {
+        new Order(); //Initialization
         int choice;
 
         // Authenticate
