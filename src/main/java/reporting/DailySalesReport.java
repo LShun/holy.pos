@@ -3,6 +3,7 @@ package reporting;
 import order.Order;
 import order.Receipt;
 
+import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -49,6 +50,14 @@ public class DailySalesReport {
         day = s.nextInt();
         System.out.print("Please enter the month of report for viewing(MM): ");
         month = s.nextInt();
+        String date = String.format("%02d-%02d-%04d",day,month,2019);
+
+        try{
+        	LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        }catch(Exception e){
+        	System.out.println("Invalid Date!");
+        	return;	
+       	}
 
         ArrayList<Object[]> rowData = new ArrayList<Object[]>();
         double sum = 0, tax = 0;
@@ -110,6 +119,9 @@ public class DailySalesReport {
 
         JLabel label = new JLabel();
 
+		/*Place the HOLY KMB picture inside C:/Users/User/Desktop/holy.pos/src/main/java/reporting/HOLY.jpeg, 
+		 *otherwise the report is still functional, but 
+		 *picture will not be displayed */
         label.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\User\\Desktop\\holy.pos\\src\\main\\java\\reporting\\HOLY.jpeg").getImage().getScaledInstance(110, 110, Image.SCALE_AREA_AVERAGING)));
 
         JLabel label2 = new JLabel("HOLY Fast Food Restaurant");
